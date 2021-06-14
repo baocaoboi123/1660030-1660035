@@ -1,0 +1,353 @@
+<section style="background-color:#000; color: #fff"   class="about10 py-4">
+ 
+  <div class="tab-content row my-1 mx-auto">
+    
+  
+    <div id="p" class="tab-pane fade in active show col-lg-12 col-md-12 col-12 w-50 pt-5 pb-5">                                   
+      <div class="card-deck mx-auto">
+        <div    class="img col-lg-3 col-md-3 col-12 w-50 pt-5 pb-5">
+                                           
+          <!-- <h2 style="padding: 0.4rem 0rem;"  class="text-center align-items-center"><%- result.Tenphim %></h2>       -->
+          <div hidden class="container">
+            
+          
+          </div>
+          <img class="img-fluid container" src="<%- result.Posterphim %>" alt="">      
+          
+          
+
+        </div> 
+        <div  class="text col-lg-9 col-md-9 col-12 w-50 pt-5 pb-5">   
+          <div class="row">
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Cum Rap va Rap</span>
+                  </div>
+                  <select onchange="populate(this.id, 'inputGroupSelect05')"   class="custom-select" name="inputGroupSelect03" id="inputGroupSelect03" aria-label="Example select with button addon">
+                      <option value="">----Chon Cum Rap----</option>
+                   
+      
+                      <% for (const key in found_CumRap_Rap){%>
+                        <option selected><%- found_CumRap_Rap[key].Tencumrap %></option>
+
+                      <%}%>
+
+
+                     
+                  </select>
+                  
+                 
+                    <label hidden type="text" id="heck" name="heck"></label>
+                 
+                  <script>
+                    function populate(s1, s2){
+                      var s1 = document.getElementById('inputGroupSelect03');
+                      var s2 = document.getElementById('inputGroupSelect05');
+                      s2.innerHTML = "";
+                      
+                      if (s1.value == "Quốc Thanh"){
+                        var optionArray = ['Cine Quốc Thanh|Cine Quốc Thanh', 'Cine temp|Cine temp'];
+                      }
+                      if (s1.value == "Hai Bà Trưng"){
+                        var optionArray = ['Cine Hai Bà Trưng|Cine Hai Bà Trưng','Cine sample|Cine sample'];
+                      }
+                      if (s1.value == "Bình Dương"){
+                        var optionArray = ['Cine Bình Dương|Cine Bình Dương','Cine index|Cine index'];
+                      }
+
+                      for (var option in optionArray){
+                        var pair = optionArray[option].split("|");
+                        var newoption = document.createElement("option");
+                        newoption.value = pair[0];
+                        newoption.innerHTML = pair[1];
+                        s2.options.add(newoption);
+                      }
+                     
+
+
+
+
+
+
+
+
+                      }
+                      
+                    
+                  </script>
+                        
+                 
+
+                  <select  class="custom-select" name="inputGroupSelect05" id="inputGroupSelect05" aria-label="Example select with button addon">
+                      <% if (start1_Tenrap === ""){%>
+                        <option value="">----Chon Rap----</option>
+                      <%}else{%>
+                        <option value=""><%- start1_Tenrap%></option>
+                      <%}%>
+                     
+
+                  </select>
+                  
+
+
+
+                  <!-- <script>
+                    
+
+                    function thaydoicumrap(){
+                      var txt = document.getElementsByName('inputGroupSelect03')[0].value;
+                      
+                        document.getElementById('heck').innerText = txt;
+
+                        
+
+                    }
+
+                        
+                    
+                    
+
+                  </script> -->
+                  
+                </div>
+          </div>    
+          <br> 
+          <div class="row container d-flex">
+              <!-- <input placeholder="chon ngay" type="date" id="start1" > -->
+
+             
+                  <div class="nav nav-pills ml-auto p-1">       
+
+
+                <form method="POST" >                                     
+                  <input placeholder="chon ngay" type="date" id="start1" onchange="getEventTime1()" >                                                        
+                  <input hidden type="text" name="en" id="en">    
+                  <input hidden type="text" name="start1_date" id="start1_date">
+                  <input hidden type="text" name="start1_month" id="start1_month">
+                  <input hidden type="text" name="start1_year" id="start1_year">   
+                  <input hidden type="text" name="start1_Tenrap" id="start1_Tenrap">                              
+                  <input hidden type="text" name="start1_Tenphim" id="start1_Tenphim"> 
+
+                  <input hidden type="text" name="start1_Tencumrap" id="start1_Tencumrap">  
+                  
+                  
+
+                  <button type="submit">Xem suat chieu</button> 
+                </form>
+                </div>
+                <script>
+
+                        
+
+                  var getEventTime1 = function(){
+                    var temp_date = moment(document.getElementById("start1").value).format("DD");
+                    var temp_month = moment(document.getElementById("start1").value).format("MM");
+                    var temp_year = moment(document.getElementById("start1").value).format("YYYY-MM-DD");
+                    var temp_tenphim = document.getElementById('tenphim').innerText;                  
+                    var temp_tenrap = document.getElementsByName('inputGroupSelect05')[0].value;
+
+
+                    var temp_tencumrap = document.getElementsByName('inputGroupSelect03')[0].value;
+
+
+
+
+
+
+                    document.getElementById('start1_date').value = temp_date;
+                    document.getElementById('start1_month').value = temp_month;
+                    document.getElementById('start1_year').value = temp_year;            
+                    document.getElementById('start1_Tenrap').value = temp_tenrap;
+                    document.getElementById('start1_Tencumrap').value = temp_tencumrap;
+                    document.getElementById('start1_Tenphim').value = temp_tenphim;
+                               
+                  }
+                
+                </script>
+
+
+
+
+
+
+          </div>
+         
+          <br>  
+          <div class="row">
+             <div>
+              <h1 type="text" id="tenphim"><%- result.Tenphim %></h1>
+              
+              <h5 id="ngaycongchieu" >Ngay cong chieu: <%- (result.Ngaycongchieu) %></h5>
+
+              <div class="card-deck">
+               
+                  <% for (const key in array_check){%>
+                    <form action="/cine/routes/muave.js"   method="GET">
+                      <div class="card mb-3" style="max-width: auto; color: black;">
+                          <div class="card-body">
+                              
+                            <h5   id="tempHHSS" class="card-title"><%-array_check[key].GioBatDau %></h5>
+                           
+                            <input  hidden id="sc" name="sc" class="card-title" value="<%-array_check[key].IDsuatchieu %>">
+                            <input hidden id="tp" name="tp" class="card-title" value="<%-array_check[key].Tenphim %>">
+                            <!-- <p class="card-text"><%- array_check[key].Batdau %></p> -->
+                            <a href="/muave/<%-array_check[key].IDsuatchieu%>">Mua ve</a>
+                          
+                          </div>
+                          <button type="submit" class="btn btn-primary">
+                            <a href="/muave/<%-array_check[key].IDsuatchieu%>">Mua ve</a>
+                          </button>
+                        </div>
+
+                    </form>
+                  <%}%>
+                  
+
+                 
+                
+                  
+
+              </div>
+
+              <!-- <table calss="table table-dark"> 
+                <thead>
+                  <tr >
+                    <th scope="col">IDphim</th>
+                    <th scope="col">Tenphim</th>
+                    <th scope="col">IDsuatchieu</th>
+                    <th scope="col">IDrap</th>
+                    <th scope="col">Batdau</th>
+                    <th scope="col">Ketthuc</th>
+                    <th scope="col">Giave</th>
+                  </tr>
+                  <tbody>
+                    <% for (const key in array_check){%>
+                      <tr>                              
+                          <td><%- array_check[key].IDphim %></td>
+                          <td><%- array_check[key].Tenphim %></td>
+                          <td><%- array_check[key].IDsuatchieu %></td>
+                          <td><%- array_check[key].IDrap %></td>
+                          <td><%- array_check[key].Batdau %></td>
+                          <td><%- array_check[key].Ketthuc %></td>
+                          <td><%- array_check[key].Giave %></td>
+                      </tr>
+                    <%}%>
+                    
+                   
+                  </tbody>
+                </thead>
+              </table> -->
+
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+
+             </div>
+      
+          </div>
+          <!-- <div class="row container d-flex ">
+            <div class="nav nav-pills ml-auto p-2">               
+              <a data-toggle="tab" href="#sch">MUA VÉ</a>
+              <a data-toggle="tab" href="#p"> VÉ</a>
+            </div>
+          </div>
+ -->
+
+
+        </div>
+       
+      </div>
+      
+    </div>
+
+    
+    <div id="sch" class="tab-pane fade  col-lg-12 col-md-12 col-12 w-50 pt-5 pb-5">                                   
+      <div class="card-deck mx-auto">
+                  <div    class="img col-lg-3 col-md-3 col-12 w-50 pt-5 pb-5">
+    
+                      <img class="img-fluid container" src="<%- result.Posterphim %>" alt=""> 
+                       
+                       <!-- <input type="img-fluid container" class="card-img-top"  src="<%- result.Posterphim %>"  alt="Card image cap" /> -->
+                        <h2 style="padding: 0.4rem 0rem;"  class="text-center align-items-center"><%- result.Tenphim %></h2>
+                       
+                        <!-- <div  class="container">
+                                <a class="mx-auto text-center align-items-center" href=""><%- result.Thoiluong %></a>
+                                <a class=" mx-auto text-center align-items-center" href="">Learn More</a>
+                                <a class="mx-auto text-center align-items-center" href="">Learn More</a>
+                                <a class="mx-auto text-center align-items-center" href="">Learn More</a>
+                        </div>
+             --> 
+                  </div> 
+                  <div  class="text col-lg-9 col-md-9 col-12 w-50 pt-5 pb-5">
+                                    
+                      <!-- <form method="POST" > -->
+
+                          <h1><%- result.Tenphim %> </h1>
+                      
+                            <h5 hidden id="ngaycongchieu_temp">  <%- (result.Ngaycongchieu) %></h5>
+                            <h5  id="ngaycongchieu"> </h5> 
+                              
+                              
+        
+                            <input placeholder="chon ngay" type="date" id="start" onchange="getEventTime()" >
+                                  
+                              
+                              <br>
+                              <input hidden type="text" name="idphim" id="idphim" value="<%- result.IDphim %>">
+                              <input hidden type="text" name="en" id="en">
+                              
+                        <!-- <button type="submit">Xem suat chieu</button> -->
+
+
+
+                        
+
+                      <!-- </form> -->
+
+
+
+
+                        <script>
+
+                        
+
+                            var getEventTime = function(){
+                              var temp = moment(document.getElementById("start").value).format("DD-MM-YYYY");
+                             
+                              document.getElementById('en').value = temp;
+                      
+
+                             
+                            }
+                            var temp1 = moment(document.getElementById("ngaycongchieu_temp").innerHTML).format("DD-MM-YYYY");
+                             
+                             document.getElementById('ngaycongchieu').innerHTML =temp1;
+                        </script>
+
+
+
+                   
+                  </div>
+       
+      </div>
+    </div>
+
+  </div>
+            
+
+
+</section>
+
+      
+
+
+
+
+
+
+
+

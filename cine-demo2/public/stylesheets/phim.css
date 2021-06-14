@@ -1,0 +1,32 @@
+.phim{
+    border-radius: 3px;
+    box-shadow: 0 4px 5px rgba((0), 0, 0, 0.2) ;
+    width: 220px;
+    background-color: #373b69;
+    margin: 5px;
+}
+.phim img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+.phim-info{
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    padding: 0.5rem 1rem 1rem;
+    letter-spacing: 1px;
+}
+.phim-info p{
+    margin: 0;
+    font-size: 12px;
+}
+main .m{
+    display: flex;
+    flex-wrap: wrap;
+}
+.phim-info span{
+    background-color: #22254b;
+    border-radius: 3px;
+    padding: 0.25rem 0.5rem;
+}
