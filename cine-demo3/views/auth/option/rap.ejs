@@ -1,0 +1,216 @@
+<br><br><br><br><br><br><br>
+
+
+<div class="wrapper">
+        <div class="">      
+            <button onclick="addrap()">ADD Rap</button>      
+            <button onclick="addcumrap()">ADD Cum Rap</button>                          
+                    
+        </div>
+    <div class="menu">
+        <select  name="selectedname" id="selectedname">
+            <% for(const key in foundCumRap){%>
+                <option value="<%- foundCumRap[key].IDcumrap%>"><%- foundCumRap[key].Tencumrap%></option>
+
+            <%}%>
+           
+        </select>
+
+       
+
+
+    </div>
+
+
+    <div class="row align-items-center container my-5 mx-auto">
+            <div class="card-deck mx-auto">
+                <% for(const key in foundCumRap){%>
+    
+                    <div id="<%- foundCumRap[key].IDcumrap%>" class="card mb-3 data" style="min-width: 12rem; max-width: 12rem; ">
+                            <%for(const temp in foundRap){
+                                if(foundCumRap[key].IDcumrap === foundRap[temp].CumRapIDcumrap){%>
+                                 
+                                    <div class="card-body">
+                                      <h5 class="card-title"><%-foundRap[temp].Tenrap%></h5>
+                                      <h5 class="card-title">Ten Cum Rap : <%-foundCumRap[key].Tencumrap%></h5>
+    
+                                        <p class="card-text">Thong tin chi tiet : Rap</p>
+                                        <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"> <%-foundRap[temp].Loairap%></li>
+                                        <li class="list-group-item"> <%-foundRap[temp].Kichthuocngang%></li>
+                                        <li class="list-group-item"> <%-foundRap[temp].Kichthuocdoc%></li>
+                                        </ul>
+                                    </div>
+
+                                        <div class="card-footer">
+                                            <button onclick="editrap('<%-foundCumRap[key].Tencumrap%>','<%-foundRap[temp].IDrap%>','<%-foundCumRap[key].IDcumrap%>','<%-foundRap[temp].Tenrap%>', '<%-foundRap[temp].Loairap%>', '<%-foundRap[temp].Kichthuocngang%>', '<%-foundRap[temp].Kichthuocdoc%>')">Edit</button>
+                                            <button>Delete</button>
+
+
+                                        </div>
+
+                                      
+                            <%}
+                        }%>
+                    </div>
+    
+                <%}%>
+            </div>
+    </div>  
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(document).ready(function(){
+        $("#selectedname").on('change', function(){
+            $(".data").hide();
+            $("#" + $(this).val()).fadeIn(700);
+        }).change();
+    });
+
+ 
+    
+</script>
+
+<!----------Edit Rap------------>
+<div class="bg-modal">
+        <div class="modal-content ">             
+            <div onclick="tatrap()" class="close">+</div>
+            <div class="ui container">
+                <form  class="ui form" method="POST"  >
+                    <div class="card w-100" style="width: 18rem;">
+                            
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <input type="text" name="idrap" id="idrap">
+                              <input type="text" name="idcumrap" id="idcumrap">
+                              <input type="text"  name="temp_tencumrap" id="temp_tencumrap">
+
+                             <input type="text" name="rrap" id="rrap">
+                             <input type="text" name="loairap" id="loairap">
+                             <input type="text" name="ktdoc" id="ktdoc">
+                             <input type="text" name="ktngang" id="ktngang">
+                            <input type="text"  name="check_option" id="check_option">
+
+                            </div>
+                            
+                           
+                    </div>
+                    
+                    <button class="ui fluid blue button" type="submit">Save</button>
+                </form>
+            </div>
+    
+    
+           
+        </div>
+</div>
+
+<!----------Them Rap------------>
+
+<div class="bg-modal1">
+        <div class="modal-content ">             
+            <div onclick="tatrap1()" class="close">+</div>
+            <div class="ui container">
+                <form  class="ui form" method="POST"  >
+                    <div class="card w-100" style="width: 18rem;">
+                            
+                            
+                            <input type="text" value="1" name="check_option" id="check_option">
+                            <input type="text"  name="temp_tencumrap1" id="temp_tencumrap1">
+
+                            <label  for="name">Ten Rap</label>
+                            <input  type="text" name="rrap" id="rrap">     
+                            <label for="name">Loai Rap</label>
+                            <input type="text" name="loairap" id="loairap">   
+                            <label for="name">Kthuoc ngang</label>
+                            <input type="text" name="ktngang" id="ktngang">     
+
+
+                            <label for="name">Kthuoc doc</label>
+                            <input type="text" name="ktdoc" id="ktdoc">     
+
+                           
+                    </div>
+                    
+                    <button class="ui fluid blue button" type="submit">Save</button>
+                </form>
+            </div>
+    
+    
+           
+        </div>
+</div>
+
+<!----------Edit Rap------------>
+
+
+
+<script>
+    
+
+    var addrap = function(){
+        document.querySelector('.bg-modal1').style.display = 'flex';
+
+        // var temp_tencumrap = document.getElementById('name')[0].value;
+        
+        // document.getElementById('temp_tencumrap').value = tenrap;
+
+        var temp_tencumrap = document.getElementsByName('selectedname')[0].value;
+
+        document.getElementById('temp_tencumrap1').value = temp_tencumrap;
+        document.getElementById('rrap').value = '';
+        document.getElementById('loairap').value = '';
+        document.getElementById('ktdoc').value = '';
+        document.getElementById('ktngang').value = '';
+
+    };
+
+
+    var editrap = function(tencumrap,idrap, idcumrap,tenrap, loairap, ktdoc, ktngang){
+        document.querySelector('.bg-modal').style.display = 'flex';
+
+        document.getElementById('rrap').value = tenrap;
+        document.getElementById('loairap').value = loairap;
+        document.getElementById('ktdoc').value = ktdoc;
+        document.getElementById('ktngang').value = ktngang;
+        document.getElementById('idrap').value = idrap;
+        document.getElementById('idcumrap').value = idcumrap;
+        document.getElementById('check_option').value = '0';
+        document.getElementById('temp_tencumrap').value = tencumrap;
+
+
+    };
+    var tatrap = function(){
+        document.querySelector('.bg-modal').style.display = 'none';
+
+    };
+    var tatrap1 = function(){
+        document.querySelector('.bg-modal1').style.display = 'none';
+
+    };
+    
+    
+</script>

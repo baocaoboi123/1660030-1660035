@@ -1,0 +1,211 @@
+<section style="background-color: #000;"  id="about" class="about py-3">
+  <div class="row align-items-center container my-5 mx-auto">
+
+   
+        
+
+        <div class="col-lg-3 col-md-3 col-12 w-50 pt-5 pb-5">
+            <img class="card-img-top" src="<%-found_posterphim[0].Phim.Posterphim%>" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><%-found_posterphim[0].Phim.Tenphim%></h5>
+                <div class="movie-container">
+                    <select id="movie">
+                        <option value='<%-found_sc[0].Giave%>'><%-found_posterphim[0].Phim.Tenphim%></option>
+                       
+                    </select>
+                </div>            
+            </div>
+        </div>
+        <div class=" col-lg-6 col-md-6 col-12 w-50 pt-5 pb-5">
+
+            <div class="">
+                <ul class="showcase">
+                    <li>
+                        <div  class="seat occupied chuachon"></div>
+                        <small>Available</small>
+                    </li>
+                    <li>
+                        <div  class="seat occupied chon"></div>
+                        <small>Selected</small>
+                    </li>
+                    <li>
+                        <div class="seat occupied"></div>
+                        <small>Occupied</small>
+                    </li>
+                </ul>
+            </div>
+            <div class="row d-flex justify-content-center">                         
+                <div class=" screen"></div>
+            </div>
+            <div class="choose row d-flex justify-content-center ">
+                    <div class="">
+                        <% 
+                        for (i = 0 ; i < kichthuocdoc; i++ ){  %>
+                        <div class="row p-2 ">
+                                                        
+                            <%for (k = 0 ; k < kichthuocngang; k++){  
+                                check = 0
+                                for(const key in found_v_dc){
+                                    if(array_sodoghe[i][k] === found_v_dc[key].Maghe){%>
+                                        <div class="seat occupied"></div>    
+                                        <%
+                                        check = 1
+                                        break
+                                        
+                                    }
+
+                                }
+                                if(check != 1){%>
+                                    <div   id="seat" class="seat text-center" ><%- array_sodoghe[i][k]%></div>    
+
+                                    <%}
+
+                           } %>
+                               
+                        </div>
+                        
+                        <% }
+                        %>      
+                    </div>
+            </div>
+            
+                
+        </div>
+
+        <div   class="col-lg-3 col-md-3 col-12 w-50  pt-5 pb-5">
+           
+           <div class="row">
+                <p class="text">You have selected <span id="count">0</span> seats for a price of $<span id="total">0</span></p>
+
+           </div>
+           <div hidden class="row">
+                <p class="text" id="listlist">ssss</p>
+
+           </div>
+           <div class="row">
+                <form action="" method="POST">
+                    <input hidden  style="color: #000;"   id="vedadat" name="vedadat" type="text">
+                    <input hidden  style="color: #000;"   id="tongtien" name="tongtien" type="text">
+
+                    <button>ENTER</button>
+                </form>
+           </div>
+        </div>
+
+
+
+
+
+
+
+  </div>
+</section>
+
+
+<script >
+    
+
+
+        const container = document.querySelector('.choose');
+        const seats = document.querySelectorAll('.row .seat:not(.occupied)');
+        const count = document.getElementById('count');
+
+        const total = document.getElementById('total');
+        const movieSelect = document.getElementById('movie');
+        let ticketPrice = +movieSelect.value;
+
+        
+
+
+//save selected movie index and price
+function setMovieData(movieIndex, moviePrice){
+    localStorage.setItem('selectedMovieIndex', movieIndex);
+    localStorage.setIvaluetem('selectedMoviePrice', moviePrice);
+}
+       
+    function updateSelectedCount() {
+        const selectedSeats = document.querySelectorAll('.row .seat.selected');
+
+        const seatsIndex = [...selectedSeats].map(seat => [...seats]);
+
+        var input;
+        if(selectedSeats.length === 0 ){
+            document.getElementById('listlist').innerText =  '';
+            document.getElementById('vedadat').value = '';
+        }else{
+
+        var check = ""
+        for (var i = 0; i < selectedSeats.length; ++i) {
+            input = selectedSeats[i];
+            if (input.innerText) {
+                
+                document.getElementById('listlist').innerText = check + input.innerText;
+                document.getElementById('vedadat').value =  check + input.innerText;
+
+                check +=  input.innerText;
+            }else
+            {
+
+                document.getElementById('listlist').innerText = "nothting";
+
+            }
+        }
+        
+        }
+        
+        const selectedSeatsCount = selectedSeats.length;
+        
+        
+        count.innerText = selectedSeatsCount;
+
+        total.innerText = selectedSeatsCount * ticketPrice;
+
+        document.getElementById('tongtien').value = total.innerText ;
+
+       
+
+        
+    }
+
+       function populateUI() {
+        const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
+        if (selectedSeats !== null && selectedSeats.length > 0) {
+            seats.forEach((seat, index) => {
+            if (selectedSeats.indexOf(index) > -1) {
+                seat.classList.add('selected');
+            }
+            });
+        }
+
+        const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
+
+        if (selectedMovieIndex !== null) {
+            movieSelect.selectedIndex = selectedMovieIndex;
+        }
+    }
+    movieSelect.addEventListener('change', e => {
+        ticketPrice = +e.target.value;
+        setMovieData(e.target.selectedIndex, e.target.value)
+        updateSelectedCount();
+    });
+     container.addEventListener('click', e => {
+            if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied'))
+            {
+                
+                e.target.classList.toggle('selected');
+                updateSelectedCount();
+
+            }
+
+
+
+        });
+    
+</script>
+    
+
+
+
+
+
+

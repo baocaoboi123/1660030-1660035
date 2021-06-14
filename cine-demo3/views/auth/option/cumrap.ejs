@@ -1,0 +1,117 @@
+
+
+<section style="background-color: #000;"  id="about" class="about py-5">
+    <div class="row align-items-center container my-5 mx-auto">
+          
+        <button onclick="addcumrap()">ADD Cum Rap</button>                          
+
+    </div>
+    <div class="row align-items-center container my-5 mx-auto">
+        <div class="card-deck mx-auto">
+            <% for(const key in foundCumRap){%>
+
+                <div class="card mb-3" style="min-width: 15rem; max-width: 15rem; border: none;">
+                        <div class="card-body">
+                            <h5  class="text-center card-title"><%- foundCumRap[key].IDcumrap%></h5>
+                                
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">TenCumRap:  <%- foundCumRap[key].Tencumrap %></small><br>
+                            <small class="text-muted">DiaChi:  <%- foundCumRap[key].Diachi %></small><br>
+                            <button onclick="editcumrap('<%- foundCumRap[key].IDcumrap%>','<%-foundCumRap[key].Tencumrap%>','<%- foundCumRap[key].Diachi %>')" >Edit</button>
+                            <button>Delete</button>
+                        </div>
+                </div>
+
+            <%}%>
+        </div>
+    </div>
+  </section>
+
+
+<script>
+    var addcumrap = function(){
+        document.querySelector('.bg-modal1').style.display = 'flex';
+
+       
+
+
+            document.getElementById('tencumrap').value = '';
+            document.getElementById('check_option').value = '1';
+            document.getElementById('diachi').value = '';
+
+    };
+    var editcumrap = function(idcumrap,tencumrap, diachi){
+        document.querySelector('.bg-modal').style.display = 'flex';
+
+        document.getElementById('idcumrap').value = idcumrap;
+        document.getElementById('tencumrap').value = tencumrap;
+        document.getElementById('check_option').value = '0';
+        document.getElementById('diachi').value = diachi;
+
+
+    };
+    var tatrap = function(){
+        document.querySelector('.bg-modal').style.display = 'none';
+
+    };
+    var tatrap1 = function(){
+        document.querySelector('.bg-modal1').style.display = 'none';
+
+    };
+
+</script>
+<div class="bg-modal">
+        <div class="modal-content ">             
+            <div onclick="tatrap()" class="close">+</div>
+            <div class="ui container">
+                <form  class="ui form" method="POST"  >
+                    <div class="card w-100" style="width: 18rem;">                            
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <input type="text" name="idcumrap" id="idcumrap">
+                                <input type="text"  name="tencumrap" id="tencumrap">
+
+                                <input type="text" name="diachi" id="diachi">
+                                
+                                <input type="text"  name="check_option" id="check_option">
+                            </div>                                                   
+                    </div>
+                
+                    <button class="ui fluid blue button" type="submit">Save</button>
+                </form>
+            </div>
+    
+        </div>
+</div>
+
+<div class="bg-modal1">
+        <div class="modal-content ">             
+            <div onclick="tatrap1()" class="close">+</div>
+            <div class="ui container">
+                <form  class="ui form" method="POST"  >
+                    <div class="card w-100" style="width: 18rem;">
+                            
+                            
+                            <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <input type="text" name="idcumrap" id="idcumrap">
+                                    <input type="text"  name="tencumrap" id="tencumrap">
+    
+                                    <input type="text" name="diachi" id="diachi">
+                                    
+                                    <input type="text" value="1"  name="check_option" id="check_option">
+                            </div>        
+
+                           
+                    </div>
+                    
+                    <button class="ui fluid blue button" type="submit">Save</button>
+                </form>
+            </div>
+    
+    
+           
+        </div>
+</div>
+

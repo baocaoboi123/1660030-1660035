@@ -1,0 +1,141 @@
+
+
+<section style="background-color: #000;"  id="" class=" py-5">
+    
+   
+    <div class="row  my-5 mx-auto">               
+        
+
+        <div style="background-color: salmon; " class="col-lg-9 col-md-9 col-12 w-100 pt-5 pb-5">
+            <div style="background-color: #000;"  class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                        <div class="d-flex phim-info">                                
+                            <span id="add" class="ml-auto p-2">Add</span>
+                        </div>
+                        <main class="m">
+                            <% for(const key in found_AllMovie){%>
+                            <div class="phim">
+                                <img src="<%- found_AllMovie[key].Posterphim %>" alt="">
+                                <div class="phim-info">
+                                    <p><%- found_AllMovie[key].Tenphim %></p>
+                                    <button onclick="thaydoiphim1('<%- found_AllMovie[key].Tenphim %>', '<%- found_AllMovie[key].Posterphim %>', '<%- found_AllMovie[key].Thoiluong %>', '<%- found_AllMovie[key].IDphim %>')"   id="edit" class="edit" >Edit</button>
+                                </div>
+                                <select hidden class="custom-select" name="inputGroupSelect05" id="inputGroupSelect05" aria-label="Example select with button addon">
+                                                                                
+                                    <option value="<%- found_AllMovie[key].Tenphim %>"><%- found_AllMovie[key].Tenphim %></option>
+                                    <option value="<%- found_AllMovie[key].Posterphim %>"><%- found_AllMovie[key].Posterphim %></option>    
+                                                         
+                                </select>
+                            
+                            </div>
+                            <%}%>
+                        </main>
+                </div>
+               
+            </div>
+        </div>
+        <div style="background-color: salmon;"  class="col-lg-3 col-md-3 col-12 w-100 pt-5 pb-5">
+                <div id="close1" class="close"><a href="/auth/admin/config">+</a>
+                </div>
+                <form method="POST" class="ui form" enctype="multipart/form-data"   >
+                    <img style="max-width: 100px; max-height: 150px;"  id="poster_img" src="" alt=""><br>
+
+                    <label hidden  for="name">ID Phim</label>
+                    <input hidden type="text" name="idphim_edit" id="idphim_edit">     
+                    <label for="name">Ten Phim</label>
+                    <input type="text" name="tenphim_edit" id="tenphim_edit">   
+                    <label for="name">Poster Phim</label>
+                
+                    <input type="file" name="myImage" id="myImage" >
+
+                    <label for="name">Thoi Luong</label>
+                    <input type="text" name="thoiluong_edit" id="thoiluong_edit">     
+                    <input hidden type="text" id="check_option" name="check_option" value="1">
+                            
+                    
+                    <button class="ui fluid blue button" type="submit">Save</button>
+                </form>
+            
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+
+   var thaydoiphim1 = function(tenphim, posterphim, thoiluong, idphim){
+
+        document.getElementById('idphim_edit').value = idphim;
+
+
+    
+        document.getElementById('tenphim_edit').value = tenphim;
+        document.getElementById('thoiluong_edit').value = thoiluong;
+        document.getElementById('poster_img').src = posterphim;
+
+
+   }
+   
+
+</script>
+
+
+<div class="bg-modal">
+    <div class="modal-content ">             
+        <div id="close" class="close">+</div>
+        <div class="ui container">
+            <form  class="ui form" method="POST" enctype="multipart/form-data"  >
+                <div class="ui two fields">
+                    <div class="field">
+                        <label for="name">Poster Phim</label>
+                        <input type="file" name="myImage" id="myImage" >
+
+                    </div>
+                    <div class="field">
+                        <label hidden for="name">ID Phim</label>
+                        <input hidden type="text" name="" id="">     
+                        <label for="name">Ten Phim</label>
+                        <input type="text" name="tenphim_add" id="tenphim_add">                       
+                        <label for="name">Ngay Cong Chieu</label>
+                        <input onchange="getEventTime5()" placeholder="chon ngay" type="date" name="ngaycongchieu_add" id="ngaycongchieu_add" > 
+                        <input  type="text" name="start1_year" id="start1_year">   
+
+                        <label for="name">Thoi Luong</label>
+                        <input type="text" name="thoiluong_add" id="thoiluong_add">     
+
+                        <input hidden type="text" id="check_option" name="check_option" value="0">
+
+                    </div>
+                </div>
+                
+                <button class="ui fluid blue button" type="submit">Save</button>
+            </form>
+        </div>
+
+
+       
+    </div>
+</div>
+
+
+<script>
+var getEventTime5 = function(){
+    var temp_year = moment(document.getElementById("ngaycongchieu_add").value).format("YYYY-MM-DD");
+    document.getElementById('start1_year').value = temp_year;            
+
+};
+
+
+
+    document.getElementById('add').addEventListener('click',
+    function(){
+        document.querySelector('.bg-modal').style.display = 'flex';
+    });
+   document.getElementById('close').addEventListener('click',
+   function(){
+
+       document.querySelector('.bg-modal').style.display = 'none';
+   });
+
+</script>
