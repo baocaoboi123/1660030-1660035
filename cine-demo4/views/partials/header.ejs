@@ -1,0 +1,87 @@
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top ">
+  <a style="color:00BF85;" class="navbar-brand" href="/">ISA</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mx-auto">
+      
+      <li class="nav-item">
+        <a class="nav-link" href="/phimdangchieu">PHIM</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">LỊCH CHIẾU</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">RẠP VÀ GIÁ</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">KHUYẾN MÃI</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#about">GIỚI THIỆU</a>
+      </li>
+     
+      <li class="nav-item">
+        <a class="nav-link" href="#service">LIÊN HỆ</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/auth/register">ĐĂNG KÝ</a>
+      </li>
+      <li class="nav-item">
+
+
+          <%  if (currentUser) 
+          {%>
+          <div class="btn-group ">
+             
+               
+              <button type="button" class="btn btn-success text-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%- currentUser.Hoten%>
+              </button>
+              <div class="dropdown-menu">
+                  <a class="dropdown-item" href="/quanly">QUẢN LÝ</a>
+                  <!-- <a class="dropdown-item" href="/auth/admin/config">Add/Edit Phim</a>
+                  <a class="dropdown-item" href="/auth/admin/config/rap">Add/Edit Rap</a>
+                  <a class="dropdown-item" href="/auth/admin/config/cumrap">Add/Edit Cum Rap</a>
+                  <a class="dropdown-item" href="/auth/admin/config/suatchieu">Add/Edit Suat Chieu</a> -->
+
+
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/auth/logout">THOÁT</a>
+              </div>
+            </div>
+              <%}
+              else{%>
+                <button class="btn btn-success text-dark">
+                    <a href="/auth/login" class="nav-link">ĐĂNG NHẬP</a>
+      
+                </button>
+              <%}%>
+
+
+
+
+
+
+      </li>
+    </ul>
+    
+      
+
+   
+
+
+
+
+
+
+
+    
+  </div>
+</nav>
+
