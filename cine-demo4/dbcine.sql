@@ -15,7 +15,10 @@ CREATE TABLE NGUOI_DUNG_ADMIN(
 
 INSERT INTO `NGUOI_DUNG_ADMIN` (`IDnguoidung`, `Email`, `Matkhau`, `Hoten`, `Sodienthoai`, `Vaitro`) VALUES
 (1, 'admin@gmail.com', 'admin', 'admin', '123456789', '0'),
-(2, 'user1@gmail.com', 'user1', 'user1', '123456789', '1');
+(2, 'user1@gmail.com', 'user1', 'user1', '987654321', '1'),
+(3, 'user2@gmail.com', 'user2', 'user2', '012345678', '1'),
+(4, 'user3@gmail.com', 'user3', 'user3', '876543210', '1'),
+(5, 'user4@gmail.com', 'user4', 'user4', '135792468', '1'),;
 
 
 
@@ -27,8 +30,10 @@ INSERT INTO `NGUOI_DUNG_ADMIN` (`IDnguoidung`, `Email`, `Matkhau`, `Hoten`, `Sod
 
 INSERT INTO `CUM_RAP` (`IDcumrap`, `Tencumrap`, `Diachi`) VALUES
 ('CR1', N'Quốc Thanh', N'01 Quốc Thanh'),
-('CR2', 'Hai Bà Trưng', N'02 Hai Bà Trưng'),
-('CR3', 'Bình Dương', N'03 Bình Dương');
+('CR2', N'Hai Bà Trưng', N'02 Hai Bà Trưng'),
+('CR3', N'Bình Dương', N'03 Bình Dương'),
+('CR4', N'Đồng Nai', N'04 Đồng Nai')
+('CR5', N'Thành Thái', N'05 Thành Thái');
 
 CREATE TABLE RAP(
     IDrap VARCHAR(50) PRIMARY KEY NOT NULL,
@@ -43,7 +48,9 @@ CREATE TABLE RAP(
 INSERT INTO `RAP` (`IDrap`, `Tenrap`, `IDcumrap`, `Loairap`, `Kichthuocngang`, `Kichthuocdoc`) VALUES
 ('R1', N'Cine Quốc Thanh', 'CR1', '2D', 15, 30),
 ('R2', N'Cine Bình Dương', 'CR3', '3D', 18, 33),
-('R3', N'Cine Hai Bà Trưng', 'CR2', '4DX', 20, 35);
+('R3', N'Cine Hai Bà Trưng', 'CR2', '4DX', 20, 35),
+('R4', N'Cine Thành Thái', 'CR5', '4DX', 20, 35),
+('R5', N'Cine Đồng Nai', 'CR4', '4DX', 20, 35);
 
 
 CREATE TABLE PHIM(
