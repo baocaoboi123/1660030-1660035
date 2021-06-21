@@ -1,0 +1,514 @@
+
+     
+
+
+
+
+<section style="background-color:#222; color: #fff" class="about10 py-4">
+    <div class="tab-content row my-1 mx-auto">
+        <div id="p" class="tab-pane fade in active show col-lg-12 col-md-12 col-12 w-50 pt-5 pb-5">
+            <div class="card-deck mx-auto">
+                <div class="img col-lg-3 col-md-3 col-12 w-50 pt-5 pb-5">
+                        <div style=""  class="input-group ">
+                                <div style="margin: 0;
+                                font-size: 17px;
+                                height: auto;
+                                margin: 0 auto;
+                                position: relative;
+                                text-transform: uppercase;"  class="input-group-prepend">
+                                    <span style="background-color: lightgreen; border: none;  " class="input-group-text">Phim </span>
+                                
+                                <select name="selectphim" id="selectphim">
+
+                                   
+
+
+                                    <% for(const key in foundPhim){
+                                        if(tenphim === foundPhim[key].IDphim){%>
+                                            <option selected value="<%- foundPhim[key].IDphim%>"><%- foundPhim[key].Tenphim%></option>
+                                        <%}else{%>
+                                            <option  value="<%- foundPhim[key].IDphim%>"><%- foundPhim[key].Tenphim%></option>
+                                        <%}
+                                    }%>
+                                </select>    
+                            </div>
+                        </div>
+                        
+                        <% for(const key in foundPhim){%>
+                            <div style=""  id="<%- foundPhim[key].IDphim%>" class="data2 ">
+                                <img style="  object-fit: cover;"  class="img-fluid container" src="<%- foundPhim[key].Posterphim%>" alt="">    
+            
+                            </div>
+                        <%}%>      
+                </div>
+                <div class="text col-lg-9 col-md-9 col-12 w-50 pt-5 pb-5">
+                    <div class="row">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Cum Rap va Rap</span>
+                                <select class="custom-select"  name="selectedname" id="selectedname">
+                                    <option value="">----Chọn Cụm Rạp----</option>
+        
+                                    <% for(const key in foundCumRap){
+                                        if(tencumrap === foundCumRap[key].IDcumrap){%>
+                                            <option selected value="<%- foundCumRap[key].IDcumrap%>"><%- foundCumRap[key].Tencumrap%></option>
+
+                                        <%}else{%>
+                                            <option value="<%- foundCumRap[key].IDcumrap%>"><%- foundCumRap[key].Tencumrap%></option>
+
+                                        <%}
+                        
+                                    }%>
+
+                                    
+                                </select>
+                                <span style="background-color: lightsteelblue; border: none;" class="input-group-text">Rạp</span>
+                                <% for(const key in foundCumRap){%>
+        
+                                    <select  class="data custom-select" name="<%- foundCumRap[key].IDcumrap%>" id="<%- foundCumRap[key].IDcumrap%>" >
+                                            <%for(const temp in foundRap){
+                                                if((foundCumRap[key].IDcumrap === foundRap[temp].CumRapIDcumrap) && (tenrap === foundRap[temp].Tenrap)){%>
+                                                    
+                                                        <option  selected  ><%-foundRap[temp].Tenrap%></option>
+                                                <%}else if((foundCumRap[key].IDcumrap === foundRap[temp].CumRapIDcumrap) && (tenrap !== foundRap[temp].Tenrap)){%>
+                                                    <option    ><%-foundRap[temp].Tenrap%></option>
+
+                                                <%}
+                                            }%>
+                                    </select>
+                                <%}%>
+                            </div>
+
+                            <!------->
+                        </div>
+                    </div>
+                    <div class="row container d-flex">
+                        <div class="nav nav-pills ml-auto p-1">
+                                <form method="POST" >                                     
+                                        <span style="background-color: lightcoral; border: none;" class="input-group-text">Thời gian suất chiếu</span>
+                                        <input onchange="getEventTime11()" placeholder="Chọn Ngày:" type="date" id="start1" > 
+                                        <input hidden  type="text" name="ngayxem" id="ngayxem">   
+                                        <input hidden  type="text" name="tencumrap" id="tencumrap"> 
+                        
+                                        <input hidden  type="text" name="tenrap" id="tenrap">                              
+                         
+                                        <input hidden   type="text" name="tenphim" id="tenphim">  
+                                        <input hidden type="text" value="2" name="check_option" id="check_option">
+                                        <button type="submit">Xem Suất Chiếu</button> 
+    
+                        
+                                </form>
+                                <span style="background-color: lightpink;  "  id="add" class="p-2">Thêm Suất Chiếu</span>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div>
+                            <!-------------------------->
+                            <h1 type="text" id="tenphim"></h1>
+              
+                            <h5 id="ngaycongchieu" >NGÀY CÔNG CHIẾU: </h5>
+
+                            <div class="card-deck"> 
+
+                                    <% for (const key in found_suatchieu){%>
+                                          <div class="card " style=" max-width: auto; color: black;">
+                                              <div class="card-body">
+                                                  
+                                                <h6 style="font-weight: bold;"   id="tempHHSS" class="card-title"><%-found_suatchieu[key].GioBatDau %></h5>
+                                                
+                                            
+                                              </div>
+                                              <div>
+                                                            <button onclick="scrollToTopSuatChieu('<%-found_suatchieu[key].IDsuatchieu %>','<%-found_suatchieu[key].Phim.IDphim %>','<%-found_suatchieu[key].RapIDrap %>','<%-found_suatchieu[key].Giave %>','<%-found_suatchieu[key].Batdau %>','<%-found_suatchieu[key].GioBatDau %>', '<%-found_suatchieu[key].Ketthuc %>', '<%-found_suatchieu[key].GioKetThuc %>')"  style="background-color: lightgreen;  border-radius: 5px; border: none;">EDIT</button>
+                                                            <button onclick="deleteSuatChieu('<%-found_suatchieu[key].IDsuatchieu %>')"  style="background-color: lightcoral;  border-radius: 5px; border: none;">DELETE</button>
+            
+                                                    </div>
+                                            </div>
+                    
+                                      <%}%>
+                            </div>
+                            <!-------------------------->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="bg-modal">
+        <div class="modal-content ">             
+            <div onclick="tatsuatchieu()" class="close">+</div>
+            <div class="ui container">
+                <form  class="ui form" method="POST"  >
+                    <div class="card w-100" style="width: 18rem;">
+                            
+                            <div class="card-body">
+                              <h5 class="card-title">Edit Suất Chiếu</h5>
+                       
+
+
+                                <div  class="input-group">
+                                    <div  class="input-group-prepend">
+                                        <span style="background-color: lightgreen; border: none;" class="input-group-text">ID suất chiếu </span>
+                                        <input type="text" name="idsuatchieu" id="idsuatchieu">
+
+                                    </div>
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">ID phim </span>
+                                            <input type="text" name="idphim" id="idphim">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">ID rạp </span>
+                                            <input type="text" name="idrap" id="idrap">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Giá vé </span>
+                                            <input type="text" name="giave" id="giave">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Ngày bắt đầu </span>
+                                            <input type="text" name="ngaybatdau" id="ngaybatdau">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Giờ bắt đầu </span>
+                                            <input type="text" name="giobatdau" id="giobatdau">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Ngày kết thúc </span>
+                                            <input type="text" name="ngayketthuc" id="ngayketthuc">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Giờ kết thúc </span>
+                                            <input type="text" name="gioketthuc" id="gioketthuc">
+
+                                        </div>
+
+                                </div>
+                                <input type="text" value="0" name="check_option" id="check_option">
+
+                            </div>
+                            
+                           
+                    </div>
+                    
+                    <button class="ui fluid blue button" type="submit">Save</button>
+                </form>
+            </div>
+    
+    
+           
+        </div>
+</div> 
+
+<div class="bg-modal1">
+        <div class="modal-content ">             
+            <div onclick="tatsuatchieu1()" class="close">+</div>
+            <div class="ui container">
+                <form  class="ui form" method="POST"  >
+                    <div class="card w-100" style="width: 18rem;">
+                            
+                            <div class="card-body">
+                              <h5 class="card-title">Edit Suất Chiếu</h5>
+                       
+
+
+                                <div  class="input-group">
+                                    <div  class="input-group-prepend">
+                                        <span style="background-color: lightgreen; border: none;" class="input-group-text">ID suất chiếu </span>
+                                        <input type="text" name="idsuatchieu1" id="idsuatchieu">
+
+                                    </div>
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">ID phim </span>
+                                            <input type="text" name="idphim1" id="idphim1">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">ID rạp </span>
+                                            <input type="text" name="idrap1" id="idrap1">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Giá vé </span>
+                                            <input type="text" name="giave1" id="giave1">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Ngày bắt đầu </span>
+                                            <input type="text" name="ngaybatdau1" id="ngaybatdau1">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Giờ bắt đầu </span>
+                                            <input type="text" name="giobatdau1" id="giobatdau1">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Ngày kết thúc </span>
+                                            <input type="text" name="ngayketthuc1" id="ngayketthuc1">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Giờ kết thúc </span>
+                                            <input type="text" name="gioketthuc1" id="gioketthuc1">
+
+                                        </div>
+
+                                </div>
+                                <input type="text" value="1" name="check_option" id="check_option">
+                                <input hidden  type="text" name="tencumrap1" id="tencumrap1"> 
+                        
+                                <input hidden  type="text" name="tenrap1" id="tenrap1">                              
+                 
+                                <input hidden   type="text" name="tenphim1" id="tenphim1">  
+                            </div>
+                            
+                           
+                    </div>
+                    
+                    <button class="ui fluid blue button" type="submit">Save</button>
+                </form>
+            </div>
+    
+    
+           
+        </div>
+</div> 
+
+
+<div class="bg-modal2">
+        <div class="modal-content2 "> 
+                    <div class="container">
+                            <p>Joke Over! Tao không còn vui như lúc trước</p> 
+                    </div>           
+                    <form  class="ui form" method="POST"   >
+                        <div class="field">
+                            <input   type="text" name="idsuatchieu2" id="idsuatchieu2">
+                            <input   value="3" type="text" name="check_option" id="check_option">
+                            <button style="width: 100px; height: 50px; background-color: lightgreen;  border-radius: 5px; border: none;">YES</button>
+
+                        </div>
+                    </form>
+                    <div class="field">
+                        <button onclick="thoatDeleteSuatChieu()" style="width: 100px;height: 50px; background-color: lightcoral;  border-radius: 5px; border: none;">NO</button>
+                                
+                    </div>
+                    
+            
+    
+        </div>
+</div>
+
+
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+      </script>
+      <script>
+         
+      
+          $("#selectphim").on('change', function(){
+
+
+
+                  $(".data2").hide();
+                  $("#" + $(this).val()).fadeIn(700);
+              }).change();
+              $("#selectedname").on('change', function(){
+
+
+
+                  $(".data").hide();
+                  $("#" + $(this).val()).fadeIn(700);
+              }).change();
+      </script>
+      
+      
+      
+      <script>
+             var thoatDeleteSuatChieu = function(){
+                document.querySelector('.bg-modal2').style.display = 'none';
+
+            };
+
+            function deleteSuatChieu(idsuatchieu){
+                document.querySelector('.bg-modal2').style.display = 'flex';
+                document.getElementById('idsuatchieu2').value = idsuatchieu;
+
+                $(window).scrollTop(0);
+
+            };
+            
+
+           
+            var getEventTime11 = function(){
+             
+              var ngayxem = moment(document.getElementById("start1").value).format("YYYY-MM-DD");
+              document.getElementById('ngaybatdau1').value = ngayxem;
+              document.getElementById('ngayketthuc1').value = ngayxem;
+
+
+                var temp_tencumrap = document.getElementsByName('selectedname')[0].value;
+                var temp_tenphim = document.getElementsByName('selectphim')[0].value;
+              
+                document.getElementById('ngayxem').value = ngayxem;            
+                document.getElementById('tencumrap').value = temp_tencumrap;
+                document.getElementById('tencumrap1').value = temp_tencumrap;
+
+                document.getElementById('tenphim').value = temp_tenphim;
+                document.getElementById('tenphim1').value = temp_tenphim;
+
+                var temp_tenrap = document.getElementsByName(temp_tencumrap)[0].value;
+
+                document.getElementById('tenrap').value = temp_tenrap;
+                document.getElementById('tenrap1').value = temp_tenrap;
+
+                document.getElementById('idphim1').value = temp_tenphim;
+                document.getElementById('idrap1').value = temp_tenrap;
+            };
+          
+          </script>
+
+
+<script>
+var addphim  =function(){
+    document.querySelector('.bg-modal1').style.display = 'flex';
+        
+
+        
+        document.getElementById('giave1').value = '';
+        document.getElementById('giobatdau1').value = '';
+        document.getElementById('gioketthuc1').value = '';
+        document.getElementById('check_option').value = '0';
+
+
+};
+
+document.getElementById('add').addEventListener('click',
+        function(){
+            document.querySelector('.bg-modal1').style.display = 'flex';
+        
+
+        
+        document.getElementById('giave1').value = '';
+        document.getElementById('giobatdau1').value = '';
+        document.getElementById('gioketthuc1').value = '';
+        document.getElementById('check_option').value = '0';
+        });
+
+
+var editsuatchieu = function(idsuatchieu, idphim, idrap, giave, ngaybatdau, giobatdau, ngayketthuc, gioketthuc){
+        document.querySelector('.bg-modal').style.display = 'flex';
+        document.getElementById('idsuatchieu').value = idsuatchieu;
+        document.getElementById('idphim').value = idphim;
+        document.getElementById('idrap').value = idrap;
+        document.getElementById('giave').value = giave;
+        document.getElementById('ngaybatdau').value = ngaybatdau;
+        document.getElementById('giobatdau').value = giobatdau;
+        document.getElementById('ngayketthuc').value = ngayketthuc;
+        document.getElementById('gioketthuc').value = gioketthuc;
+        document.getElementById('check_option').value = '0';
+
+
+
+
+    };
+
+function scrollToTopSuatChieu(idsuatchieu, idphim, idrap, giave, ngaybatdau, giobatdau, ngayketthuc, gioketthuc) {
+    document.querySelector('.bg-modal').style.display = 'flex';
+
+            $(window).scrollTop(0);
+            document.getElementById('idsuatchieu').value = idsuatchieu;
+        document.getElementById('idphim').value = idphim;
+        document.getElementById('idrap').value = idrap;
+        document.getElementById('giave').value = giave;
+        document.getElementById('ngaybatdau').value = ngaybatdau;
+        document.getElementById('giobatdau').value = giobatdau;
+        document.getElementById('ngayketthuc').value = ngayketthuc;
+        document.getElementById('gioketthuc').value = gioketthuc;
+        document.getElementById('check_option').value = '0';
+        }
+
+
+
+
+    var tatsuatchieu = function(){
+        document.querySelector('.bg-modal').style.display = 'none';
+
+    };
+    var tatsuatchieu1 = function(){
+        document.querySelector('.bg-modal1').style.display = 'none';
+
+    };
+</script>
+      
+      

@@ -1,0 +1,42 @@
+<section  id="movie" class="movie py-5">
+    <div class="row align-items-center container my-5 mx-auto">
+        <div  class="col-lg-12 col-md-12 col-12 w-100 ">
+
+
+                <main class="m">
+                        <% for(const key in list_phimdangchieu){%>
+                        <div  class="phim ">
+                            
+                                    <ul class="caption-style-4">
+                                            <li>
+                                                    <img src="<%- list_phimdangchieu[key].Posterphim %>" alt="">
+                                                    <div class="caption">
+                                                    <div class="blur"></div>
+                                                    <div class="caption-text">
+                                                        <h1><%- list_phimdangchieu[key].Tenphim%></h1>
+                                                        <div>
+                                                                <button onclick="location.href='/phim/<%- list_phimdangchieu[key].Tenphim%>'"   style="cursor: pointer; background-color: lightgreen;  border-radius: 5px; border: none;">Xem Suất Chiếu</button>
+                                                                <button   style="background-color: lightcoral;  border-radius: 5px; border: none;">Chi Tiết</button>
+                    
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>			
+                                        </ul>
+                                    <div class="phim-info ">
+                                        <p ><%- list_phimdangchieu[key].Tenphim%></p>
+                                    </div>
+                              
+                        </div><br>
+                        <%}%>
+                </main>
+        </div> 
+       
+                    
+                
+    
+    </div>
+</section>
+
+
+

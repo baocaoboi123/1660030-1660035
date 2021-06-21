@@ -1,0 +1,182 @@
+
+     
+
+
+
+
+<section style="background-color:#222; color: #fff" class="about10 py-4">
+    <div class="tab-content row my-1 mx-auto">
+        <div id="p" class="tab-pane fade in active show col-lg-12 col-md-12 col-12 w-50 pt-5 pb-5">
+            <div class="card-deck mx-auto">
+                <div class="img col-lg-3 col-md-3 col-12 w-50 pt-5 pb-5">
+                        
+                        
+                            
+                          <img style="  object-fit: cover;"  class="img-fluid container" src="<%- foundPhim.Posterphim%>" alt="">    
+            
+                </div>
+                <div class="text col-lg-9 col-md-9 col-12 w-50 pt-5 pb-5">
+                    <div class="row">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Cum Rap va Rap</span>
+                                <select class="custom-select"  name="selectedname" id="selectedname">
+                                    <option value="">----Chọn Cụm Rạp----</option>
+        
+                                    <% for(const key in foundCumRap){
+                                        if(tencumrap === foundCumRap[key].IDcumrap){%>
+                                            <option selected value="<%- foundCumRap[key].IDcumrap%>"><%- foundCumRap[key].Tencumrap%></option>
+
+                                        <%}else{%>
+                                            <option value="<%- foundCumRap[key].IDcumrap%>"><%- foundCumRap[key].Tencumrap%></option>
+
+                                        <%}
+                        
+                                    }%>
+
+                                    
+                                </select>
+                                <span style="background-color: lightsteelblue; border: none;" class="input-group-text">Rạp</span>
+                                <% for(const key in foundCumRap){%>
+        
+                                    <select  class="data custom-select" name="<%- foundCumRap[key].IDcumrap%>" id="<%- foundCumRap[key].IDcumrap%>" >
+                                            <%for(const temp in foundRap){
+                                                if((foundCumRap[key].IDcumrap === foundRap[temp].CumRapIDcumrap) && (tenrap === foundRap[temp].Tenrap)){%>
+                                                    
+                                                        <option  selected  ><%-foundRap[temp].Tenrap%></option>
+                                                <%}else if((foundCumRap[key].IDcumrap === foundRap[temp].CumRapIDcumrap) && (tenrap !== foundRap[temp].Tenrap)){%>
+                                                    <option    ><%-foundRap[temp].Tenrap%></option>
+
+                                                <%}
+                                            }%>
+                                    </select>
+                                <%}%>
+                            </div>
+
+                            <!------->
+                        </div>
+                    </div>
+                    <div class="row container d-flex">
+                        <div class="nav nav-pills ml-auto p-1">
+                                <form method="POST" >                                     
+                                        <span style="background-color: lightcoral; border: none;" class="input-group-text">Thời gian suất chiếu</span>
+                                        <input onchange="getEventTime11()" placeholder="Chọn Ngày:" type="date" id="start1" > 
+                                        <input hidden  type="text" name="ngayxem" id="ngayxem">   
+                                        <input  hidden type="text" name="tencumrap" id="tencumrap"> 
+                        
+                                        <input hidden  type="text" name="tenrap" id="tenrap">                              
+                                        <input hidden value="<%- foundPhim.IDphim%>"  type="text" name="tenphim" id="tenphim">                              
+
+                                        <input hidden  type="text" value="2" name="check_option" id="check_option">
+                                        <button type="submit">Xem Suất Chiếu</button> 
+    
+                        
+                                </form>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div>
+                            <!-------------------------->
+                            <h1 type="text" id="tenphim">TÊN PHIM:  <%- foundPhim.Tenphim%></h1>
+              
+                            <h5 id="ngaycongchieu" >NGÀY CÔNG CHIẾU: </h5>
+
+                            <div class="card-deck"> 
+
+                                    <% for (const key in found_suatchieu){%>
+                                          <div class="card " style=" max-width: auto; color: black;">
+                                              <div class="card-body">
+                                                  
+                                                <h6 style="font-weight: bold;"   id="tempHHSS" class="card-title"><%-found_suatchieu[key].GioBatDau %></h5>
+                                                
+                                            
+                                              </div>
+                                              <div>
+                                                  <a href="/muave/<%-found_suatchieu[key].IDsuatchieu%>">Mua ve</a>
+
+                                              </div>
+                                            </div>
+                    
+                                      <%}%>
+                            </div>
+                            <!-------------------------->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+      </script>
+      <script>
+         
+      
+         
+              $("#selectedname").on('change', function(){
+
+
+
+                  $(".data").hide();
+                  $("#" + $(this).val()).fadeIn(700);
+              }).change();
+      </script>
+      
+      
+      
+      <script>
+            
+            
+
+           
+            var getEventTime11 = function(){
+             
+              var ngayxem = moment(document.getElementById("start1").value).format("YYYY-MM-DD");
+
+
+                var temp_tencumrap = document.getElementsByName('selectedname')[0].value;
+              
+                document.getElementById('ngayxem').value = ngayxem;            
+                document.getElementById('tencumrap').value = temp_tencumrap;
+
+
+                var temp_tenrap = document.getElementsByName(temp_tencumrap)[0].value;
+
+                document.getElementById('tenrap').value = temp_tenrap;
+
+            };
+          
+          </script>
+
+
+
+      

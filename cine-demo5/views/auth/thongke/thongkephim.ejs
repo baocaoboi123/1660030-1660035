@@ -1,0 +1,90 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
+
+<section style="background: lightgoldenrodyellow;"  id="about" class="about py-5">
+    <div class="row align-items-center container my-5 mx-auto">
+          
+     
+      <div class="text col-lg-9 col-md-9 col-12 w-50 pt-5 pb-5">
+            <h5>Thống Kê Phim Từ Ngày <span style="color: lightcoral;" ><%- tungay%></span>  Đến Ngày <span style="color: lightcoral;" ><%- denngay%></span></h5>
+            <canvas id="chart" width="800" height="400"></canvas>
+
+      </div>
+    </div>
+    
+        <script>
+            var getEventTimeBD = function(){
+             
+             var bd = moment(document.getElementById("bd").value).format("YYYY-MM-DD");
+             document.getElementById('bddate').value = bd;
+            };
+            var getEventTimeKT = function(){
+             
+             var kt = moment(document.getElementById("kt").value).format("YYYY-MM-DD");
+             document.getElementById('ktdate').value = kt;
+            };
+
+
+            chartIt();
+    async function chartIt(){
+        const data = await getData();
+        const ctx = document.getElementById('chart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.xs,
+                datasets: [{
+                    label: 'Thong Ke',
+                    data: data.ys,
+                    fill: false,
+                    backgroundColor: [
+                        'rgb(251, 255, 0)'
+                    ],
+                    borderColor: [
+                        'rgb(68, 180, 34)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        ticks: {
+                            // Include a dollar sign in the ticks
+                            callback: function(value, index, values) {
+                                return  value + 'VND';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+
+
+
+     getData();
+
+        async function getData(){
+            const xs = [];
+            const ys = [];
+            const response = await fetch('/csv/file.csv');
+            const data = await response.text();
+            console.log(data);
+            // const table = data.split('\n').slice(1);
+
+            const table = data.split('\n');
+            table.forEach(row => {
+                const colums = row.split(',');
+                const year = colums[0];
+                xs.push(year);
+                const temp = colums[1];
+                ys.push(parseFloat(temp) );
+                console.log(year, temp);
+            });
+            return{xs, ys};
+            
+        }
+        </script>
+
+</section>

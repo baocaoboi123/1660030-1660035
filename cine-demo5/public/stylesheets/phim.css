@@ -1,0 +1,652 @@
+/* <section style="background-color:#222; color: #fff"   class="about10 py-4">      
+        <div class="row align-items-center container my-5 mx-auto">
+            
+            <div style=""   class="col-lg-3 col-md-3 col-12 w-50 pt-5 pb-5">
+                        <div style=""  class="input-group ">
+                                <div style="margin: 0;
+                                font-size: 17px;
+                                height: auto;
+                                margin: 0 auto;
+                                position: relative;
+                                text-transform: uppercase;"  class="input-group-prepend">
+                                    <span style="background-color: lightgreen; border: none;  " class="input-group-text">Phim </span>
+                                
+                                <select name="selectphim" id="selectphim">
+                                    
+                                    <% for(const key in foundPhim){%>
+                                        <option value="<%- foundPhim[key].IDphim%>"><%- foundPhim[key].Tenphim%></option>
+                                    <%}%>
+                                </select>    
+                            </div>
+                        </div>
+                        
+                        <% for(const key in foundPhim){%>
+                            <div style=""  id="<%- foundPhim[key].IDphim%>" class="data2 ">
+                                <img style=" width: 100%;
+                                height: 300px; object-fit: cover;"  class="img-fluid container" src="<%- foundPhim[key].Posterphim%>" alt="">    
+            
+                            </div>
+                        <%}%>
+    
+    
+    
+    
+            </div>
+            <div style="" class="col-lg-9 col-md-9 col-12 w-50 pt-0 pb-0">
+                    <div style=""  class="input-group">
+                            <div style="
+                            text-transform: uppercase;"  class="input-group-prepend">
+                                <span style="background-color: lightgreen; border: none;" class="input-group-text">Cụm Rạp </span>
+                                <select  name="selectedname" id="selectedname">
+                                        <option value="">----Chọn Cụm Rạp----</option>
+            
+                                        <% for(const key in foundCumRap){%>
+                                            <option value="<%- foundCumRap[key].IDcumrap%>"><%- foundCumRap[key].Tencumrap%></option>
+                            
+                                        <%}%>
+                                    
+                                </select>
+                                <span style="background-color: lightsteelblue; border: none;" class="input-group-text">Rạp</span>
+                                <% for(const key in foundCumRap){%>
+        
+                                    <select  class="data" name="<%- foundCumRap[key].IDcumrap%>" id="<%- foundCumRap[key].IDcumrap%>" >
+                                            <%for(const temp in foundRap){
+                                                if(foundCumRap[key].IDcumrap === foundRap[temp].CumRapIDcumrap){%>
+                                                    <option    ><%-foundRap[temp].Tenrap%></option>
+            
+                                                <%}
+                                            }%>
+                                    </select>
+                                <%}%>
+                                <span style="background-color: lightcoral; border: none;" class="input-group-text">Thời gian suất chiếu</span>
+                                <input onchange="getEventTime11()" placeholder="Chọn Ngày:" type="date" id="start1" > 
+                            </div>
+                            
+                            
+                            
+                            
+        
+        
+        
+                    </div>
+                    <div class="d-flex justify-content-end">
+                            <form method="POST" >                                     
+                           
+                                    <input hidden  type="text" name="ngayxem" id="ngayxem">   
+                                    <input hidden  type="text" name="tencumrap" id="tencumrap"> 
+                    
+                                    <input hidden  type="text" name="tenrap" id="tenrap">                              
+                     
+                                    <input hidden  type="text" name="tenphim" id="tenphim">  
+                                    <input hidden type="text" value="2" name="check_option" id="check_option">
+                                    <span style="background-color: lightgreen;"  id="sêen" class="p-2">     
+                                        <button type="submit">Xem Suất Chiếu</button> 
+                                    </span>
+
+                    
+                            </form>
+                        <span style="background-color: lightpink;"  id="add" class="p-2">Thêm Suất Chiếu</span>
+                    </div>
+            
+                    <main class="m">
+                            <% for (const key in found_suatchieu){%>
+                                <div class="phim">
+                                <ul class="caption-style-4">
+                                        <li>
+                                            <img src="" alt="">
+                                            <div class="caption">
+                                                <div class="blur"></div>
+                                                <div class="caption-text">
+                                                    <h1><%-found_suatchieu[key].GioBatDau %></h1>
+                                                    <div>
+                                                            <button onclick="scrollToTopSuatChieu('<%-found_suatchieu[key].IDsuatchieu %>','<%-found_suatchieu[key].Phim.IDphim %>','<%-found_suatchieu[key].RapIDrap %>','<%-found_suatchieu[key].Giave %>','<%-found_suatchieu[key].Batdau %>','<%-found_suatchieu[key].GioBatDau %>', '<%-found_suatchieu[key].Ketthuc %>', '<%-found_suatchieu[key].GioKetThuc %>')"  style="background-color: lightgreen;  border-radius: 5px; border: none;">EDIT</button>
+                                                            <button   style="background-color: lightcoral;  border-radius: 5px; border: none;">DELETE</button>
+            
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>			
+                                    </ul>
+                                <div class="phim-info ">
+                                    <p ><%-found_suatchieu[key].GioBatDau %></p>
+                                </div>
+                                
+                            </div>
+                            <%}%>
+                    </main>
+
+     
+            </div>
+        </div>
+</section> */
+.phim{
+    border-radius: 3px;
+    box-shadow: 0 4px 5px rgba((0), 0, 0, 0.2) ;
+    width: 220px;
+    background-color: #373b69;
+    margin:7px auto;
+}
+.phim img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+.phim-info{
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    padding: 0.5rem 1rem 1rem;
+    letter-spacing: 1px;
+    position: relative;
+    background-color: lightcoral;
+   
+}
+.phim-info p{
+    margin: 0;
+    font-size: 17px;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    text-transform: uppercase;
+}
+main .m{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    
+}
+.phim-info span{
+    background-color: #22254b;
+    border-radius: 3px;
+    padding: 0.25rem 0.5rem;
+}
+/*
+<div class="bg-modal1">
+        <div class="modal-content ">             
+            <div onclick="tatsuatchieu1()" class="close">+</div>
+            <div class="ui container">
+                <form  class="ui form" method="POST"  >
+                    <div class="card w-100" style="width: 18rem;">
+                            
+                            <div class="card-body">
+                              <h5 class="card-title">Edit Suất Chiếu</h5>
+                       
+
+
+                                <div  class="input-group">
+                                    <div  class="input-group-prepend">
+                                        <span style="background-color: lightgreen; border: none;" class="input-group-text">ID suất chiếu </span>
+                                        <input type="text" name="idsuatchieu1" id="idsuatchieu">
+
+                                    </div>
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">ID phim </span>
+                                            <input type="text" name="idphim1" id="idphim1">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">ID rạp </span>
+                                            <input type="text" name="idrap1" id="idrap1">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Giá vé </span>
+                                            <input type="text" name="giave1" id="giave1">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Ngày bắt đầu </span>
+                                            <input type="text" name="ngaybatdau1" id="ngaybatdau1">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Giờ bắt đầu </span>
+                                            <input type="text" name="giobatdau1" id="giobatdau1">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Ngày kết thúc </span>
+                                            <input type="text" name="ngayketthuc1" id="ngayketthuc1">
+
+                                        </div>
+
+                                </div>
+                                <div  class="input-group">
+                                        <div  class="input-group-prepend">
+                                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Giờ kết thúc </span>
+                                            <input type="text" name="gioketthuc1" id="gioketthuc1">
+
+                                        </div>
+
+                                </div>
+                                <input type="text" value="1" name="check_option" id="check_option">
+
+                            </div>
+                            
+                           
+                    </div>
+                    
+                    <button class="ui fluid blue button" type="submit">Save</button>
+                </form>
+            </div>
+    
+    
+           
+        </div>
+</div> 
+
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+      </script>
+      <script>
+         
+      
+          $("#selectphim").on('change', function(){
+
+
+
+                  $(".data2").hide();
+                  $("#" + $(this).val()).fadeIn(700);
+              }).change();
+              $("#selectedname").on('change', function(){
+
+
+
+                  $(".data").hide();
+                  $("#" + $(this).val()).fadeIn(700);
+              }).change();
+      </script>
+      
+      
+      
+      <script>
+          
+           
+            var getEventTime11 = function(){
+             
+              var ngayxem = moment(document.getElementById("start1").value).format("YYYY-MM-DD");
+              document.getElementById('ngaybatdau1').value = ngayxem;
+              document.getElementById('ngayketthuc1').value = ngayxem;
+
+
+                var temp_tencumrap = document.getElementsByName('selectedname')[0].value;
+                var temp_tenphim = document.getElementsByName('selectphim')[0].value;
+              
+                // document.getElementById('ngayxem').value = ngayxem;            
+                // document.getElementById('tencumrap').value = temp_tencumrap;
+                // document.getElementById('tenphim').value = temp_tenphim;
+
+                var temp_tenrap = document.getElementsByName(temp_tencumrap)[0].value;
+
+                // document.getElementById('tenrap').value = temp_tenrap;
+
+                document.getElementById('idphim1').value = temp_tenphim;
+                document.getElementById('idrap1').value = temp_tenrap;
+            };
+          
+          </script>
+
+
+<script>
+var addphim  =function(){
+    document.querySelector('.bg-modal1').style.display = 'flex';
+        
+
+        
+        document.getElementById('giave1').value = '';
+        document.getElementById('giobatdau1').value = '';
+        document.getElementById('gioketthuc1').value = '';
+        document.getElementById('check_option').value = '0';
+
+
+};
+
+document.getElementById('add').addEventListener('click',
+        function(){
+            document.querySelector('.bg-modal1').style.display = 'flex';
+        
+
+        
+        document.getElementById('giave1').value = '';
+        document.getElementById('giobatdau1').value = '';
+        document.getElementById('gioketthuc1').value = '';
+        document.getElementById('check_option').value = '0';
+        });
+
+
+var editsuatchieu = function(idsuatchieu, idphim, idrap, giave, ngaybatdau, giobatdau, ngayketthuc, gioketthuc){
+        document.querySelector('.bg-modal').style.display = 'flex';
+        document.getElementById('idsuatchieu').value = idsuatchieu;
+        document.getElementById('idphim').value = idphim;
+        document.getElementById('idrap').value = idrap;
+        document.getElementById('giave').value = giave;
+        document.getElementById('ngaybatdau').value = ngaybatdau;
+        document.getElementById('giobatdau').value = giobatdau;
+        document.getElementById('ngayketthuc').value = ngayketthuc;
+        document.getElementById('gioketthuc').value = gioketthuc;
+        document.getElementById('check_option').value = '0';
+
+
+
+
+    };
+    var tatsuatchieu = function(){
+        document.querySelector('.bg-modal').style.display = 'none';
+
+    };
+    var tatsuatchieu1 = function(){
+        document.querySelector('.bg-modal1').style.display = 'none';
+
+    };
+</script>
+
+
+*/
+
+/* 
+<section style="background-color:#222; color: #fff"   class="about10 py-4">
+    
+    <div class="row align-items-center  my-5 mx-auto">
+
+        <div  class="text col-lg-3 col-md-3 col-12 w-50 pt-5 pb-5">
+                <div  class="container">
+                        <div  class="input-group">
+                            <div  class="input-group-prepend">
+                                <span style="background-color: lightgreen; border: none;" class="input-group-text">Phim </span>
+                            </div>
+                            <select name="selectphim" id="selectphim">
+                                
+                                <% for(const key in foundPhim){%>
+                                    <option value="<%- foundPhim[key].IDphim%>"><%- foundPhim[key].Tenphim%></option>
+                                <%}%>
+                            </select>    
+                        </div>
+                </div>
+        </div>
+        <div  class="text col-lg-9 col-md-9 col-12 w-50 pt-5 pb-5">
+            <div  class="container">
+    
+                <div  class="input-group">
+                            <div  class="input-group-prepend">
+                            <span style="background-color: lightgreen; border: none;" class="input-group-text">Cụm Rạp </span>
+                            </div>
+                            <select  name="selectedname" id="selectedname">
+                                    <option value="">----Chọn Cụm Rạp----</option>
+
+                                    <% for(const key in foundCumRap){%>
+                                        <option value="<%- foundCumRap[key].IDcumrap%>"><%- foundCumRap[key].Tencumrap%></option>
+                        
+                                    <%}%>
+                                
+                                </select>
+                            
+                                <div class="input-group-prepend">
+                                        <span style="background-color: lightsteelblue; border: none;" class="input-group-text">Rạp</span>
+                                </div>
+                        
+                            <% for(const key in foundCumRap){%>
+
+                                <select  class="data" name="<%- foundCumRap[key].IDcumrap%>" id="<%- foundCumRap[key].IDcumrap%>" >
+                                        <%for(const temp in foundRap){
+                                            if(foundCumRap[key].IDcumrap === foundRap[temp].CumRapIDcumrap){%>
+                                                <option    ><%-foundRap[temp].Tenrap%></option>
+
+                                            <%}
+                                        }%>
+                                </select>
+                            <%}%>
+
+                           
+                          
+
+
+
+                            <div class="input-group-prepend">
+                                    <span style="background-color: lightcoral; border: none;" class="input-group-text">Thời gian suất chiếu</span>
+                            </div>
+                            <input onchange="getEventTime11()" placeholder="Chọn Ngày:" type="date" id="start1" > 
+                            <button onclick="addphim()">Add Phim</button>                                                       
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row align-items-center  mx-auto">
+            <div    class="img col-lg-3 col-md-3 col-12  w-50 pt-5 pb-5">
+                                                     
+                
+    
+                <% for(const key in foundPhim){%>
+                    <div id="<%- foundPhim[key].IDphim%>" class="data2 ">
+                        <img class="img-fluid container" src="<%- foundPhim[key].Posterphim%>" alt="">    
+    
+                    </div>
+                <%}%>
+      
+          
+            </div> 
+            <div  class="text col-lg-9 col-md-9 col-12 w-50 pt-5 pb-5"> 
+            
+                    <form method="POST" >                                     
+                           
+                            <!-- <input  type="text" name="ngayxem" id="ngayxem">   
+                            <input  type="text" name="tencumrap" id="tencumrap"> 
+
+                            <input  type="text" name="tenrap" id="tenrap">                              
+          
+                            <input  type="text" name="tenphim" id="tenphim">  
+                            <input type="text" value="2" name="check_option" id="check_option"> -->
+
+                            <button type="submit">Xem suat chieu</button> 
+
+                    </form>
+
+                    <div class="card-deck">
+               
+                        <% for (const key in found_suatchieu){%>
+                          <div class="card-deck">
+                            <div class="card mb-3" style="max-width: auto; color: black;">
+                                <div class="card-body">
+                                    
+                                  <h5   id="tempHHSS" class="card-title"><%-found_suatchieu[key].GioBatDau %></h5>
+                                 
+
+                                </div>
+                                <div>
+                                    <button onclick="editsuatchieu('<%-found_suatchieu[key].IDsuatchieu %>','<%-found_suatchieu[key].Phim.IDphim %>','<%-found_suatchieu[key].RapIDrap %>','<%-found_suatchieu[key].Giave %>','<%-found_suatchieu[key].Batdau %>','<%-found_suatchieu[key].GioBatDau %>', '<%-found_suatchieu[key].Ketthuc %>', '<%-found_suatchieu[key].GioKetThuc %>')" class="btn btn-primary">
+                                        Edit
+                                    </button>
+                                    <button class="btn btn-primary">
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <%}%>
+                        
+      
+                       
+                      
+                        
+      
+                    </div>
+                          
+            </div>
+                         
+
+
+        
+    </div>
+    
+</section>
+
+
+
+
+
+*/
+
+/*
+<section style="background-color:#222; color: #fff"   class="about10 py-4">
+
+        
+    <div class="row align-items-center container my-5 mx-auto">
+        <div class="col-lg-12 col-md-12 col-12 w-50 pt-5 pb-5">
+                
+                <div class="d-flex justify-content-start">
+                    <div style=""  class="input-group">
+                                <div style="
+                                text-transform: uppercase;"  class="input-group-prepend">
+                                    <span style="background-color: lightgreen; border: none;" class="input-group-text">Cụm Rạp </span>
+                                    <select  name="selectedname" id="selectedname">
+                                            <option value="">----Chọn Cụm Rạp----</option>
+                
+                                            <% for(const key in foundCumRap){%>
+                                                <option value="<%- foundCumRap[key].IDcumrap%>"><%- foundCumRap[key].Tencumrap%></option>
+                                
+                                            <%}%>
+                                        
+                                    </select>
+                                    <span style="background-color: lightsteelblue; border: none;" class="input-group-text">Rạp</span>
+                                    <% for(const key in foundCumRap){%>
+            
+                                        <select  class="data" name="<%- foundCumRap[key].IDcumrap%>" id="<%- foundCumRap[key].IDcumrap%>" >
+                                                <%for(const temp in foundRap){
+                                                    if(foundCumRap[key].IDcumrap === foundRap[temp].CumRapIDcumrap){%>
+                                                        <option    ><%-foundRap[temp].Tenrap%></option>
+                
+                                                    <%}
+                                                }%>
+                                        </select>
+                                    <%}%>
+                                    <span style="background-color: lightcoral; border: none;" class="input-group-text">Thời gian suất chiếu</span>
+                                    <input onchange="getEventTime11()" placeholder="Chọn Ngày:" type="date" id="start1" > 
+                                </div>
+                                
+                                
+                                
+                                
+            
+            
+            
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <span style="background-color: lightgreen;"  id="seen" class="p-2">Xem Suất Chiếu</span>
+                    <span style="background-color: lightpink;"  id="add" class="p-2">Thêm Suất Chiếu</span>
+                </div>
+        </div>
+    </div>
+    <div class="row align-items-center container my-5 mx-auto">
+        
+        <div style=""   class="col-lg-3 col-md-3 col-12 w-50 pt-5 pb-5">
+                    <div style=""  class="input-group ">
+                            <div style="margin: 0;
+                            font-size: 17px;
+                            height: auto;
+                            margin: 0 auto;
+                            position: relative;
+                            text-transform: uppercase;"  class="input-group-prepend">
+                                <span style="background-color: lightgreen; border: none;  " class="input-group-text">Phim </span>
+                            
+                            <select name="selectphim" id="selectphim">
+                                
+                                <% for(const key in foundPhim){%>
+                                    <option value="<%- foundPhim[key].IDphim%>"><%- foundPhim[key].Tenphim%></option>
+                                <%}%>
+                            </select>    
+                        </div>
+                    </div>
+                    
+                    <% for(const key in foundPhim){%>
+                        <div style=""  id="<%- foundPhim[key].IDphim%>" class="data2 ">
+                            <img style=" width: 100%;
+                            height: 300px; object-fit: cover;"  class="img-fluid container" src="<%- foundPhim[key].Posterphim%>" alt="">    
+        
+                        </div>
+                    <%}%>
+
+
+
+
+        </div>
+        <div style="" class="col-lg-9 col-md-9 col-12 w-50 pt-0 pb-0">
+            
+                
+            <div style=""  class="input-group">
+                                <div style="margin: 0;
+                                font-size: 12px;
+                                height: auto;
+                                margin: 0 auto;
+                                position: relative;
+                                text-transform: uppercase;"  class="input-group-prepend">
+                                    <span style="background-color: lightgreen; border: none;" class="input-group-text">Cụm Rạp </span>
+                                    <select  name="selectedname" id="selectedname">
+                                            <option value="">----Chọn Cụm Rạp----</option>
+                
+                                            <% for(const key in foundCumRap){%>
+                                                <option value="<%- foundCumRap[key].IDcumrap%>"><%- foundCumRap[key].Tencumrap%></option>
+                                
+                                            <%}%>
+                                        
+                                    </select>
+                                    <span style="background-color: lightsteelblue; border: none;" class="input-group-text">Rạp</span>
+                                    <% for(const key in foundCumRap){%>
+            
+                                        <select  class="data" name="<%- foundCumRap[key].IDcumrap%>" id="<%- foundCumRap[key].IDcumrap%>" >
+                                                <%for(const temp in foundRap){
+                                                    if(foundCumRap[key].IDcumrap === foundRap[temp].CumRapIDcumrap){%>
+                                                        <option    ><%-foundRap[temp].Tenrap%></option>
+                
+                                                    <%}
+                                                }%>
+                                        </select>
+                                    <%}%>
+                                    <span style="background-color: lightcoral; border: none;" class="input-group-text">Thời gian suất chiếu</span>
+                                    <input onchange="getEventTime11()" placeholder="Chọn Ngày:" type="date" id="start1" > 
+                                </div>
+                                
+                                
+                                
+                                
+            
+            
+            
+            </div>
+        
+
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        </div>
+    </div>
+
+
+
+
+</section>
+
+
+
+
+*/
