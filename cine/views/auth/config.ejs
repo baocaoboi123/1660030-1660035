@@ -1,0 +1,319 @@
+
+
+<section style="background-color: #000;"  id="" class=" py-5">
+    
+   
+    <div class="row  my-5 mx-auto">               
+        
+
+        <div  class="col-lg-12 col-md-12 col-12 w-100 ">
+            <div class="phim-info">                                
+                <!-- <span style="background-color: lightpink;"  id="add" class="ml-auto p-2">Add</span> -->
+                <input readonly style="background-color: lightgray;" id="add" class="btn submit"  value="Thêm Phim"/>
+
+            </div>          
+            <main class="m">
+                <% for(const key in found_AllMovie){%>
+                <div class="phim">
+                    <ul class="caption-style-4">
+                            <li>
+                                    <img src="<%- found_AllMovie[key].Posterphim %>" alt="">
+                                    <div class="caption">
+                                    <div class="blur"></div>
+                                    <div class="caption-text">
+                                        <h1><%- found_AllMovie[key].Tenphim %></h1>
+                                        <div>
+                                                <!-- <button style="background-color: lightgreen;  border-radius: 5px; border: none;" onclick="thaydoiphim1('<%- found_AllMovie[key].Tenphim %>', '<%- found_AllMovie[key].Posterphim %>', '<%- found_AllMovie[key].Thoiluong %>', '<%- found_AllMovie[key].IDphim %>')"   id="edit" class="edit" >EDIT</button> -->
+                                                <button onclick="scrollToTop1('<%- found_AllMovie[key].Tenphim %>', '<%- found_AllMovie[key].Posterphim %>', '<%- found_AllMovie[key].Thoiluong %>', '<%- found_AllMovie[key].IDphim %>', '<%- found_AllMovie[key].Ngaycongchieu %>')"  style="background-color: lightgreen;  border-radius: 5px; border: none;">EDIT</button>
+                                                <button onclick="deletePhim('<%- found_AllMovie[key].IDphim %>')"  style="background-color: lightcoral;  border-radius: 5px; border: none;">DELETE</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>			
+                        </ul>
+                    <div class="phim-info ">
+                        <p ><%- found_AllMovie[key].Tenphim %></p>
+                    </div>
+                    <select hidden class="custom-select" name="inputGroupSelect05" id="inputGroupSelect05" aria-label="Example select with button addon">
+                                                                    
+                        <option value="<%- found_AllMovie[key].Tenphim %>"><%- found_AllMovie[key].Tenphim %></option>
+                        <option value="<%- found_AllMovie[key].Posterphim %>"><%- found_AllMovie[key].Posterphim %></option>    
+                                             
+                    </select>
+                
+                </div>
+                <%}%>
+            </main>
+                    
+        </div>
+        <!-- <div style="background-color: salmon;"  class="col-lg-3 col-md-3 col-12 w-100 pt-5 pb-5">
+                <div class="d-flex phim-info">                                
+                        <span id="add" class="ml-auto p-2">Add</span>
+                </div>
+                <div id="close1" class="close"><a href="/auth/admin/config">+</a>
+                </div>
+                <form method="POST" class="ui form" enctype="multipart/form-data"   >
+                    <img style="max-width: 100px; max-height: 150px;"  id="poster_img" src="" alt=""><br>
+
+                    <label hidden  for="name">ID Phim</label>
+                    <input hidden type="text" name="idphim_edit" id="idphim_edit">     
+                    <label for="name">Ten Phim</label>
+                    <input type="text" name="tenphim_edit" id="tenphim_edit">   
+                    <label for="name">Poster Phim</label>
+                
+                    <input type="file" name="myImage" id="myImage" >
+
+                    <label for="name">Thoi Luong</label>
+                    <input type="text" name="thoiluong_edit" id="thoiluong_edit">     
+                    <input hidden type="text" id="check_option" name="check_option" value="1">
+                            
+                    
+                    <button class="ui fluid blue button" type="submit">Save</button>
+                </form>
+            
+        </div> -->
+    </div>
+</section>
+
+
+
+<script>
+
+    //  function scrollToTop() {
+    //     document.querySelector('.bg-modal').style.display = 'flex';
+
+    //         $(window).scrollTop(0);
+
+
+    //     }
+
+        
+     function scrollToTop1(tenphim, posterphim, thoiluong, idphim, ngaycongchieu) {
+        document.querySelector('.bg-modal1').style.display = 'flex';
+
+            $(window).scrollTop(0);
+            document.getElementById('idphim_edit').value = idphim;
+
+            document.getElementById('ngaycongchieu_edit').value = moment(ngaycongchieu).format("YYYY-MM-DD");
+
+
+    
+            document.getElementById('tenphim_edit').value = tenphim;
+            document.getElementById('thoiluong_edit').value = thoiluong;
+            document.getElementById('poster_img').src = posterphim;
+
+        }
+   var thaydoiphim1 = function(tenphim, posterphim, thoiluong, idphim, ngaycongchieu){
+
+        document.getElementById('idphim_edit').value = idphim;
+
+
+    
+        document.getElementById('tenphim_edit').value = tenphim;
+        document.getElementById('thoiluong_edit').value = thoiluong;
+        document.getElementById('poster_img').src = posterphim;
+
+   }
+   
+
+</script>
+
+<!-----ADD----->
+<div class="bg-modal">
+    <div style="background-color: lightgoldenrodyellow;" class="modal-content ">             
+        <div id="close" class="close">+</div>
+        <div class="ui container">
+            <form id="formaddphim"  class="ui form" method="POST" enctype="multipart/form-data"  >
+                <div class="ui two fields">
+                    <div class="field">
+                        <label style="text-transform: uppercase; background-color: lightpink" for="name">Poster Phim</label>
+                        <input type="file" name="myImage" id="myImage" >
+
+                    </div>
+                    <div class="field">
+                        <!-- <label hidden for="name">ID Phim</label>
+                        <input hidden type="text" name="" id="">      -->
+                        <label style="text-transform: uppercase; background-color: lawngreen" for="name">Tên Phim</label>
+                        <input style="margin-bottom:15px;" type="text" name="tenphim_add" id="tenphim_add">                       
+                         
+
+                        <label style="text-transform: uppercase; background-color: lightslategrey" for="name">Thời Lượng</label>
+                        <input style="margin-bottom:15px;" type="text" name="thoiluong_add" id="thoiluong_add">     
+
+                        <label style="text-transform: uppercase; background-color: rgb(247, 247, 86)" for="name">Ngày Công Chiếu</label>
+                        <div class="row">
+                                <div class="col-6">
+                                        <input readonly  type="text" name="start1_year" id="start1_year">  
+
+                                </div>
+                                <div class="col-6">
+                                        <input onchange="getEventTime5()"  type="date" name="ngaycongchieu_add" id="ngaycongchieu_add" > 
+
+                                </div>
+                            </div>
+                        <br><br><br><br><br><br><br>
+                        <input  hidden type="text" id="check_option" name="check_option" value="0">
+
+                    </div>
+                </div>
+                <input onclick="themphim()" readonly style="background-color: rgb(65, 81, 228);" class="btn submit" value="Xác Nhận"/>
+
+                <!-- <button class="ui fluid blue button" type="submit">Save</button> -->
+            </form>
+        </div>
+
+
+       
+    </div>
+</div>
+<!-----Edit---->
+<div class="bg-modal1">
+        <div style="background-color: lightgoldenrodyellow;" class="modal-content ">             
+            <div id="close1" class="close">+</div>
+            <div class="ui container">
+                <form  class="ui form" method="POST" enctype="multipart/form-data"  >
+                    <div class="ui two fields">
+                        <div class="field">
+                            <label style="text-transform: uppercase; background-color: lightpink" for="name">Poster Phim</label>
+                            <img style="width: 200px; max-height: 300px;"  id="poster_img" src="" alt=""><br>
+    
+                        </div>
+                        <div class="field">
+                                <label style="text-transform: uppercase; background-color: lawngreen" for="name">ID Phim</label>
+                                <input style="margin-bottom:15px;" readonly type="text" name="idphim_edit" id="idphim_edit">   
+
+                                <label style="text-transform: uppercase; background-color: lightcoral" for="name">Tên Phim</label>
+                                <input style="margin-bottom:15px;" type="text" name="tenphim_edit" id="tenphim_edit">  
+
+                                <label style="text-transform: uppercase; background-color: lightseagreen" for="name">Poster Phim</label>                            
+                                <input style="margin-bottom:15px;" type="file" name="myImage" id="myImage" >
+            
+                                <label style="text-transform: uppercase; background-color: lightslategrey" for="name">Thời Lượng</label>
+                                <input style="margin-bottom:15px;" type="text" name="thoiluong_edit" id="thoiluong_edit">     
+
+                                <label style="text-transform: uppercase; background-color: rgb(247, 247, 86)" for="name">Ngày Công Chiếu</label>
+                                <div class="row">
+                                    <div class="col-6">
+                                            <input readonly type="text" name="ngaycongchieu_edit" id="ngaycongchieu_edit">  
+
+                                    </div>
+                                    <div class="col-6">
+                                            <input id="thaydoingaycongchieu" onchange="thaydoingaycongchieuPhim()" type="date" >  
+
+                                    </div>
+                                </div>
+
+                                <input hidden type="text" id="check_option" name="check_option" value="1">
+    
+                        </div>
+                    </div>
+                    
+                    <button class="ui fluid blue button" type="submit">Xác Nhận</button>
+                </form>
+            </div>
+    
+    
+           
+        </div>
+</div>
+
+
+    <div class="bg-modal2">
+            <div class="modal-content2 "> 
+                        <div class="container">
+                                <p style="text-transform: uppercase; background-color: lightgreen;">Xác Nhận Xóa Phim</p> 
+                        </div>           
+                     <form  class="ui form" method="POST" enctype="multipart/form-data"  >
+                            <div class="field">
+                                    <input hidden  type="text" name="idphim2" id="idphim2">
+                                    <input hidden  value="3" type="text" name="check_option" id="check_option">
+                                <button style="width: 100px; height: 50px; background-color: lightgreen;  border-radius: 5px; border: none;">YES</button>
+    
+        
+                            </div>
+                        </form>
+                            <div class="field">
+                                <button onclick="thoatDeletePhim()" style="width: 100px;height: 50px; background-color: lightcoral;  border-radius: 5px; border: none;">NO</button>
+    
+                                    
+        
+                            </div>
+                        
+            
+        
+            </div>
+        </div>
+
+
+
+
+<script>
+        var themphim = function(){
+                var check_tenphim_add  = document.getElementById('tenphim_add').value;
+                var check_thoiluong_add  = document.getElementById('thoiluong_add').value;
+                var check_start1_year = document.getElementById('start1_year').value;
+               
+
+                if(check_tenphim_add === ''){
+                    alert("Hãy Nhập Tên Phim Vào! Cảm Ơn");
+
+                }else if(check_thoiluong_add === ''){
+                    alert("Hãy Nhập Thời Lượng Vào! Cảm Ơn");
+
+                }else if(check_start1_year === ''){
+                    alert("Hãy Nhập Ngày Bắt Đầu  Vào! Cảm Ơn");
+
+                }
+                else
+                {
+                    document.getElementById('formaddphim').submit();
+
+                }   
+
+
+
+        };
+
+
+        var thaydoingaycongchieuPhim = function(){
+            var ngaycongchieusds = moment(document.getElementById("thaydoingaycongchieu").value).format("YYYY-MM-DD");
+            document.getElementById('ngaycongchieu_edit').value = ngaycongchieusds;
+
+        };
+
+        var thoatDeletePhim = function(){
+        document.querySelector('.bg-modal2').style.display = 'none';
+    };
+
+    function deletePhim(idphim){
+        document.querySelector('.bg-modal2').style.display = 'flex';
+        document.getElementById('idphim2').value = idphim;
+
+        $(window).scrollTop(0);
+    };
+    var getEventTime5 = function(){
+        var temp_year = moment(document.getElementById("ngaycongchieu_add").value).format("YYYY-MM-DD");
+        document.getElementById('start1_year').value = temp_year;            
+
+    };
+    document.getElementById('close1').addEventListener('click',function(){
+
+        document.querySelector('.bg-modal1').style.display = 'none';
+    });
+
+
+    document.getElementById('add').addEventListener('click',
+    function(){
+        document.querySelector('.bg-modal').style.display = 'flex';
+    });
+
+   document.getElementById('close').addEventListener('click',
+   function(){
+
+       document.querySelector('.bg-modal').style.display = 'none';
+   });
+
+   
+
+</script>

@@ -1,0 +1,269 @@
+<div class="testing">
+    <div class="container">
+        <div class="profile-header">
+            <div class="profile-img">
+                <img width="200" src="/images/page/2.jpg" alt="">
+            </div>
+            <div class="profile-nav-info">
+                <h3 class="user-name">Tên User:  <%-currentUser.Hoten%></h3>
+                <div class="address">
+                    <p class="state">Vai Trò: </p>
+                    <span class="country"><%-currentUser.Vaitro%></span>
+                </div>
+            </div>
+            <div class="profile-option">
+                
+            </div>
+        </div>
+        <div class="main-bd">
+            <div class="left-side">
+                <div class="profile-side">
+                    <p style="color: green; font-weight: bold;">Số Điện Thoại: <%-currentUser.Sodienthoai%> <i></i></p>
+                    <p style="color: orange; font-weight: bold;">Email: <%-currentUser.Email%> <i></i></p>
+                    <div class="user-bio">
+                        <p style="color: purple; font-weight: bold; " class="bio">
+                            Bio: Someone wrote this song before and I could tell you where its form,
+                            4736251
+                        </p>
+                    </div>
+                    <div class="profile-btn">
+                        <button onclick="thaydoithongtintaikhoan('<%-currentUser.Hoten%>','<%-currentUser.Email%>','<%-currentUser.Sodienthoai%>')" class="chatbtn">Thay Đổi Thông Tin</button>
+                        <button onclick="thaydoimatkhautaikhoan()" class="createbtn">Thay Đổi Mật Khẩu</button>
+                    </div>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="nav">
+                    <ul>
+                       
+                        <li onclick="tabs(0)" class="user-review">
+                            CÀI ĐẶT 
+                        </li>
+                        <li onclick="tabs(1)" class="user-setting">
+                            VÉ ĐÃ ĐẶT
+                        </li>
+                    </ul>
+                </div>
+                <div class="profile-body">
+                   
+                    <div class="text-light profile-review tab">
+                            <h1>Cài Đặt</h1>
+                            <p>kjdalkjdsakjaklsjkjdalkjdsakjaklsjkjdalkjdsakjaklsjkjdalkjdsakjaklsj</p>
+                    </div>
+                    <div class="text-light profile-setting tab">
+                        <h1>Danh Sách Vé Đã Đặt</h1>
+                            
+                        <div class="container mb-3 mt-3">
+                            <table class=" table table-striped table-bordered mydatatable" >
+                                <thead>
+                                    
+                                    <tr>
+                                        <th>Tên Phim</th>
+                                        <th>Mã Ghế</th>
+                                        <th>Giá Tiền</th>
+                                        <th>Thời Gian </th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for (const key in found_Ve){%>
+                                        <tr>                                       
+                                            <td><%-array_phim_into_ve[key]%></td>
+                                            <td><%-found_Ve[key].Maghe%></td>
+                                            <td><%-found_Ve[key].Giatien%></td>
+                                            <td><%-found_Ve[key].DatCho.Thoigiandatve%></td>   
+                                            
+                                        </tr>
+                                    <%}%>
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    
+    
+    <!-----Thong tin ca nhan-->
+    <div class="bg-modal" >
+        <div style="background-color: lightgoldenrodyellow;" class="modal-content " >             
+            <div onclick="tatthongtintaikhoan()" class="close">+</div>
+            <div class="ui container">
+                <form  class="ui form" method="POST"  >
+                    <div style="background-color: rgb(247, 247, 220);" class="card w-100" style="width: 18rem;">
+                            
+                            <div class="card-body">
+                              <h5 style="text-transform: uppercase; background-color: lawngreen" class="card-title">Thông Tin Cá Nhân</h5>
+                       
+    
+    
+                                <div  class="input-group">
+                                    <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                        <span style="text-transform: uppercase; width: 160px; background-color: lightskyblue; border: none;" class="input-group-text">User Name </span>
+                                        <input  type="text" name="username" id="username">
+                                        <span style="background-color: lightcoral;"  class="btn">check</span>
+    
+                                    </div>
+                                </div>
+                                <div style="margin-top:2px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                            <span style="text-transform: uppercase; width: 160px; background-color: lightcoral; border: none;" class="input-group-text">Email </span>
+                                            <input  type="text" name="email" id="email">
+                                            <span style="background-color: lightcoral;"  class="btn">check</span>
+    
+                                        </div>
+    
+                                </div>
+                                <div style="margin-top:2px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightgray; border: none;" class="input-group-text">Số Điện Thoại </span>
+                                            <input  type="text" name="sodienthoai" id="sodienthoai">
+    
+                                        </div>
+    
+                                </div>
+                                
+                                <input hidden type="text" value="0" name="check_option" id="check_option">
+    
+                            </div>
+                            
+                           
+                    </div>
+                    
+                    <button class="ui fluid blue button" type="submit">Xác Nhận</button>
+                </form>
+            </div>
+    
+    
+           
+        </div>
+    </div> 
+    
+    
+    <!---Thay doi mat khau-->
+    <div   class="bg-modal1">
+            <div style="background-color: lightgoldenrodyellow;" class="modal-content ">             
+                <div onclick="tatthaydoimatkhautaikhoan()" class="close">+</div>
+                <div  class="ui container">
+                    <form  class="ui form" method="POST"  >
+                        <div style="background-color: rgb(247, 247, 220);" class="card w-100" style="width: 18rem;">                     
+                                <div class="card-body">
+                                  <h5 style="text-transform: uppercase; background-color: lawngreen"  class="card-title">Thay Đổi Mật Khẩu</h5>
+                           
+                                    <div style="margin-top:5px;" class="input-group">
+                                            <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 200px; background-color: lightgreen; border: none;" class="input-group-text">Mật Khẩu Hiện Tại</span>
+                                                <input placeholder="Mật Khẩu Hiện Tại Của Bạn !" type="password" name="matkhauold" id="matkhauold">
+    
+                                            </div>
+    
+                                    </div>
+                                    <div style="margin-top:5px;" class="input-group">
+                                            <div style=" box-sizing: border-box; width: 100%;"  class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 200px; background-color: lightpink; border: none;" class="input-group-text">Mật Khẩu Mới</span>
+                                                <input placeholder="Nhập Mật Khẩu Mới (Không Được Trùng Mật Khẩu Hiện Tại !) "  type="password" name="matkhaunew" id="matkhaunew">
+                                            </div>
+    
+                                    </div>
+                                    <div style="margin-top:5px;" class="input-group">
+                                            <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span  style="text-transform: uppercase; width: 200px; background-color: lightseagreen; border: none;" class="input-group-text">Xác Nhận Mật Khẩu Mới</span>
+                                                <input placeholder="" type="password" name="comfirmmatkhau" id="comfirmmatkhau">
+    
+                                            </div>
+    
+                                    </div>
+                                    <input hidden readonly type="text" value="1" name="check_option" id="check_option">
+                                   
+                                </div>
+                                
+                               
+                        </div>
+                        
+                        <button class="ui fluid blue button" type="submit">Xác Nhận</button>
+                    </form>
+                </div>
+                
+            </div>
+    </div> 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    
+    
+    <script>
+    
+        var thaydoithongtintaikhoan = function(username, email, sodienthoai){
+            document.querySelector('.bg-modal').style.display = 'flex';
+            document.getElementById('username').value = username;
+            document.getElementById('email').value = email;
+            document.getElementById('sodienthoai').value = sodienthoai;
+    
+        };
+    
+    
+        var tatthongtintaikhoan = function(){
+            document.querySelector('.bg-modal').style.display = 'none';
+    
+        };
+    
+        var thaydoimatkhautaikhoan = function(){
+            document.querySelector('.bg-modal1').style.display = 'flex';
+           
+    
+        };
+    
+    
+        var tatthaydoimatkhautaikhoan = function(){
+            document.querySelector('.bg-modal1').style.display = 'none';
+    
+        };
+    
+        // document.getElementById('thoigiandatve').innerText = moment(document.getElementById('thoigiandatve').innerText).format("DD-MM-YYYY");
+        var table = $('.mydatatable').DataTable({
+            searching: true,
+            ordering: true,
+            lengthMenu: [[5,10,25,50,-1],[5,10,25,50,"All"]],
+            // createdRow: function(row, data, index){
+            //     if (data[5].replace(/[\$,]/g,'') * 1 > 150000){
+            //         $('td', row).eq(5).addClass('text-success');
+            //     }
+            // }
+        });
+      
+    
+    
+        $('.nav ul li').click(function(){
+            $(this).addClass("active").siblings().removeClass('active');
+        })
+    
+        const tabBtn = document.querySelectorAll('.nav ul li');
+        const tab = document.querySelectorAll('.tab');
+        function tabs(panelIndex){
+            tab.forEach(function(node){
+                node.style.display = 'none';
+            });
+            tab[panelIndex].style.display = 'block';
+        }
+        tabs(0);
+    
+    
+  
+    </script>
+    
+    
+    
+    

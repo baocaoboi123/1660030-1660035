@@ -1,0 +1,137 @@
+<section style="background-color:#000; color: #fff" class="about10 py-4">
+    <div class="tab-content row my-1 mx-auto">
+        <div id="p" class="tab-pane fade in active show col-lg-12 col-md-12 col-12 w-50 pt-5 pb-5">
+            <div class="card-deck mx-auto">
+                <div class="img col-lg-3 col-md-3 col-12 w-50 pt-5 pb-5">                                                
+                    <img style="  object-fit: cover;"  class="img-fluid container" src="<%- foundPhim[0].Posterphim%>" alt="">                
+                </div>
+                <div class="text col-lg-9 col-md-9 col-12 w-50 pt-5 pb-5">
+                    <div  class="row">
+                        <div  class="input-group">
+                            <div  class="input-group-prepend">
+                                <span style="text-transform:uppercase;border-color:rgb(255, 231, 16);  background-color: rgb(255, 231, 16);" class="input-group-text">Cụm Rạp</span>
+                                <select class="custom-select"  name="selectedname" id="selectedname">
+                                    <option value="">----Chọn Cụm Rạp----</option>        
+                                    <% for(const key in foundCumRap){
+                                        if(tencumrap === foundCumRap[key].IDcumrap){%>
+                                            <option selected value="<%- foundCumRap[key].IDcumrap%>"><%- foundCumRap[key].Tencumrap%></option>
+                                        <%}else{%>
+                                            <option value="<%- foundCumRap[key].IDcumrap%>"><%- foundCumRap[key].Tencumrap%></option>
+                                        <%}                        
+                                    }%>                                    
+                                </select>                                
+                            </div>                    
+                        </div>
+                    </div>
+                    <div style="background-color: rgb(73, 71, 71);" class="row container d-flex">
+                        <div class="nav nav-pills ml-auto p-1">
+                            <span style="text-transform:uppercase;border-color:rgb(255, 231, 16);  background-color: rgb(255, 231, 16);" class="input-group-text">Thời gian suất chiếu</span>
+                            <form method="POST" >                                     
+                                <input   onchange="getEventTime11()" placeholder="Chọn Ngày:" type="date" id="start1" > 
+                                <input  hidden  type="text" name="ngayxem"      id="ngayxem">   
+                                <input  hidden  type="text" name="tencumrap"    id="tencumrap">                     
+                                <input  hidden type="text" name="tenphim" id="tenphim">                              
+
+                                <input  hidden  type="text"  name="check_option" id="check_option">
+                                <button  type="submit">Xem Suất Chiếu</button>                     
+                            </form>  
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div>
+                            <input hidden value="<%- foundPhim[0].IDphim%>"  type="text" name="tenphimInp" id="tenphimInp">                              
+                            <h3 type="text" id="tenphimH1" style="text-transform:uppercase; background-color: rgb(43, 161, 43);"  >TÊN PHIM:  <%- foundPhim[0].Tenphim%></h3>              
+                            <h5 style="text-transform:uppercase; background-color: rgb(43, 80, 161);" id="ngaycongchieu" >NGÀY CÔNG CHIẾU: <%-ngayxem%></h5>
+                            <div class="text-left card-body">
+                                <% if (found_SC === '' ){%>
+                                    
+                                <%}else{
+                                    for(const r in found_R){
+                                        for(const sc in found_SC){
+                                            if( (found_SC[sc].PhimIDphim === foundPhim[0].IDphim) && (found_SC[sc].RapIDrap === found_R[r].IDrap)){%>
+                                                <button onclick="location.href='/muave/<%-found_SC[sc].IDsuatchieu%>'"  class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;"><%-found_SC[sc].GioBatDau %></button>    
+                                            <%}
+                                        }
+                                    }
+                                }%>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+      </script>
+      <script>
+         
+      
+         
+              $("#selectedname").on('change', function(){
+
+
+
+                  $(".data").hide();
+                  $("#" + $(this).val()).fadeIn(700);
+              }).change();
+      </script>
+      
+      
+      
+      <script>
+            
+            
+
+           
+            var getEventTime11 = function(){
+             
+              var ngayxem = moment(document.getElementById("start1").value).format("YYYY-MM-DD");
+
+
+                var temp_tencumrap = document.getElementsByName('selectedname')[0].value;
+              
+                document.getElementById('ngayxem').value = ngayxem;            
+                document.getElementById('tencumrap').value = temp_tencumrap;
+                document.getElementById('tenphim').value = document.getElementById('tenphimInp').value;
+                document.getElementById('check_option').value = '2';
+
+                // var temp_tenrap = document.getElementsByName(temp_tencumrap)[0].value;
+
+                // document.getElementById('tenrap').value = temp_tenrap;
+
+            };
+          
+          </script>
+
+
+
+      

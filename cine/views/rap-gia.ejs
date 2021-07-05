@@ -1,0 +1,104 @@
+
+<section  id="about" class="about py-5">
+    
+    <div class=" container my-5 mx-auto">
+            <% for (const key in found_CumRap){%>
+                <div class="card " style="width: 100%; background-color: lightgoldenrodyellow;">
+                    <div class="row">
+                        <div class="col  text-center">
+                            <img  style="width: 500px; height: 170px;"  src="/images/page/1.jpg" alt="">
+                        </div>
+                        <div class="col">
+                            <div class="text-right card-body">
+                                <h1 class="card-title">Cụm Rạp <%- found_CumRap[key].Tencumrap%></h1>
+                                <p style=" text-transform: uppercase;" class="card-text">Địa Chỉ: <%- found_CumRap[key].Diachi%></p>
+                                <input hidden  type="text" id="idmap" name="idmap" value="106.63408">
+                                <input hidden  type="text" id="idmap1" name="idmap1" value="10.75414">
+                                
+                                <!-- <a href="/rap-gia/chiduong/<%- found_CumRap[key].IDcumrap%>" class="btn btn-primary">Chỉ Đường</a> -->
+                                <button class="btn btn-primary" onclick="scrollToTopDiaChi()"  style="background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+
+                            </div>
+                        </div>
+                    </div>                           
+                </div>
+                <br>    
+            <%}%>      
+      </div>
+    
+</section>
+
+
+
+<div class="bg-modal1">
+        <div class="modal-content ">             
+            <div   id="close1" class="close">+</div>
+            
+                sdsd
+            <div  id='map' style=' background-color: yellow; width: auto; height: 300px;' ></div>
+                   
+            
+    
+        </div>
+</div>
+
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoidGVtcHNhbXBsZSIsImEiOiJja3E3b3E3M3MwNG8xMzFvY2lyajZnYmZsIn0.JdHpjs_F_XcHmpTsmcNcng';
+                        
+                        navigator.geolocation.getCurrentPosition(successLocation,
+                         errorLocation,{
+                            enableHighAccuracy: true
+                        })
+                    
+                    
+                        function successLocation(position){
+                            setupMap([position.coords.longitude, position.coords.latitude])
+                        }
+                    
+                        function errorLocation(){
+                            
+                        }
+                    
+                        
+                        function setupMap(center){
+                            const map1 = document.getElementById('idmap').value;
+                            const map2 = document.getElementById('idmap1').value;
+
+                            const map = new mapboxgl.Map({
+                            container: 'map',
+                            style: 'mapbox://styles/mapbox/streets-v11',
+                            center: [map1,map2],
+                            zoom: 15
+                            })
+                    
+                            const nav = new mapboxgl.NavigationControl()
+                            map.addControl(nav)
+                    
+                            // var directions = new MapboxDirections({
+                            //     accessToken: mapboxgl.accessToken
+                            // })
+                            // map.addControl(directions, "top-left")
+                    
+                            var marker = new mapboxgl.Marker({
+                            color: "#222",
+                            draggable: true
+                            }).setLngLat([map1,map2])
+                            .addTo(map);
+                        }
+                    
+
+
+     function scrollToTopDiaChi() {
+        document.querySelector('.bg-modal1').style.display = 'flex';
+
+            $(window).scrollTop(0);
+            
+        }
+
+    document.getElementById('close1').addEventListener('click',function(){
+
+        document.querySelector('.bg-modal1').style.display = 'none';
+    });
+</script>
+

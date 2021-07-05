@@ -1,0 +1,136 @@
+
+<section style="background: #000;"  id="about" class="about py-5">
+    <div class="bod">
+        <div class="container-a1">
+            <div onclick="thongkecumrap()" class="box1">
+                <div class="content-a2">
+                    <img src="/images/icon/places-to-visit.png" alt="">
+                    <p>Thống Kê theo Cụm Rạp</p>
+                </div>
+            </div>
+            <div onclick="thongkephim()" class="box1">
+                    <div class="content">
+                    <img src="/images/icon/film.png" alt="">
+                        <p>Thống Kê them Phim</p>
+                    </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<div class="bg-modal3">
+    <div class="modal-content3"> 
+                <div class="container">
+                        <p>Thống Kê Phim Theo Ngày</p> 
+                </div>           
+                <form id="formphim" class="ui form" method="POST"   >
+                    <div class="field">
+                                                  
+                        <span style="background-color: lightslategray; border: none;  " class="input-group-text">Từ Ngày:&nbsp;&nbsp; <p id="tungay"></p></span>
+                        <input onchange="getEventTimeBD()"  type="date" id="bd" > 
+                        <input hidden  type="text" name="bddate" id="bddate">   
+                        <span style=" background-color: lightslategray; border: none;  " class="input-group-text">Đến Ngày:&nbsp;&nbsp; <p id=denngay></p></span>
+                        <input onchange="getEventTimeKT()"  type="date" id="kt" > 
+                        <input hidden  type="text" name="ktdate" id="ktdate"> 
+                        <input hidden value="1" type="text" name="check_option" id="check_option">
+                        <!-- <button type="submit">dasdasds</button> -->
+                    </div>
+                </form>
+                <div class="field">
+                    <button type="submit" form="formphim" style="width: 100px; height: 50px; background-color: lightgreen;  border-radius: 5px; border: none;">YES</button>
+
+                    <button onclick="thoatthongkephim()" style="width: 100px;height: 50px; background-color: lightcoral;  border-radius: 5px; border: none;">NO</button>                            
+                </div>
+    </div>
+</div>
+
+<div class="bg-modal2">
+        <div class="modal-content2"> 
+                    <div class="container">
+                            <p>Thống Kê Phim Theo Cụm Rạp</p> 
+                    </div>           
+                    <form id="formcumrap" class="ui form" method="POST"   >
+                        <div class="field">
+                           
+                               
+                            <span style="background-color: lightslategray; border: none;  " class="input-group-text">Từ Ngày:&nbsp;&nbsp; <p id="tungay1"></p></span>
+                            <input onchange="getEventTimeBD1()"  type="date" id="bd1" > 
+                            <input hidden  type="text" name="bddate1" id="bddate1">   
+                            <span style=" background-color: lightslategray; border: none;  " class="input-group-text">Đến Ngày:&nbsp;&nbsp; <p id=denngay1></p></span>
+                            <input onchange="getEventTimeKT1()"  type="date" id="kt1" > 
+                            <input hidden  type="text" name="ktdate1" id="ktdate1"> 
+
+                            <input hidden value="0" type="text" name="check_option" id="check_option">
+
+                        </div>
+                    </form>
+                    <div class="field">
+                        <button type="submit" form="formcumrap" style="width: 100px; height: 50px; background-color: lightgreen;  border-radius: 5px; border: none;">YES</button>
+    
+                        <button onclick="thoatthongkecumrap()" style="width: 100px;height: 50px; background-color: lightcoral;  border-radius: 5px; border: none;">NO</button>                            
+                    </div>
+        </div>
+    </div>
+
+<script>
+           var getEventTimeBD = function(){
+             
+             var bd = moment(document.getElementById("bd").value).format("YYYY-MM-DD");
+             document.getElementById('bddate').value = bd;
+             document.getElementById('tungay').innerText = moment(document.getElementById("bd").value).format("DD-MM-YYYY");
+
+            };
+            var getEventTimeKT = function(){
+             
+             var kt = moment(document.getElementById("kt").value).format("YYYY-MM-DD");
+             document.getElementById('ktdate').value = kt;
+             document.getElementById('denngay').innerText = moment(document.getElementById("kt").value).format("DD-MM-YYYY");
+
+            };
+
+
+
+            var thoatthongkephim = function(){
+                document.querySelector('.bg-modal3').style.display = 'none';
+
+            };
+
+            function thongkephim(){
+                document.querySelector('.bg-modal3').style.display = 'flex';
+
+                // $(window).scrollTop(0);
+
+            };
+
+             var getEventTimeBD1 = function(){
+             
+             var bd = moment(document.getElementById("bd1").value).format("YYYY-MM-DD");
+             document.getElementById('bddate1').value = bd;
+             document.getElementById('tungay1').innerText = moment(document.getElementById("bd1").value).format("DD-MM-YYYY");
+
+            };
+            var getEventTimeKT1 = function(){
+             
+             var kt = moment(document.getElementById("kt1").value).format("YYYY-MM-DD");
+             document.getElementById('ktdate1').value = kt;
+             document.getElementById('denngay1').innerText = moment(document.getElementById("kt1").value).format("DD-MM-YYYY");
+
+            };
+
+
+
+            var thoatthongkecumrap = function(){
+                document.querySelector('.bg-modal2').style.display = 'none';
+
+            };
+
+            function thongkecumrap(){
+                document.querySelector('.bg-modal2').style.display = 'flex';
+
+                // $(window).scrollTop(0);
+
+            };
+            
+            
+</script>

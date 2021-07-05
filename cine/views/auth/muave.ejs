@@ -1,0 +1,227 @@
+<section style="background-color: #000;"  id="about" class="about py-3">
+<br>
+    <div class="row align-items-center container my-5 mx-auto">
+        <div class="col-lg-3 col-md-3 col-12 w-50 pt-5 pb-5">
+            <img class="card-img-top" src="<%-found_posterphim[0].Phim.Posterphim%>" alt="Card image cap">
+            <div style="margin: 0;
+            font-size: 14px;
+            height: auto;
+            margin: 0 auto;
+            position: relative;
+            text-transform: uppercase;" class="card-body">
+                <h5 style="text-transform: uppercase;"  class="text-light card-title">Tên Phim: <%-found_posterphim[0].Phim.Tenphim%></h5>
+                <div hidden class="movie-container">
+                    <select id="movie">
+                        <option value='<%-found_sc[0].Giave%>'><%-found_posterphim[0].Phim.Tenphim%></option>                       
+                    </select>
+                </div>            
+            </div>
+        </div>
+        <div class=" col-lg-6 col-md-6 col-12 w-50 pt-5 pb-5">
+            <div class="">
+                <ul class="showcase">
+                    <li>
+                        <div  class="seat occupied chuachon"></div>
+                        <small style="text-transform: uppercase;" >Ghế Còn Trống</small>
+                    </li>
+                    <li>
+                        <div  class="seat occupied chon"></div>
+                        <small style="text-transform: uppercase;">Ghế Đang Chọn</small>
+                    </li>
+                    <li>
+                        <div class="seat occupied"></div>
+                        <small style="text-transform: uppercase;">Ghế Đã Được Đặt</small>
+                    </li>
+                </ul>
+            </div>
+            <div class="row d-flex justify-content-center">                         
+                <div class=" screen"></div>
+            </div>
+            <div class="choose row d-flex justify-content-center ">
+                <div class="">
+                <% for (i = 0 ; i < kichthuocdoc; i++ ){%>
+                    <div class="row p-2 ">                                                        
+                    <%for (k = 0 ; k < kichthuocngang; k++){  
+                        check = 0
+                        for(const key in found_v_dc){
+                            if(array_sodoghe[i][k] === found_v_dc[key].Maghe){%>
+                                <div class="seat occupied"></div>    
+                            <%
+                                check = 1
+                                break                                 
+                            }
+                        }
+                        if(check != 1){%>
+                            <div style="color:#000;"  id="seat" class=" seat text-center" ><%- array_sodoghe[i][k]%></div>    
+                        <%}
+                       }%>                               
+                    </div>                        
+                    <%}%>      
+                </div>
+            </div>                 
+        </div>
+        <div   class="col-lg-3 col-md-3 col-12 w-50  pt-5 pb-5">           
+           
+                    <div style="  text-transform: capitalize; color: white;" class="row ">
+                        <div class="col-12">
+                            <p class="text-">Bạn đang đặt: &nbsp; <span style="color:lightgreen;" id="count">0</span> Vé</p>
+                            
+                        </div>                                   
+                    </div>
+                    <div style="  text-transform:capitalize; color: white;" class="row ">
+                        <div class="col-12">
+                            <p class="text-"> Số tiền cần thanh toán:  &nbsp; <span style="color:lightgreen;" id="total">0</span> VND</p>
+                            
+                        </div>                                   
+                    </div>
+                
+           <div hidden class="row">
+                <p class="text" id="listlist">ssss</p>
+           </div>
+           <div class="row ">
+               <div>
+                    <form id="formMuaVe" class="text-center text-align-center" action="" method="POST">
+                        <input  hidden style="color: #000;"   id="vedadat" name="vedadat" type="text">
+                        <input hidden  style="color: #000;"   id="tongtien" name="tongtien" type="text">
+                        <br>
+                        <!-- <button class="btn" class="submit">Đặt Vé</button> -->
+
+                    </form>
+                    <input readonly class=" submit btn" onclick="muavethanhcong()" value="Đặt Vé"/>
+
+                </div>
+           </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="bg-modal2">
+        <div class="modal-content2 "> 
+                    <div class="container">
+                            <p style="text-transform: uppercase; background-color: lightgreen;">MUA VÉ THÀNH CÔNG</p> 
+                    </div>           
+                        <div class="field">
+                                
+                            <button onclick="thoatmuavethanhcong()" style="width: 100px; height: 50px; background-color: lightgreen;  border-radius: 5px; border: none;">OK</button>
+
+    
+                        </div>
+                    </form>
+                        
+        </div>
+    </div>
+
+
+
+
+
+<script >
+
+        function muavethanhcong(){
+
+
+            document.querySelector('.bg-modal2').style.display = 'flex';
+
+
+            $(window).scrollTop(0);
+        };
+
+        var thoatmuavethanhcong = function(){
+
+            document.querySelector('.bg-modal2').style.display = 'none';
+            document.getElementById('formMuaVe').submit();
+
+        };
+
+
+        const container = document.querySelector('.choose');
+        const seats = document.querySelectorAll('.row .seat:not(.occupied)');
+        const count = document.getElementById('count');
+        const total = document.getElementById('total');
+        const movieSelect = document.getElementById('movie');
+        let ticketPrice = +movieSelect.value;
+
+//save selected movie index and price
+    function setMovieData(movieIndex, moviePrice){
+        localStorage.setItem('selectedMovieIndex', movieIndex);
+        localStorage.setIvaluetem('selectedMoviePrice', moviePrice);
+    }
+       
+    function updateSelectedCount() {
+        const selectedSeats = document.querySelectorAll('.row .seat.selected');
+
+        const seatsIndex = [...selectedSeats].map(seat => [...seats]);
+
+        var input;
+        if(selectedSeats.length === 0 ){
+            document.getElementById('listlist').innerText =  '';
+            document.getElementById('vedadat').value = '';
+        }else{
+
+        var check = ""
+        for (var i = 0; i < selectedSeats.length; ++i) {
+            input = selectedSeats[i];
+            if (input.innerText) {
+                
+                document.getElementById('listlist').innerText = check + input.innerText;
+                document.getElementById('vedadat').value =  check + input.innerText;
+
+                check +=  input.innerText;
+            }else
+            {
+
+                document.getElementById('listlist').innerText = "nothting";
+
+            }
+        }
+        
+        }
+        const selectedSeatsCount = selectedSeats.length;
+        count.innerText = selectedSeatsCount;
+        total.innerText = selectedSeatsCount * ticketPrice;
+        document.getElementById('tongtien').value = total.innerText ; 
+    }
+
+       function populateUI() {
+        const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
+        if (selectedSeats !== null && selectedSeats.length > 0) {
+            seats.forEach((seat, index) => {
+            if (selectedSeats.indexOf(index) > -1) {
+                seat.classList.add('selected');
+            }
+            });
+        }
+
+        const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
+
+        if (selectedMovieIndex !== null) {
+            movieSelect.selectedIndex = selectedMovieIndex;
+        }
+    }
+    movieSelect.addEventListener('change', e => {
+        ticketPrice = +e.target.value;
+        setMovieData(e.target.selectedIndex, e.target.value)
+        updateSelectedCount();
+    });
+     container.addEventListener('click', e => {
+            if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied'))
+            {
+                
+                e.target.classList.toggle('selected');
+                updateSelectedCount();
+
+            }
+
+
+
+        });
+    
+</script>
+    
+
+
+
+
+
+
