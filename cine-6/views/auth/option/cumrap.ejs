@@ -1,0 +1,562 @@
+<section style="max-height: 1200px; background-color: #000;"  id="about" class="about py-5">
+    <div class="row align-items-center container my-5 mx-auto">
+        <div  class="col-lg-12 col-md-12 col-12 w-100 ">
+            <!-- <div class="phim-info">       
+                <span style="background-color: lightpink;"  id="add" class="ml-auto p-2">Thêm Cụm Rạp</span>                         
+            </div>   -->
+
+            <div class="phim-info">   
+                <div>
+                        <input onclick="location.href='/quanly'" readonly style="background-color: lightseagreen; width: 130px;"  class="btn submit"  value="<=== Quản Lý"/>
+                        <input readonly style="background-color: lightgray;" id="add" class="btn submit"  value="Thêm Cụm Rạp"/>
+
+                </div>                             
+
+            </div> 
+              
+            <main class="m">
+            <% for(const key in foundCumRap){%>
+                <div class="phim">
+                    <ul class="caption-style-4">
+                        <li>
+                            <img src="/images/page/2.jpg" alt="">
+                            <div class="caption">
+                                <div class="blur"></div>
+                                <div class="caption-text">
+                                    <h1><%- foundCumRap[key].Tencumrap %></h1>
+                                    <div>
+                                        <button onclick="scrollToTopCumRap('<%- foundCumRap[key].IDcumrap%>','<%-foundCumRap[key].Tencumrap%>','<%- foundCumRap[key].Diachi %>', '<%- foundCumRap[key].Mapdiachi %>')"  style="background-color: lightgreen;  border-radius: 5px; border: none;">EDIT</button>
+                                        <button  onclick="deleteCumRap('<%- foundCumRap[key].IDcumrap%>')"  style="background-color: lightcoral;  border-radius: 5px; border: none;">DELETE</button>        
+                                    </div>
+                                </div>
+                            </div>
+                        </li>			
+                    </ul>
+                    <div class="phim-info ">
+                        <p><%- foundCumRap[key].Tencumrap %></p>
+                    </div>                        
+                </div>
+            <%}%>
+            </main>
+        </div>
+    </div>
+
+</section>
+
+
+<script>
+
+     var thoatDeleteCumRap = function(){
+        document.querySelector('.bg-modal2').style.display = 'none';
+
+    };
+
+    function deleteCumRap(idrap){
+        document.querySelector('.bg-modal2').style.display = 'flex';
+        document.getElementById('idcumrap2').value = idrap;
+
+        $(window).scrollTop(0);
+
+    };
+
+     document.getElementById('add').addEventListener('click',
+        function(){
+            document.querySelector('.bg-modal1').style.display = 'flex';
+
+       
+
+            document.getElementById('add_mapdiachi').value = '';
+
+            document.getElementById('add_tencumrap').value = '';
+            document.getElementById('check_option').value = '1';
+            document.getElementById('add_diachi').value = '';
+
+        });
+
+
+        var themcumrap = function(){
+
+            var check_add_tencumrap = document.getElementById('add_tencumrap').value;
+            var check_add_diachi = document.getElementById('add_diachi').value;
+            if(check_add_tencumrap === ''){
+                    alert("Hãy Nhập Tên Rạp Xem Vào! Cảm Ơn");
+
+                }else if(check_add_diachi === ''){
+                    alert("Hãy Nhập Địa Chỉ Vào! Cảm Ơn");
+
+                }
+                else
+                {
+                    document.getElementById('formaddcumrap').submit();
+
+                }   
+        };
+
+
+    // var addcumrap = function(){
+    //     document.querySelector('.bg-modal1').style.display = 'flex';
+
+       
+
+
+    //         document.getElementById('tencumrap').value = '';
+    //         document.getElementById('check_option').value = '1';
+    //         document.getElementById('diachi').value = '';
+
+    // };
+
+        function scrollToTopCumRap(idcumrap,tencumrap, diachi, mapdiachi) {
+            document.querySelector('.bg-modal').style.display = 'flex';
+
+            $(window).scrollTop(0);
+            document.getElementById('edit_mapdiachi').value = mapdiachi;
+
+            document.getElementById('edit_idcumrap').value = idcumrap;
+        document.getElementById('edit_tencumrap').value = tencumrap;
+        document.getElementById('check_option').value = '0';
+        document.getElementById('edit_diachi').value = diachi;
+
+        }
+
+        var chinhsuacumrap = function(){
+            var check_edit_tencumrap = document.getElementById('edit_tencumrap').value;
+            var check_edit_diachi = document.getElementById('edit_diachi').value;
+            if(check_edit_tencumrap === ''){
+                alert("Hãy Nhập Tên Rạp Xem Vào! Cảm Ơn");
+
+                }else if(check_edit_diachi === ''){
+                    alert("Hãy Nhập Địa Chỉ Vào! Cảm Ơn");
+
+                }
+                else
+                {
+                    document.getElementById('formeditcumrap').submit();
+
+                }   
+        };
+
+
+    // var editcumrap = function(idcumrap,tencumrap, diachi){
+    //     document.querySelector('.bg-modal').style.display = 'flex';
+
+    //     document.getElementById('idcumrap').value = idcumrap;
+    //     document.getElementById('tencumrap').value = tencumrap;
+    //     document.getElementById('check_option').value = '0';
+    //     document.getElementById('diachi').value = diachi;
+
+
+    // };
+    var tatrap = function(){
+        document.querySelector('.bg-modal').style.display = 'none';
+
+    };
+    var tatrap1 = function(){
+        document.querySelector('.bg-modal1').style.display = 'none';
+
+    };
+
+</script>
+<!---edit---->
+<div class="bg-modal">
+        <div style="background-color: lightgoldenrodyellow;" class="modal-content ">             
+            <div onclick="tatrap()" class="close">+</div>
+            <div class="ui container">
+                <form id="formeditcumrap" class="ui form" method="POST"  >
+                    <div style="background-color: rgb(247, 247, 220);" class="card w-100" style="width: 18rem;">                            
+                            <div class="card-body">
+                                <h5 style="text-transform: uppercase; background-color: lawngreen" class="card-title">Chỉnh Sửa Cụm Rạp</h5>
+                                <!-- <input type="text" name="idcumrap" id="idcumrap">
+                                <input type="text"  name="tencumrap" id="tencumrap">
+
+                                <input type="text" name="diachi" id="diachi"> -->
+
+
+                                <div style="margin-top:15px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                            <span style="text-transform: uppercase; width: 160px; background-color: lightskyblue; border: none;" class="input-group-text">ID Cụm Rạp </span>
+                                            <input  readonly type="text" name="edit_idcumrap" id="edit_idcumrap">
+
+                                        </div>
+
+                                </div>
+                                <div style="margin-top:15px;" class="form-group input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightcoral; border: none;" class="input-group-text">Tên Cụm Rạp </span>
+                                                <input id="edit_tencumrap" name="edit_tencumrap" type="text" placeholder="" class="form-control">
+                                        </div>
+                                        <span class="form-message"></span>
+                                </div>
+                                <!-- <div style="margin-top:15px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;"  class="input-group-prepend">
+                                            <span style="text-transform: uppercase; width: 160px; background-color: lightcoral; border: none;" class="input-group-text">Tên Cụm Rạp </span>
+                                            <input  type="text" name="edit_tencumrap" id="edit_tencumrap">
+
+                                        </div>
+
+                                </div> -->
+                                <div style="margin-top:15px;" class="form-group input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightslategray; border: none;" class="input-group-text">Địa Chỉ </span>
+                                                <input id="edit_diachi" name="edit_diachi" type="text" placeholder="" class="form-control">
+                                        </div>
+                                        <span class="form-message"></span>
+                                </div>
+                                <!-- <div style="margin-top:15px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                            <span style="text-transform: uppercase; width: 160px; background-color: lightslategray; border: none;" class="input-group-text">Địa Chỉ </span>
+                                            <input type="text" name="edit_diachi" id="edit_diachi">
+
+                                        </div>
+
+                                </div> -->
+                                <!-- <div style="margin-top:15px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                            <span style="text-transform: uppercase; width: 160px; background-color: lightgreen; border: none;" class="input-group-text">Địa Chỉ Link </span>
+                                            <input type="text" name="edit_diachiLink" id="edit_diachiLink">
+
+                                        </div>
+
+                                </div> -->
+                                <div style="margin-top:15px;" class="form-group input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightgreen; border: none;" class="input-group-text">Địa Chỉ Link </span>
+                                                <input id="edit_mapdiachi" name="edit_mapdiachi" type="text" placeholder="" class="form-control">
+                                        </div>
+                                        <span class="form-message"></span>
+                                </div>
+                                <div style="margin-top:15px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                            <span style="text-transform: uppercase; width: 160px; background-color: lightgray; border: none;" class="input-group-text">Poster Cụm Rạp </span>
+                                            <input type="file" name="myImage" id="myImage">
+
+                                        </div>
+
+                                </div>
+                                
+                                
+
+
+                                <!-- onclick="chinhsuacumrap()" -->
+                                
+                                <input  hidden type="text"  name="check_option" id="check_option">
+                                <!-- <input  readonly style="background-color: rgb(65, 81, 228);" class="btn submit" value="Xác Nhận"/> -->
+                                <button style="margin: 10px auto;" class="ui fluid blue button" type="submit">Xác Nhận</button>
+
+
+                            </div>                                                   
+                    </div>
+
+                    <!-- <button class="ui fluid blue button" type="submit">Save</button> -->
+                </form>
+            </div>
+    
+        </div>
+</div>
+<!---add---->
+<div class="bg-modal1">
+        <div style="background-color: lightgoldenrodyellow;" class="modal-content ">             
+            <div onclick="tatrap1()" class="close">+</div>
+            <div class="ui container">
+                <form id="formaddcumrap" class="ui form" method="POST"  >
+                    <div style="background-color: rgb(247, 247, 220);" class="card w-100" style="width: 18rem;">                                        
+                            <div class="card-body">
+                                    <h5 style="text-transform: uppercase; background-color: lawngreen" class="card-title">Thêm Cụm Rạp</h5>
+                                    <!-- <input type="text" name="idcumrap" id="idcumrap">
+                                    <input type="text"  name="tencumrap" id="tencumrap">
+    
+                                    <input type="text" name="diachi" id="diachi"> -->
+
+                                    
+                                    <!-- <div style="margin-top:15px;" class="input-group">
+                                            <div style=" box-sizing: border-box; width: 100%;"  class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightcoral; border: none;" class="input-group-text">Tên Cụm Rạp </span>
+                                                <input  type="text" name="add_tencumrap" id="add_tencumrap">
+    
+                                            </div>
+    
+                                    </div> -->
+                                    <div style="margin-top:15px;" class="form-group input-group">
+                                            <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                    <span style="text-transform: uppercase; width: 160px; background-color: lightcoral; border: none;" class="input-group-text">Tên Cụm Rạp </span>
+                                                    <input id="add_tencumrap" name="add_tencumrap" type="text" placeholder="" class="form-control">
+                                            </div>
+                                            <span class="form-message"></span>
+                                    </div>
+                                    <div style="margin-top:15px;" class="form-group input-group">
+                                            <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                    <span style="text-transform: uppercase; width: 160px; background-color: lightslategray; border: none;" class="input-group-text">Địa Chỉ </span>
+                                                    <input id="add_diachi" name="add_diachi" type="text" placeholder="" class="form-control">
+                                            </div>
+                                            <span class="form-message"></span>
+                                    </div>
+                                    <!-- <div style="margin-top:15px;" class="input-group">
+                                            <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightslategray; border: none;" class="input-group-text">Địa Chỉ </span>
+                                                <input type="text" name="add_diachi" id="add_diachi">
+    
+                                            </div>
+    
+                                    </div> -->
+                                    <div style="margin-top:15px;" class="form-group input-group">
+                                            <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                    <span style="text-transform: uppercase; width: 160px; background-color: lightgreen; border: none;" class="input-group-text">Địa Chỉ Link </span>
+                                                    <input id="add_mapdiachi" name="add_mapdiachi" type="text" placeholder="" class="form-control">
+                                            </div>
+                                            <span class="form-message"></span>
+                                    </div>
+                                    <div style="margin-top:15px;" class="input-group">
+                                            <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightgray; border: none;" class="input-group-text">Poster Cụm Rạp </span>
+                                                <input type="file" name="myImage" id="myImage">
+    
+                                            </div>
+    
+                                    </div>
+
+
+
+
+
+                                    <input hidden type="text" value="1"  name="check_option" id="check_option">
+                                    <button style="margin: 10px auto;" class="ui fluid blue button" type="submit">Xác Nhận</button>
+
+                            </div>        
+
+                           
+                    </div>
+                    <!-- <input onclick="themcumrap()" readonly style="background-color: rgb(65, 81, 228);" class="btn submit" value="Xác Nhận"/> -->
+
+                    <!-- <button class="ui fluid blue button" type="submit">Save</button> -->
+                </form>
+            </div>
+    
+    
+           
+        </div>
+</div>
+
+<!----------Delete Rap------------>
+<div class="bg-modal2">
+        <div class="modal-content2 "> 
+                    <div class="container">
+                            <p style="text-transform: uppercase; background-color: lightgreen;">Xác Nhận Xóa Cụm Rạp</p> 
+                    </div>           
+                    <form  class="ui form" method="POST"   >
+                        <div class="field">
+                            <input  hidden type="text" name="idcumrap2" id="idcumrap2">
+                            <input hidden  value="3" type="text" name="check_option" id="check_option">
+                            <button style="width: 100px; height: 50px; background-color: lightgreen;  border-radius: 5px; border: none;">YES</button>
+
+                        </div>
+                    </form>
+                    <div class="field">
+                        <button onclick="thoatDeleteCumRap()" style="width: 100px;height: 50px; background-color: lightcoral;  border-radius: 5px; border: none;">NO</button>
+                                
+                    </div>
+                    
+            
+    
+        </div>
+</div>
+
+<script>
+    
+
+
+              
+        // Đối tượng `Validator`
+        function Validator(options) {
+            function getParent(element, selector) {
+                while (element.parentElement) {
+                    if (element.parentElement.matches(selector)) {
+                        return element.parentElement;
+                    }
+                    element = element.parentElement;
+                }
+            }
+        
+            var selectorRules = {};
+        
+            // Hàm thực hiện validate
+            function validate(inputElement, rule) {
+                var errorElement = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector);
+                var errorMessage;
+        
+                // Lấy ra các rules của selector
+                var rules = selectorRules[rule.selector];
+                
+                // Lặp qua từng rule & kiểm tra
+                // Nếu có lỗi thì dừng việc kiểm
+                for (var i = 0; i < rules.length; ++i) {
+                    switch (inputElement.type) {
+                        case 'radio':
+                        case 'checkbox':
+                            errorMessage = rules[i](
+                                formElement.querySelector(rule.selector + ':checked')
+                            );
+                            break;
+                        default:
+                            errorMessage = rules[i](inputElement.value);
+                    }
+                    if (errorMessage) break;
+                }
+                
+                if (errorMessage) {
+                    errorElement.innerText = errorMessage;
+                    getParent(inputElement, options.formGroupSelector).classList.add('invalid');
+                } else {
+                    errorElement.innerText = '';
+                    getParent(inputElement, options.formGroupSelector).classList.remove('invalid');
+                }
+        
+                return !errorMessage;
+            }
+        
+            // Lấy element của form cần validate
+            var formElement = document.querySelector(options.form);
+            if (formElement) {
+                // Khi submit form
+                formElement.onsubmit = function (e) {
+                    e.preventDefault();
+        
+                    var isFormValid = true;
+        
+                    // Lặp qua từng rules và validate
+                    options.rules.forEach(function (rule) {
+                        var inputElement = formElement.querySelector(rule.selector);
+                        var isValid = validate(inputElement, rule);
+                        if (!isValid) {
+                            isFormValid = false;
+                        }
+                    });
+        
+                    if (isFormValid) {
+                        // Trường hợp submit với javascript
+                        if (typeof options.onSubmit === 'function') {
+                            var enableInputs = formElement.querySelectorAll('[name]');
+                            var formValues = Array.from(enableInputs).reduce(function (values, input) {
+                                
+                                switch(input.type) {
+                                    case 'radio':
+                                        values[input.name] = formElement.querySelector('input[name="' + input.name + '"]:checked').value;
+                                        break;
+                                    case 'checkbox':
+                                        if (!input.matches(':checked')) {
+                                            values[input.name] = '';
+                                            return values;
+                                        }
+                                        if (!Array.isArray(values[input.name])) {
+                                            values[input.name] = [];
+                                        }
+                                        values[input.name].push(input.value);
+                                        break;
+                                    case 'file':
+                                        values[input.name] = input.files;
+                                        break;
+                                    default:
+                                        values[input.name] = input.value;
+                                }
+        
+                                return values;
+                            }, {});
+                            options.onSubmit(formValues);
+                        }
+                        // Trường hợp submit với hành vi mặc định
+                        else {
+                            formElement.submit();
+                        }
+                    }
+                }
+        
+                // Lặp qua mỗi rule và xử lý (lắng nghe sự kiện blur, input, ...)
+                options.rules.forEach(function (rule) {
+        
+                    // Lưu lại các rules cho mỗi input
+                    if (Array.isArray(selectorRules[rule.selector])) {
+                        selectorRules[rule.selector].push(rule.test);
+                    } else {
+                        selectorRules[rule.selector] = [rule.test];
+                    }
+        
+                    var inputElements = formElement.querySelectorAll(rule.selector);
+        
+                    Array.from(inputElements).forEach(function (inputElement) {
+                       // Xử lý trường hợp blur khỏi input
+                        inputElement.onblur = function () {
+                            validate(inputElement, rule);
+                        }
+        
+                        // Xử lý mỗi khi người dùng nhập vào input
+                        inputElement.oninput = function () {
+                            var errorElement = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector);
+                            errorElement.innerText = '';
+                            getParent(inputElement, options.formGroupSelector).classList.remove('invalid');
+                        } 
+                    });
+                });
+            }
+        
+        }
+        
+        
+        
+        // Định nghĩa rules
+        // Nguyên tắc của các rules:
+        // 1. Khi có lỗi => Trả ra message lỗi
+        // 2. Khi hợp lệ => Không trả ra cái gì cả (undefined)
+       
+        
+       
+        Validator.isRequired = function (selector, message) {
+            return {
+                selector: selector,
+                test: function (value) {
+                    return value ? undefined :  message || 'Vui lòng nhập trường này'
+                }
+            };
+        }
+        
+        
+        
+        // =================================================================
+                document.addEventListener('DOMContentLoaded', function () {
+                  // Mong muốn của chúng ta
+                  Validator({
+                    form: '#formeditcumrap',
+                    formGroupSelector: '.form-group',
+                    errorSelector: '.form-message',
+                    rules: [
+                        Validator.isRequired('#edit_tencumrap'),
+                        Validator.isRequired('#edit_diachi'),
+
+                      Validator.isRequired('#edit_mapdiachi')
+                    ],
+                    // onSubmit: function (data) {
+                    //   // Call API
+                    //   console.log(data);
+                    // }
+                  });
+
+                  
+                  Validator({
+                    form: '#formaddcumrap',
+                    formGroupSelector: '.form-group',
+                    errorSelector: '.form-message',
+                    rules: [
+                        Validator.isRequired('#add_tencumrap'),
+                        Validator.isRequired('#add_diachi'),
+
+                      Validator.isRequired('#add_mapdiachi')
+                    ],
+                    // onSubmit: function (data) {
+                    //   // Call API
+                    //   console.log(data);
+                    // }
+                  });
+
+                  
+          
+                  
+                });
+          
+              </script>

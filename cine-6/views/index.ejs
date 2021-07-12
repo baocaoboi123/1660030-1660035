@@ -1,0 +1,465 @@
+
+
+
+<section id="spli" class="spli">
+    <div class="container" style="width: 75%; background-color: cadetblue; margin: 0 auto; border-radius: 10px;">
+            <h1 style="width: 100%; " class="text-center text-dark movieselection"></h1>       
+
+    </div>    
+    <div class="splide align-items-center ">         
+        <div  class="splide__track">
+            <ul  class="splide__list">
+            <% for (const key in found_Phim){%>
+                <li  class="splide__slide " > 
+                    <div  class="img">
+                        <ul class="caption-style-4">
+                            <li>
+                                <img src="<%- found_Phim[key].Posterphim %>" alt="">
+                                <div class="caption">
+                                    <div class="blur"></div>
+                                    <div class="caption-text">
+                                        <h1><%-found_Phim[key].Tenphim%></h1>
+                                            <button class="btn-5" onclick="das('<%- found_Phim[key].Tenphim%>')"   style="cursor: pointer; background-color: yellow;  border-radius: 5px; border: none;">
+                                                    <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MUA VÉ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                          -->
+                                                    <!-- <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MUA VÉ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> -->
+                                            </button>            
+
+                                    </div>
+                                </div>
+                            </li>			
+                        </ul>
+                        <!-- <img  class="img-fluid w-100" src="<%-found_Phim[key].Posterphim%>" alt=""> -->
+                    </div>
+                </li>
+            <%}%>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/js/splide.min.js"></script>
+    <script>
+    var das = function(tenphim){
+        location.href=`/phimdangchieu/chitietphim/${tenphim}`;
+    }
+    var showLogin = function(){
+        document.querySelector('.bg-modal1').style.display = 'flex';
+
+    }
+    var tatShowLogin = function(){
+        document.querySelector('.bg-modal1').style.display = 'none';
+
+    };
+
+           new Splide( '.splide', {
+                type        : 'loop',
+                perPage     : 5,
+                autoplay    : true,
+                trimSpace: false,
+                focus    : 'center',
+                pauseOnHover: true,
+                
+                } ).mount();
+
+       
+        
+
+    
+
+        function myFunction(x) {
+            if (x.matches) { // If media query matches
+
+            } else {
+                
+            }
+        }
+
+        var x = window.matchMedia("(max-width: 767px)")
+        myFunction(x) // Call listener function at run time
+        x.addListener(myFunction) // Attach listener function on state changes
+       
+
+
+
+
+
+
+
+
+    </script>
+</section>
+
+<!-- display: inline-block + vertical-align: middle -->
+<section style="display:flex; background-color: #000; " id="about1" class="  py-5">
+         
+            <div style=" margin:auto auto; padding: 0 130px;" class="  ">
+                <div class="container" style="width: 75%; background-color: darkgoldenrod; margin: 0 auto; border-radius: 10px;">
+                        <h1 style="width: 100%;" class="text-center text-dark eventuudai"></h1>       
+            
+                </div>
+            <div style="margin: 50px 0 50px 0; background-color: purple; " class="row align-items-center   mx-auto">
+                    <div style="  " class="img col-lg-6 col-md-6 col-12 w-50 ">
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img class="d-block w-100" src="/images/uudai/big-star.jpg" alt="First slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="/images/uudai/c_monday.jpg" alt="Second slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="/images/uudai/c_ten.jpg" alt="Third slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="/images/uudai/cmember.jpg" alt="Third slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="/images/uudai/hssv.jpg" alt="Third slide">
+                                    </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                    </div>
+                    <div style="background-color: rgb(5, 8, 2); " class="text col-lg-6 col-md-6 col-12 w-50 ">
+                            <div class="container" style="width: 75%; background-color: cadetblue; margin: 0 auto; border-radius: 10px;">
+                                    <h1 style="width: 100%; " class="text-center text-dark uudai"></h1>       
+                            </div> 
+                          <h2 style="margin-top: 30px;" class="text-light">Tin mới & Ưu đãi </h2>
+                        <p class="text-light">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                        </p>
+                    <a href="/uudai" class="btn" style="color: #000; background-color: gray; border-radius: 6px;">Learn More</a>
+                    </div>                        
+            </div> 
+            <div style=" background-color: crimson;  " class="row align-items-center    mx-auto">
+                    <div style="background-color: rgb(5, 8, 2); " class="text col-lg-6 col-md-6 col-12 w-50 ">
+                            <div class="container" style="width: 75%; background-color: cadetblue; margin: 0 auto; border-radius: 10px;">
+                                    <h1 style="width: 100%; " class="text-center text-dark member"></h1>       
+                            </div> 
+                          <h2 style="margin-top: 30px;" class="text-light">Tin mới & Ưu đãi </h2>
+                        <p class="text-light">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                        </p>
+                    <a href="/uudai" class="btn" style="color: #000; background-color: gray; border-radius: 6px;">Learn More</a>
+                    </div>       
+                    <div style=" " class="img col-lg-6 col-md-6 col-12 w-50 ">
+                            <div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators1" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carouselExampleIndicators1" data-slide-to="1"></li>
+                                    <li data-target="#carouselExampleIndicators1" data-slide-to="2"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img class="d-block w-100" src="/images/page/1.jpg" alt="First slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="/images/page/2.jpg" alt="Second slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="/images/page/2.jpg" alt="Third slide">
+                                    </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                    </div>                                          
+            </div>  
+        <div class="row align-items-center container my-5 mx-auto">
+
+</section>
+
+  
+<!-- <div style="background-color: chartreuse; " class="text col-lg-6 col-md-6 col-12 w-50 ">
+        <div class="container" style="width: 75%; background-color: cadetblue; margin: 0 auto; border-radius: 10px;">
+                <h1 style="width: 100%; " class="text-center text-dark eventuudai"></h1>       
+        </div>       
+        <h2 class="text-light">Tin mới & Ưu đãi </h2>
+    <p class="text-light">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+    </p>
+<a href="/uudai">Learn More</a>
+</div>
+<div style="" class="img col-lg-6 col-md-6 col-12 w-50 ">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="/images/page/1.jpg" alt="First slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="/images/page/2.jpg" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="/images/page/2.jpg" alt="Third slide">
+            </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+            </a>
+        </div>
+</div> -->
+<!-- <div style=" background-color: crimson;height: 50%; " class="row align-items-center container my-5  mx-auto">
+        <div style=" " class="img col-lg-6 col-md-6 col-12 w-50 ">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="/images/page/1.jpg" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="/images/page/2.jpg" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="/images/page/2.jpg" alt="Third slide">
+                        </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+        </div>
+        <div style="background-color: chartreuse; " class="text col-lg-6 col-md-6 col-12 w-50 ">
+                <div class="container" style="width: 75%; background-color: cadetblue; margin: 0 auto; border-radius: 10px;">
+                        <h1 style="width: 100%; " class="text-center text-dark eventuudai"></h1>       
+                </div>                        <h2 class="text-light">Tin mới & Ưu đãi </h2>
+            <p class="text-light">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+            </p>
+        <a href="/uudai">Learn More</a>
+        </div>                        
+</div>  -->
+
+
+<!-- <section id="about" class="about py-5">
+    <div class="row align-items-center container my-5 mx-auto">
+        <div class="img col-lg-6 col-md-6 col-12 w-50 pt-5 pb-5">
+            <div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                      <li data-target="#carouselExampleIndicators1" data-slide-to="0" class="active"></li>
+                      <li data-target="#carouselExampleIndicators1" data-slide-to="1"></li>
+                      <li data-target="#carouselExampleIndicators1" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img class="d-block w-100" src="/images/uudai/uudai10.jpg" alt="First slide">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="/images/uudai/uudai6.jpg" alt="Second slide">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="/images/uudai/uudai9.jpg" alt="Third slide">
+                      </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+        </div>
+        <div class="text col-lg-6 col-md-6 col-12 w-50 pt-5 pb-5">
+                <h1 class="text-light text-center">======= EVENT =======</h1>
+                <h2 class="text-light">Tin mới & Ưu đãi </h2>
+                <p class="text-light">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+             </p>
+            <a href="/uudai">Learn More</a>
+        </div>       
+    </div>
+    
+</section> -->
+
+
+<!-- <div id="mid" class="mid">
+    <div class="hero text-center">
+        <% if (currentUser){%>
+            <h2 class="text-light display-4 font-weight-bold"><%- currentUser.Hoten%></h2>
+        <%}else{%>
+            <h2 class="text-light display-4 font-weight-bold"></h2>
+        <%}%>
+        <p class="text-light mx-auto">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.    
+        </p>
+        <a class="text-dark" href="">Get Started</a>
+    </div>
+</div> -->
+
+
+
+                
+                 
+
+
+
+
+
+    <!-- <div class="bg-modal1">
+            <div class="modal-content ">             
+                <div onclick="tatShowLogin()" class="close">+</div>
+                <div class="ui container">
+                    <form  class="ui form" method="POST"  >
+                        <div class="card w-100" style="width: 18rem;">
+                                
+                                <div class="card-body">
+                                        <h2 class="form-title">SIGN UP</h2>
+                                        
+                                        <form action="/routes/auth.js/login" method="POST">
+                                            <div class="input-group mb-3">
+                                                  
+                                                     
+                                                  <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder=" Email">
+                                              
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                  
+                                                    <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                                    <input type="password" class="form-control" name="password" id="password" placeholder=" Password">
+                                                  </div>
+                                            </div>
+                                            <div class="form-group form-button">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <a href="/auth/register" class="signup-image-link">Create an account</a>
+                                            </div>
+                                        </form>
+                           
+    
+                                </div>
+                                
+                               
+                        </div>
+                        
+                        <button class="ui fluid blue button" type="submit">Save</button>
+                    </form>
+                </div>
+        
+        
+               
+            </div>
+    </div>  -->
+
+ 
+    
+    <script>
+
+   
+    
+
+
+            // Toast function
+            function toast({ title = "", message = "", type = "info", duration = 3000 }) {
+              const main = document.getElementById("toast");
+              if (main) {
+                const toast = document.createElement("div");
+            
+                // Auto remove toast
+                const autoRemoveId = setTimeout(function () {
+                  main.removeChild(toast);
+                }, duration + 1000);
+            
+                // Remove toast when clicked
+                toast.onclick = function (e) {
+                  if (e.target.closest(".toast__close")) {
+                    main.removeChild(toast);
+                    clearTimeout(autoRemoveId);
+                  }
+                };
+            
+                const icons = {
+                  success: "fas fa-check-circle",
+                  info: "fas fa-info-circle",
+                  warning: "fas fa-exclamation-circle",
+                  error: "fas fa-exclamation-circle"
+                };
+                const icon = icons[type];
+                const delay = (duration / 1000).toFixed(2);
+            
+                toast.classList.add("toast", `toast--${type}`);
+                toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s ${delay}s forwards`;
+            
+                toast.innerHTML = `
+                                <div class="toast__icon">
+                                    <i class="${icon}"></i>
+                                </div>
+                                <div class="toast__body">
+                                    <h3 class="toast__title">${title}</h3>
+                                    <p class="toast__msg">${message}</p>
+                                </div>
+                                <div class="toast__close">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            `;
+                main.appendChild(toast);
+              }
+            }
+            
+            
+            function showSuccessToast() {
+                toast({
+                  title: "Thành công!",
+                  message: "Bạn đã đăng nhập thành công!",
+                  type: "success",
+                  duration: 5000
+                });
+              }
+            
+              function showErrorToast() {
+                toast({
+                  title: "Thất bại!",
+                  message: "Có lỗi xảy ra, tài khoản hoặc mật không đúng. Vui lòng thử lại!",
+                  type: "error",
+                  duration: 5000
+                });
+              }
+            </script>
+
+
+
+
+

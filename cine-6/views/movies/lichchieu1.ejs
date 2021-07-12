@@ -1,0 +1,101 @@
+
+
+
+<section style="display:flex; background-color: #000; " id="about1" class="  py-5">
+        <div style=" height: 100%;" class="row align-items-center container  mx-auto">
+
+            <div class="nav">
+                <ul  style="background:none; height: 80px; width: 100%; margin: 0 auto;">
+                    <% for(const key in array_listday){%>
+                        <li  style="background-color: lightgoldenrodyellow; text-align: center;  margin: 0 5px; border: 2px solid #000; width: 100%; " onclick="tabs(Number( `<%-key%>`))" class="text-dark user-post ">
+                                <%-array_listday[key] %>
+                        </li>
+                    <%}%>                    
+                </ul>
+            </div>
+
+
+            <div style="" class="profile-body text-light">
+                <% for(const key in array_listday){%>   
+                    <div class=" text-light  tab">
+                        <h1><%-array_listday[key]%></h1>  
+                        <div style="background-color: purple;" class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <a style=" color: #000;" hidden  class="nav-link active" id="v-pills-<%-array_listday[key]%>-tab" data-toggle="pill" href="#v-pills-<%-array_listday[key]%>" role="tab" aria-controls="v-pills-<%-array_listday[key]%>" aria-selected="true">Home</a>
+
+                            <% for(const cr in foundCumRap){%>
+                                <a style="font-weight: bold; font-size: 15px; text-transform: uppercase; color: #000;"  class="nav-link " id="v-pills-<%-foundCumRap[cr].IDcumrap%>-<%-array_listday[key]%>-tab" data-toggle="pill" href="#v-pills-<%-foundCumRap[cr].IDcumrap%>-<%-array_listday[key]%>" role="tab" aria-controls="v-pills-<%-foundCumRap[cr].IDcumrap%>-<%-array_listday[key]%>" aria-selected="true"><%-foundCumRap[cr].Tencumrap%></a>
+
+                            <%}%>
+                        </div>
+                        <div style="background-color: lightgoldenrodyellow;" class=" tab-content" id="v-pills-tabContent">
+                            <div hidden style=" overflow-y: scroll; height: 800px; " class=" tab-pane fade show active" id="v-pills-<%-array_listday[key]%>" role="tabpanel" aria-labelledby="v-pills-<%-array_listday[key]%>-tab">
+                                    <h1 style="color: #000; margin: 20px 0;">Rap 1</h1>
+                                    
+                            </div>
+                            <% for(const cr in foundCumRap){%>
+                                <div style=" " class="tab-pane fade " id="v-pills-<%-foundCumRap[cr].IDcumrap%>-<%-array_listday[key]%>" role="tabpanel" aria-labelledby="v-pills-<%-foundCumRap[cr].IDcumrap%>-<%-array_listday[key]%>-tab">
+                                    <h1 style=" color: #000; margin: 20px 0;"><%-foundCumRap[cr].Tencumrap%></h1>
+
+                                    <% for(const p in found_Phim){%>
+                                        <div class="card " style="margin-bottom: 10px; width: 100%; background-color: gray;">
+                                            <div class="row">
+                                                <div class="col-3  text-center">
+                                                    <img  style="width: 110px; height: 170px;"  src="<%-found_Phim[p].Posterphim %>" alt="">
+                                                </div>
+                                                <div class="col-9">
+                                                    <div class="text-left card-body">
+                                                        <h1 style="text-transform: capitalize;" class="card-title"><%-found_Phim[p].Tenphim %></h1>   
+                                                        <%for(const r in found_R){
+                                                            if(foundCumRap[cr].IDcumrap === found_R[r].CumRapIDcumrap ){
+                                                                for(const sc in found_SC){
+                                                                    if( (found_SC[sc].PhimIDphim === found_Phim[p].IDphim) && (array_listday[key] === found_SC[sc].Batdau) && (found_SC[sc].RapIDrap === found_R[r].IDrap)){%>
+                                                                        <button onclick="location.href='/muave/<%-found_SC[sc].IDsuatchieu%>'"  class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;"><%-found_SC[sc].GioBatDau %></button>    
+
+
+                                                                    <%}     
+                                                                }                                           
+                                                            }
+                                                        }%>
+                                                    </div>
+                                                </div>
+                                            </div>                           
+                                        </div>
+                                    <%}%>
+    
+
+                                </div>
+                            <%}%>
+                        </div>
+                    </div>  
+                <%}%>
+            </div>
+        </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+$('.nav ul li').click(function(){
+        $(this).addClass("active").siblings().removeClass('active');
+    })
+
+    const tabBtn = document.querySelectorAll('.nav ul li');
+    const tab = document.querySelectorAll('.tab');
+    function tabs(panelIndex){
+        tab.forEach(function(node){
+            node.style.display = 'none';
+        });
+        tab[panelIndex].style.display = 'block';
+    }
+    tabs(0);
+
+</script>

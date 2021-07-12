@@ -1,0 +1,218 @@
+<div style="background-color: #000;"  class="container-fluid">
+        <div class="row">
+            <div style=" background: url('<%- found_PhimByTenPhim[0].Posterphim%>') no-repeat center;" class="background-image"></div>
+        </div>
+        <div class="movie-details">
+            <div class="row col-12">
+                <div  class="col-xl-12">
+                    <div  class="row">
+                        
+                        <img height="350px" width="220px" src="<%- found_PhimByTenPhim[0].Posterphim%>" alt="">
+                        
+                        <div  class=" movie-details-content ml-5">
+                            <h1 class="text-light">Tên Phim:  <span style="text-transform: uppercase;"><%- found_PhimByTenPhim[0].Tenphim%></span></h1>
+                            <p class="text-light" style="margin:0 15px; font-size: 15px; font-weight: bold;">Ngày Công Chiếu: &nbsp;<span id="ngaycongchieu_after"></span></p>
+                            <p hidden id="ngaycongchieu_before"><%- found_PhimByTenPhim[0].Ngaycongchieu%></p>
+                            <p class="text-light" style="margin:0 15px; font-size: 15px; font-weight: bold;">Thời Lượng: &nbsp;<span><%- found_PhimByTenPhim[0].Thoiluong%></span>&nbsp;phút</p>
+
+                            <div style="margin: 10px;" class="row muave">
+                                <!-- <a style="margin:0 5px;" href="" class="nav-link btn border border-dark text-muted">Trailer</a> -->
+                                <input readonly style="margin:0 5px; background: none; " id="addzz" class="nav-link btn  border border-dark text-muted"  value="Trailer"/>
+                                <input readonly style="margin:0 5px; background: none; " id="ddazz" class="nav-link btn  border border-dark text-muted "  value="Mua Vé"/>
+
+                                <!-- <a style="margin:0 5px;" href="" class="nav-link btn border border-dark text-muted">Xem Suất Chiếu</a> -->
+                            </div>
+<br>
+                            <div class="text-light" style="margin:10px 10px; max-width: 900px;" class="row">
+                                <p style="font-size: 25px; text-align:justify;"><%-found_PhimByTenPhim[0].Bio%></p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-image col-xl-6">
+                    <!-- <img src="/images/movie/32malasanastreet.jpg" p-2 width="200" height="130" alt="">
+                    <img src="/images/movie/32malasanastreet.jpg" p-2 width="200" height="130" alt="">
+                    <img src="/images/movie/32malasanastreet.jpg" p-2 width="200" height="130" alt="">
+                    <img src="/images/movie/32malasanastreet.jpg" p-2 width="200" height="130" alt="">
+                    <img src="/images/movie/32malasanastreet.jpg" p-2 width="200" height="130" alt="">
+                    <img src="/images/movie/32malasanastreet.jpg" p-2 width="200" height="130" alt=""> -->
+                    
+                </div>
+            </div>
+        </div>
+        <h2 class="display-4 ml-4 text-light">PHIM NGẪU NHIÊN</h2>
+        <div style="background-color: tomato; margin-bottom: 100px;" class="row ml-4">
+            <div style="margin: 0 auto;" class="random-movie">
+                <% for(const key in array_PhimNgauNhien){%>
+    
+                    <img onclick="location.href='/phimdangchieu/chitietphim/<%- found_Phim[array_PhimNgauNhien[key]].Tenphim%>'" src="<%- found_Phim[array_PhimNgauNhien[key]].Posterphim%>" style="max-height: 300px; width: 220px;"  alt="" class="img-fluid">
+               <% }%>
+                
+            </div>
+        </div>
+</div>
+<%- include('../partials/footer.ejs') %>
+
+
+
+
+    <div  class="bg-modal" >
+            <div style="background-color: whitesmoke;" class="modal-content ">             
+                <div id="close" class="close">+</div>
+                <div class="ui container">
+                    <iframe width="100%" height="405" src="<%- found_PhimByTenPhim[0].Trailer%>">
+                    </iframe>
+                </div>
+            </div>
+    </div> 
+    
+    <div  class="bg-modal1" >
+            <div style="background-color: whitesmoke;" class="modal-content ">             
+                <div id="close1" class="close">+</div>
+                <div class="ui container">
+                        <div class="nav">
+                                <ul style="height: 80px;">
+
+                                <% for(const key in array_listday){%>
+                                    <li style="height: 80px; width:100px; border: 1px solid black;"  onclick="tabs(Number( `<%-key%>`))" class=" ">
+                                            <div class="row" style="padding: 0; margin: 0; height: 100%; ">
+                                                <!-- <div style="background-color: orangered;" class="col-6">
+                                                    <div style="height: 50%; background-color: mediumpurple;" class="row">07</div>
+                                                    <div style="height: 50%; background-color:yellow;" class="row">JUL</div>
+                                                </div>
+                                                <div  style="background-color:navy;" class=" col-6">
+                                                    <p>06</p>
+                                                </div> -->
+                                                
+                                                <p style="text-align: center; margin: auto; font-weight: bold; font-size: 1rem;"><%-array_listday[key]%></p>
+
+                                                
+            
+                                            </div>
+                                    </li>
+                                <%}%>
+
+                                    <!-- <li style="height: 80px; width:100px; border: 1px solid black;"  onclick="tabs(0)" class=" active">
+                                        <div class="row" style="padding: 0; margin: 0; height: 100%; background: plum;">
+                                           
+
+        
+                                        </div>
+                                    </li>
+                                    <li style="height: 80px; width:100px; border: 1px solid black;" onclick="tabs(1)" class="">
+                                        CÀI ĐẶT 
+                                    </li>
+                                    <li style="height: 80px; width:100px; border: 1px solid black;" onclick="tabs(2)" class="">
+                                        VÉ ĐÃ ĐẶT
+                                    </li>
+                                    <li style="height: 80px; width:100px; border: 1px solid black;"  onclick="tabs(3)" class=" active">
+                                        DANH SÁCH USER
+                                    </li>
+                                    <li style="height: 80px; width:100px; border: 1px solid black;" onclick="tabs(4)" class="">
+                                        CÀI ĐẶT 
+                                    </li>
+                                    <li style="height: 80px; width:100px; border: 1px solid black;" onclick="tabs(5)" class="">
+                                        VÉ ĐÃ ĐẶT
+                                    </li>
+                                    <li style="height: 80px; width:100px; border: 1px solid black;" onclick="tabs(6)" class="">
+                                        VÉ ĐÃ ĐẶT
+                                    </li> -->
+                                </ul>
+                            </div>
+
+
+                            <div style="overflow-y: scroll; max-height: 300px;" class="">
+                                <% for(const key in array_listday){%>   
+                                    <div class=" text-dark  tab">
+                                            <h1><%-array_listday[key]%></h1>  
+
+                                        <!-- <h1 class="text-dark"><%-array_listday[key]%></h1> -->
+                                        <div class="container mb-3 mt-3">
+                                            
+
+                                                <%for(const cr in found_CumRap){%>
+                                                <div  class="card " style="height: 125px; margin-bottom: 10px; background-color: rgb(226, 230, 220);">
+                                                        <div class="row">
+                                                            
+                                                            <div class="col-12">
+                                                                <div class="text-left card-body">
+                                                                    <h1 class="card-title"><%-found_CumRap[cr].Tencumrap%></h1>   
+                                                                    <%for(const r in found_Rap){
+                                                                        if(found_CumRap[cr].IDcumrap === found_Rap[r].CumRapIDcumrap){
+                                                                            for(const sc in found_SuatChieu){
+                                                                                if(array_listday[key] === found_SuatChieu[sc].Batdau && found_Rap[r].IDrap === found_SuatChieu[sc].RapIDrap){%>
+                                                                                    <button onclick="location.href='/muave/<%-found_SuatChieu[sc].IDsuatchieu%>'"  class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;"><%-found_SuatChieu[sc].GioBatDau%></button>    
+                                                                                    <%}
+                                                                            }
+                                                                        }
+                                                                    }%>
+          
+                                                                </div>
+                                                            </div>
+                                                        </div>                           
+                                                </div>
+                                                <%}%>
+
+
+
+
+
+
+                                        </div>
+                                    </div>  
+                                <%}%>
+
+                                
+                                
+                            </div>
+                </div>
+            </div>
+    </div>
+
+
+
+
+<script>
+
+     $('.nav ul li').click(function(){
+        $(this).addClass("active").siblings().removeClass('active');
+    })
+
+    const tabBtn = document.querySelectorAll('.nav ul li');
+    const tab = document.querySelectorAll('.tab');
+    function tabs(panelIndex){
+        tab.forEach(function(node){
+            node.style.display = 'none';
+        });
+        tab[panelIndex].style.display = 'block';
+    }
+    tabs(0);
+    document.getElementById('ngaycongchieu_after').innerText = moment(document.getElementById('ngaycongchieu_before').innerText).format("DD-MM-YYYY");
+
+    document.getElementById('addzz').addEventListener('click',
+    function(){
+        document.querySelector('.bg-modal').style.display = 'flex';
+        $(window).scrollTop(0);
+
+    });
+
+   document.getElementById('close').addEventListener('click',
+   function(){
+
+       document.querySelector('.bg-modal').style.display = 'none';
+   });
+
+   document.getElementById('ddazz').addEventListener('click',
+    function(){
+        document.querySelector('.bg-modal1').style.display = 'flex';
+        $(window).scrollTop(0);
+
+    });
+
+   document.getElementById('close1').addEventListener('click',
+   function(){
+
+       document.querySelector('.bg-modal1').style.display = 'none';
+   });
+</script>

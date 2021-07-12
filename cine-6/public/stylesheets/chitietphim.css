@@ -1,0 +1,48 @@
+.background-image{
+    background-size: cover;
+    -webkit-clip-path: ellipse(1800px 500px at 20% 0%);
+    clip-path: ellipse(1800px 500px at 20% 0%);
+    width: 100%;
+    height: 500px;
+}
+.background-image::before{
+position: absolute;
+content: '';
+background: -webkit-gradient(linear, left bottom, left top, from(rgb(0,0,0)), to(transparent));
+background: linear-gradient(to top, rbg(0,0,0), transparent);
+height: 100%;
+width: 100%;
+}
+.background-image::after{
+    position: absolute;
+    content: '';
+    background: -webkit-gradient(linear, left bottom, left top, from(rgb(0,0,0)), to(transparent));
+    background: linear-gradient(to top, rbg(0,0,0), transparent);
+    height: 100%;
+    width: 100%;
+}
+
+.movie-details img{
+    position: relative;
+    top: -180px;
+    left: 30px;
+}
+.movie-image{
+    margin-top: 150px;
+}
+.random-movie img{
+    margin: 10px;
+}
+.random-movie img:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.uudai img:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+.muave input:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}

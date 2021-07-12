@@ -1,0 +1,71 @@
+
+
+<section style="background-color:#222; color: #fff" class="about10 py-4">
+<br><br><br><br><br><br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="display-4">My Map</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                    <div id='map' style='width: 800px; height: 400px;'></div>
+                </div>
+        </div>
+    </div>
+
+    <!-- https://www.youtube.com/watch?v=OySigNMXOZU
+    https://www.mapbox.com/install/js/cdn-install/
+    http://localhost:3000/thongke/map -->
+
+
+</section>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoidGVtcHNhbXBsZSIsImEiOiJja3E3b3E3M3MwNG8xMzFvY2lyajZnYmZsIn0.JdHpjs_F_XcHmpTsmcNcng';
+
+    navigator.geolocation.getCurrentPosition(successLocation,
+     errorLocation,{
+        enableHighAccuracy: true
+    })
+
+
+    function successLocation(position){
+        setupMap([position.coords.longitude, position.coords.latitude])
+    }
+
+    function errorLocation(){
+        
+    }
+
+
+    function setupMap(center){
+        const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [106.63853,10.76860],
+        zoom: 15
+        })
+
+        const nav = new mapboxgl.NavigationControl()
+        map.addControl(nav)
+
+        var directions = new MapboxDirections({
+            accessToken: mapboxgl.accessToken
+        })
+        map.addControl(directions, "top-left")
+
+        var marker = new mapboxgl.Marker({
+        color: "#222",
+        draggable: true
+        }).setLngLat([106.63853,10.76860])
+        .addTo(map);
+    }
+
+
+
+
+</script>
+
+
+    
