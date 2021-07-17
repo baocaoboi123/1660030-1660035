@@ -1,0 +1,23 @@
+<% for (const key in found_Phim){%>
+    <li   class="splide__slide " > 
+        <div  class="img">
+            <ul class="caption-style-4">
+                <li>
+                    <img src="<%- found_Phim[key].Posterphim %>" alt="">
+                    <div class="caption">
+                        <div class="blur"></div>
+                        <div class="caption-text">
+                            <h1><%-found_Phim[key].Tenphim%></h1>
+                                <button class="btn-5" onclick="das('<%- found_Phim[key].Tenphim%>')"   style="cursor: pointer; background-color: yellow;  border-radius: 5px; border: none;">
+                                        <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MUA VÉ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                          -->
+                                        <!-- <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MUA VÉ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> -->
+                                </button>            
+
+                        </div>
+                    </div>
+                </li>			
+            </ul>
+            <!-- <img  class="img-fluid w-100" src="<%-found_Phim[key].Posterphim%>" alt=""> -->
+        </div>
+    </li>
+<%}%>

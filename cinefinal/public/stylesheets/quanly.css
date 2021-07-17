@@ -1,0 +1,139 @@
+.bod{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    min-height: 100%;
+    background: #000;
+}
+
+.container-a2{
+  
+    position: relative;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-rows: minmax((100px, auto));
+    margin: 70px;
+    grid-auto-flow: dense;
+    grid-gap: 10px;
+}
+.container-a2 .box{
+    background: #333;
+    padding: 15px;
+    display: grid;
+    font-size: 15px;
+    text-align: center;
+    color: #fff;
+    transition: 0.5s;
+    place-items: center;
+    text-transform: uppercase;
+
+}
+.container-a2 .box:hover{
+    background: #e91e63;
+}
+.container-a2 .box img{
+    position: relative;
+    max-width: 100px;
+    margin-bottom: 5px;
+}
+
+/* .container-a2 .box:nth-child(1){
+    grid-column: span 2;
+    grid-row: span 1;
+
+}
+.container-a2 .box:nth-child(2){
+    grid-column: span 1;
+    grid-row: span 2;
+}
+.container-a2 .box:nth-child(4){
+    grid-column: span 1;
+    grid-row: span 2;
+}
+.container-a2 .box:nth-child(5){
+    grid-column: span 3;
+    grid-row: span 1;
+}  */
+
+
+.container-a2 .box:nth-child(5){
+    grid-column: span 2;
+    grid-row: span 1;
+
+}
+.container-a2 .box:nth-child(6){
+    grid-column: span 2;
+    grid-row: span 1;
+
+}
+
+
+
+@media (max-width:991px){
+    .container-a2{
+        grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+        grid-template-rows: minmax((auto, auto));
+    }
+    .container-a2 .box{
+        grid-column: unset;
+        grid-row: unset 1;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container-a1{
+  
+    position: relative;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-template-rows: minmax((100px, auto));
+    margin: 220px;
+    grid-auto-flow: dense;
+    grid-gap: 10px;
+}
+
+.container-a1 .box1{
+    background: #333;
+    padding: 15px;
+    display: grid;
+    font-size: 15px;
+    text-align: center;
+    color: #fff;
+    transition: 0.5s;
+    place-items: center;
+    text-transform: uppercase;
+
+}
+.container-a1 .box1:hover{
+    background: #fbff00;
+}
+.container-a1 .box1 img{
+    position: relative;
+    max-width: 100px;
+    margin-bottom: 5px;
+}
+.container-a1 .box1:nth-child(1){
+    grid-column: span 1;
+    grid-row: span 3;
+
+}
+.container-a1 .box1:nth-child(2){
+    grid-column: span 1;
+    grid-row: span 3;
+}

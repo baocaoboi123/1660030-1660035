@@ -1,0 +1,399 @@
+
+<section style=" background-color: #000;"  id="about" class="about py-5">
+
+        <div class="row align-items-center  my-5 mx-auto ">
+            <div style="background-color: orchid; margin-top:-0px;"  class=" text col-lg-5 col-md-5 col-12">
+                <div  id="container">
+                    <div  id="header">
+                        <div id="monthDisplay"></div>
+                        <div>
+                            <form id="myForm" method="POST" action="/te">
+                                    <% if (cumrap === ''){%>
+                                        <input hidden   name="cumrap" id="cumrap" type="text" placeholder="Enter CumRap">
+        
+                                    <%}else{%>
+                                        <input hidden  value="<%-cumrap%>"  name="cumrap" id="cumrap" type="text" placeholder="Enter CumRap">
+                                    <%}%>
+                                    <input hidden  name="ngayxem" id="ngayxem" type="text" placeholder="Enter NgayXem">
+                                    
+        
+                                    <!-- <input type="submit"> -->
+                            </form>
+                            <select onchange="thaydoiSC()" name="cumrapSC" id="cumrapSC">
+        
+                                <% for(const key in found_CumRap){
+                                    if (cumrap === found_CumRap[key].Tencumrap){%>
+                                    <option selected  value="<%-found_CumRap[key].Tencumrap%>"><%-found_CumRap[key].Tencumrap%></option>
+                                    <%}else{%>
+                                    <option   value="<%-found_CumRap[key].Tencumrap%>"><%-found_CumRap[key].Tencumrap%></option>
+        
+                                    <%}
+                                }%>
+        
+                            </select>
+                        </div>
+                        <div>
+                            <button id="backButton">Back</button>
+                            <button id="nextButton">Next</button>
+                        </div>
+                    </div>
+                    <div id="weekdays">
+                        <div>Sunday</div>
+                        <div>Monday</div>
+                        <div>Tuesday</div>
+                        <div>Wednesday</div>
+                        <div>Thursday</div>
+                        <div>Friday</div>
+                        <div>Saturday</div>
+                    </div>
+                    <div id="calendar"></div>
+                </div>
+            </div>
+            <div  style=" height: 100vh; width: 100vw;" class=" text col-lg-7 col-md-7 col-12 ">
+                <div style="width: 760px; height:100vh; " >
+                    <div class="text-center">
+                        <% if(ngayxem === ''){%>
+                            <h2 class="text-light" id="eventTitleInput">Lịch Chiếu Ngày</h2>
+                        <%}else{%>
+                            <h2 class="text-light" id="eventTitleInput"><%-ngayxem %></h2>
+                        <%}%>
+                    </div>
+                    <div class="calen">
+                                    <div  class=" calendar">
+                                        <!-- <div class="card " style="margin-bottom: 10px; width: 100%; background-color: rgb(213, 255, 128);">
+                                                <div class="row">
+                                                    <div class="col-3  text-center">
+                                                        <img  style="width: 110px; height: 170px;"  src="/images/movie/getout.jpg" alt="">
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="text-left card-body">
+                                                            <h1 class="card-title">Cụm Rạp </h1>                                                                                            
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>    
+                                                        </div>
+                                                    </div>
+                                                </div>                           
+                                        </div> -->
+        
+                                        <% for(const p in found_Phim){%>
+                                            <div class="card " style="margin-bottom: 10px; width: 100%; background-color: rgb(226, 230, 220);">
+                                                <div class="row">
+                                                    <div class="col-3  text-center">
+                                                        <img  style="width: 110px; height: 170px;"  src="<%-found_Phim[p].Posterphim %>" alt="">
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="text-left card-body">
+                                                            <h1 class="card-title"><%-found_Phim[p].Tenphim %></h1>   
+                                                            <%for(const r in found_R){
+                                                                for(const sc in found_SC){
+                                                                    if( (found_SC[sc].PhimIDphim === found_Phim[p].IDphim) && (found_SC[sc].RapIDrap === found_R[r].IDrap)){%>
+                                                                        <button onclick="location.href='/muave/<%-found_SC[sc].IDsuatchieu%>'"  class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;"><%-found_SC[sc].GioBatDau %></button>    
+        
+                                                                    <%}
+                                                                }
+                                                            }%>
+                                                        </div>
+                                                    </div>
+                                                </div>                           
+                                            </div>
+                                        <%}%>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                        <!-- <div class="card " style="margin-bottom: 10px; width: 100%; background-color: rgb(213, 255, 128);">
+                                                <div class="row">
+                                                    <div class="col-3  text-center">
+                                                        <img  style="width: 110px; height: 170px;"  src="/images/movie/getout.jpg" alt="">
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="text-left card-body">
+                                                            <h1 class="card-title">Cụm Rạp </h1>
+                                                            <p style=" text-transform: uppercase;" class="card-text"></p>
+                                                            <input hidden  type="text" id="idmap" name="idmap" value="106.63408">
+                                                            <input hidden  type="text" id="idmap1" name="idmap1" value="10.75414">
+                                                            
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>    
+                                                        </div>
+                                                    </div>
+                                                </div>                           
+                                        </div>
+                                    
+                                        <div class="card " style="margin-bottom: 10px; width: 100%; background-color: rgb(213, 255, 128);">
+                                                <div class="row">
+                                                    <div class="col-3  text-center">
+                                                        <img  style="width: 110px; height: 170px;"  src="/images/movie/getout.jpg" alt="">
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="text-left card-body">
+                                                            <h1 class="card-title">Cụm Rạp </h1>
+                                                            <p style=" text-transform: uppercase;" class="card-text"></p>
+                                                            <input hidden  type="text" id="idmap" name="idmap" value="106.63408">
+                                                            <input hidden  type="text" id="idmap1" name="idmap1" value="10.75414">
+                                                            
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>    
+                                                        </div>
+                                                    </div>
+                                                </div>                           
+                                        </div>
+                                        <div class="card " style="margin-bottom: 10px; width: 100%; background-color: rgb(213, 255, 128);">
+                                                <div class="row">
+                                                    <div class="col-3  text-center">
+                                                        <img  style="width: 110px; height: 170px;"  src="/images/movie/getout.jpg" alt="">
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="text-left card-body">
+                                                            <h1 class="card-title">Cụm Rạp </h1>
+                                                            <p style=" text-transform: uppercase;" class="card-text"></p>
+                                                            <input hidden  type="text" id="idmap" name="idmap" value="106.63408">
+                                                            <input hidden  type="text" id="idmap1" name="idmap1" value="10.75414">
+                                                            
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>    
+                                                        </div>
+                                                    </div>
+                                                </div>                           
+                                        </div>
+                                        <div class="card " style="margin-bottom: 10px; width: 100%; background-color: rgb(213, 255, 128);">
+                                                <div class="row">
+                                                    <div class="col-3  text-center">
+                                                        <img  style="width: 110px; height: 170px;"  src="/images/movie/getout.jpg" alt="">
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="text-left card-body">
+                                                            <h1 class="card-title">Cụm Rạp </h1>
+                                                            <p style=" text-transform: uppercase;" class="card-text"></p>
+                                                            <input hidden  type="text" id="idmap" name="idmap" value="106.63408">
+                                                            <input hidden  type="text" id="idmap1" name="idmap1" value="10.75414">
+                                                            
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                            <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>    
+                                                        </div>
+                                                    </div>
+                                                </div>                           
+                                        </div> -->
+                                    </div>
+                    </div>
+                </div>
+                
+        
+                <!-- <h2 id="eventTitleInput"></h2>
+                        <div class="calen">
+                                <div  class="ui container calendar">
+                                    <div class="card " style="width: 100%; background-color: rgb(213, 255, 128);">
+                                            <div class="row">
+                                                <div class="col-3  text-center">
+                                                    <img  style="width: 110px; height: 170px;"  src="/images/movie/getout.jpg" alt="">
+                                                </div>
+                                                <div class="col-9">
+                                                    <div class="text-left card-body">
+                                                        <h1 class="card-title">Cụm Rạp </h1>
+                                                        <p style=" text-transform: uppercase;" class="card-text"></p>
+                                                        <input hidden  type="text" id="idmap" name="idmap" value="106.63408">
+                                                        <input hidden  type="text" id="idmap1" name="idmap1" value="10.75414">
+                                                        
+                                                        <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                        <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                        <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                        <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                        <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                        <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                        <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>
+                                                        <button class="btn btn-primary"  style="margin: 5px; background-color: rgb(0, 87, 250);  border-radius: 5px; border: none;">Chỉ Đường</button>    
+                                                    </div>
+                                                </div>
+                                            </div>                           
+                                    </div>
+                                    <br>   
+                                        
+                                </div>
+                        </div> -->
+                    
+                    
+                    
+                    
+                    
+                        <!-- <div id="dayDisplay"></div> -->
+        
+                    
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        <!-- <div style="display:none;" id="newEventModal">
+            <h2>New Event</h2>
+            <input type="text" id="eventTitleInput">
+            <button id="saveButton">Save</button>
+            <button id="cancelButton">Cancel</button>
+        </div>
+        <div style="display:none;" id="modalBackDrop"></div> -->
+        </section>
+        
+        <!-- <div class="bg-modal-calendar">
+            <div class="modal-content-calendar">             
+                <div id="close1" class="close">+</div>
+        
+                <h2 id="eventTitleInput"></h2>
+                <div id="dayDisplay"></div>
+        
+                <form method="GET" action="/te">
+                        <input name="name" id="name" type="text" placeholder="enter name">
+                        <input type="submit">
+                </form>
+                
+              
+            </div>
+        </div> -->
+        
+        
+        <script>
+            
+            var thaydoiSC = function(){
+                
+                           var temp_tenphim = document.getElementsByName('cumrapSC')[0].value;
+        
+        
+                            document.getElementById('cumrap').value = temp_tenphim;
+        
+            }
+            document.getElementById('cumrap').value = document.getElementsByName('cumrapSC')[0].value;
+        
+        
+            // document.getElementById('close1').addEventListener('click',function(){
+        
+            //     document.querySelector('.bg-modal-calendar').style.display = 'none';
+            // });
+        let nav = 0;
+        let clicked = null;
+        let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
+        
+        const calendar = document.getElementById('calendar');
+        const newEventModal = document.getElementById('newEventModal');
+        const backDrop = document.getElementById('modalBackDrop');
+        const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        
+        function openModal(date){
+            clicked = date;
+            const eventForDay = events.find(e => e.date === clicked);
+            if (eventForDay){
+                console.log('Event already exists');
+            }else{
+        
+                // document.querySelector('.bg-modal-calendar').style.display = 'flex';
+                document.getElementById('eventTitleInput').innerText = moment(date).format("YYYY-MM-DD");
+                document.getElementById('ngayxem').value =  document.getElementById('eventTitleInput').innerText;
+        
+                // document.querySelector('.calen').style.display = 'flex';
+        
+        
+                // newEventModal.style.display = 'flex';
+        
+                        // $(window).scrollTop(0);
+        
+        
+                document.getElementById("myForm").submit();
+        
+        
+            }
+            // backDrop.style.display = 'flex';
+        }
+        
+        function load(){
+            const dt = new Date();
+        
+            if (nav !== 0){
+                dt.setMonth(new Date().getMonth() + nav);
+            }
+        
+        
+            const day = dt.getDate();
+            const month = dt.getMonth();
+            const year = dt.getFullYear();
+            
+            const firstDayOfMonth = new Date(year, month, 1);
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+        
+            const dateString = firstDayOfMonth.toLocaleDateString('en-us', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+            });
+        
+            const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
+        
+            document.getElementById('monthDisplay').innerText = `${dt.toLocaleDateString('en-us', { month: 'long' })} ${year}`;
+            // document.getElementById('dayDisplay').innerText = `${day}-${month}-${year}`;
+        
+            calendar.innerHTML = '';
+        
+            for(let i = 1; i <= paddingDays + daysInMonth; i++){
+                const daySquare = document.createElement('div');
+                daySquare.classList.add('day');
+                if(i > paddingDays){
+                    daySquare.innerText = i - paddingDays;
+                    daySquare.addEventListener('click', () => openModal(`${month + 1}/${i - paddingDays}/${year}`));
+        
+                }else{
+                    daySquare.classList.add('padding');
+                }
+        
+                calendar.appendChild(daySquare);
+            }
+        }
+        
+        function initButtons(){
+            document.getElementById('nextButton').addEventListener('click', () =>{
+                nav++;
+                load();
+            });
+        
+            document.getElementById('backButton').addEventListener('click', () =>{
+                nav--;
+                load();
+            });
+        
+        
+        };
+        
+        initButtons();
+        load();
+        </script>
+        

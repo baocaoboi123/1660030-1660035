@@ -1,0 +1,624 @@
+<div id="toast"></div>
+
+
+<section style="background-color: #000;"  id="" class=" py-5">
+    
+   
+    <div class="row  my-5 mx-auto">               
+        
+
+        <div  class="col-lg-12 col-md-12 col-12 w-100 ">
+            <div class="phim-info container">                                
+                <div>
+                        <input onclick="location.href='/quanly'" readonly style="background-color: lightseagreen; width: 130px;"  class="btn submit"  value="<=== Quản Lý"/>
+                        <input readonly style="background-color: lightgray;" id="add" class="btn submit"  value="Thêm Phim"/>
+
+                </div>
+
+            </div>          
+            <main class="m container">
+                <% for(const key in found_AllMovie){%>
+                <div class="phim">
+                    <ul class="caption-style-4">
+                            <li>
+                                    <img src="<%- found_AllMovie[key].Posterphim %>" alt="">
+                                    <div class="caption">
+                                    <div class="blur"></div>
+                                    <div class="caption-text">
+                                        <h1 ><%- found_AllMovie[key].Tenphim %></h1>
+                                        <div>
+                                                <button onclick="scrollToTop1('<%- found_AllMovie[key].Bio %>','<%- found_AllMovie[key].Trailer %>','<%- found_AllMovie[key].Tenphim %>', '<%- found_AllMovie[key].Posterphim %>', '<%- found_AllMovie[key].Thoiluong %>', '<%- found_AllMovie[key].IDphim %>', '<%- found_AllMovie[key].Ngaycongchieu %>')"  style="background-color: lightgreen;  border-radius: 5px; border: none;">EDIT</button>
+                                                <button onclick="deletePhim('<%- found_AllMovie[key].IDphim %>')"  style="background-color: lightcoral;  border-radius: 5px; border: none;">DELETE</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>			
+                        </ul>
+                    <div class="phim-info ">
+                        <p style="text-transform: capitalize;"><%- found_AllMovie[key].Tenphim %></p>
+                    </div>
+                    <select hidden class="custom-select" name="inputGroupSelect05" id="inputGroupSelect05" aria-label="Example select with button addon">
+                                                                    
+                        <option value="<%- found_AllMovie[key].Tenphim %>"><%- found_AllMovie[key].Tenphim %></option>
+                        <option value="<%- found_AllMovie[key].Posterphim %>"><%- found_AllMovie[key].Posterphim %></option>    
+                                             
+                    </select>
+                
+                </div>
+                <%}%>
+            </main>
+                    
+        </div>
+        
+    </div>
+</section>
+
+
+
+<script>
+
+   
+        
+    var scrollToTop1 = function (bio,trailer,tenphim, posterphim, thoiluong, idphim, ngaycongchieu) {
+        document.querySelector('.bg-modal1').style.display = 'flex';
+
+            document.getElementById('idphim_edit').value = idphim;
+
+            document.getElementById('ngaycongchieu_edit').value = moment(ngaycongchieu).format("YYYY-MM-DD");
+
+
+            document.getElementById('tenphim_edit').value = tenphim;
+            document.getElementById('thoiluong_edit').value = thoiluong;
+            document.getElementById('poster_img').src = posterphim;
+            document.getElementById('trailer_edit').value = trailer;
+            document.getElementById('bio_edit').value = bio;
+
+            $(window).scrollTop(0);
+
+
+
+        };
+   var thaydoiphim1 = function(tenphim, posterphim, thoiluong, idphim, ngaycongchieu){
+
+        document.getElementById('idphim_edit').value = idphim;
+
+
+    
+        document.getElementById('tenphim_edit').value = tenphim;
+        document.getElementById('thoiluong_edit').value = thoiluong;
+        document.getElementById('poster_img').src = posterphim;
+
+   };
+   
+
+</script>
+
+<!-----ADD----->
+<div class="bg-modal">
+    <div style="background-color: lightgoldenrodyellow;" class="modal-content ">             
+        <div id="close" class="close">+</div>
+        <div class="ui container">
+            <form id="formaddphim"  class="ui form" method="POST" enctype="multipart/form-data"  >
+                <div class="ui two fields">
+                    <div class="field">
+                        <label style="text-transform: uppercase; background-color: lightpink" for="name">Poster Phim</label>
+                        <input style="margin-bottom:10px;" type="file" name="myImage" id="myImage" >
+                        <label style="text-transform: uppercase; background-color: lightseagreen" for="name">Trailer</label>                            
+                            <input style="margin-bottom:15px;" type="text" name="trailer_add" id="trailer_add" >
+                            <label style="text-transform: uppercase; background-color: lightslategray" for="name">Bio</label>                            
+                            <input style="margin-bottom:15px;" type="text" name="bio_add" id="bio_add" >
+
+                    </div>
+                    <div class="field">
+                        <!-- <label hidden for="name">ID Phim</label>
+                        <input hidden type="text" name="" id="">      -->
+                        <label style="text-transform: uppercase; background-color: lawngreen" for="name">Tên Phim</label>
+                        <!-- <input style="margin-bottom:15px;" type="text" name="tenphim_add" id="tenphim_add">                        -->
+                        <div style="margin-bottom:15px;" class="form-group">
+                            <input id="tenphim_add" name="tenphim_add" type="text" placeholder="" class="form-control">
+                            <span class="form-message"></span>
+                        </div>
+
+                        <!-- <label style="text-transform: uppercase; background-color: lightslategrey" for="name">Thời Lượng</label>
+                        <input style="margin-bottom:15px;" type="text" name="thoiluong_add" id="thoiluong_add">    -->
+                        <label style="text-transform: uppercase; background-color: lightslategrey" for="name">Thời Lượng</label>
+  
+                        <div style="margin-bottom:15px;" class="form-group">
+                                <input id="thoiluong_add" name="thoiluong_add" type="text" placeholder="'Trường này phải là số nguyên '" class="form-control">
+                                <span class="form-message"></span>
+                        </div>
+                        <label style="text-transform: uppercase; background-color: rgb(247, 247, 86)" for="name">Ngày Công Chiếu</label>
+                        <div class="row">
+                                <div class="col-6 form-group">
+                                        <!-- <input readonly  type="text" name="start1_year" id="start1_year">   -->
+                                        <input readonly id="start1_year" name="start1_year" type="text" placeholder="" class="form-control">
+                                        <span class="form-message"></span>
+                                </div>
+                                <div class="col-6">
+                                        <input onchange="getEventTime5()"  type="date" name="ngaycongchieu_add" id="ngaycongchieu_add" > 
+
+                                </div>
+                            </div>
+                        <input  hidden type="text" id="check_option" name="check_option" value="0">
+
+                    </div>
+                </div>
+                <!-- <input onclick="themphim()" readonly style="background-color: rgb(65, 81, 228);" class="btn submit" value="Xác Nhận"/> -->
+
+                <button class="ui fluid blue button" type="submit">Save</button>
+            </form>
+        </div>
+
+
+       
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function(){
+        let check_ = ""
+        if(check_ === "thanhcongaddphim"){
+            showSuccessToast()
+        }else if(check_ === 'thatbaiaddphim'){
+            showErrorToast()
+        }
+
+
+    });
+
+
+
+    // Toast function
+    function toast({ title = "", message = "", type = "info", duration = 3000 }) {
+      const main = document.getElementById("toast");
+      if (main) {
+        const toast = document.createElement("div");
+    
+        // Auto remove toast
+        const autoRemoveId = setTimeout(function () {
+          main.removeChild(toast);
+        }, duration + 1000);
+    
+        // Remove toast when clicked
+        toast.onclick = function (e) {
+          if (e.target.closest(".toast__close")) {
+            main.removeChild(toast);
+            clearTimeout(autoRemoveId);
+          }
+        };
+    
+        const icons = {
+          success: "fa fa-check-circle",
+          info: "fa fa-info-circle",
+          warning: "fa fa-exclamation-circle",
+          error: "fa fa-exclamation-circle"
+        };
+        const icon = icons[type];
+        const delay = (duration / 1000).toFixed(2);
+    
+        toast.classList.add("toast", `toast--${type}`);
+        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s ${delay}s forwards`;
+    
+        toast.innerHTML = `
+                        <div class="toast__icon">
+                            <i class="${icon}"></i>
+                        </div>
+                        <div class="toast__body">
+                            <h3 class="toast__title">${title}</h3>
+                            <p class="toast__msg">${message}</p>
+                        </div>
+                        <div class="toast__close">
+                            <i class="fa fa-times"></i>
+                        </div>
+                    `;
+        main.appendChild(toast);
+      }
+    }
+    
+    
+    function showSuccessToast() {
+        toast({
+          title: "Thành công!",
+          message: "Bạn đã cập nhật thành công!",
+          type: "success",
+          duration: 5000
+        });
+      }
+    
+      function showErrorToast() {
+        toast({
+          title: "Thất bại!",
+          message: "Có lỗi xảy ra, tên phim đã được dùng. Vui lòng thử lại!",
+          type: "error",
+          duration: 5000
+        });
+      }
+    </script>
+
+
+<!-----Edit---->
+<div class="bg-modal1">
+        <div style="height: 500px; max-width: 1000px; background-color: lightgoldenrodyellow;" class="modal-content ">             
+            <div id="close1" class="close">+</div>
+            <div class="ui container">
+                <form id="formeditphim" class="ui form" method="POST" enctype="multipart/form-data"  >
+                    <div class="ui two fields">
+                        <div class="field">
+                            <label style="text-transform: uppercase; background-color: lightpink" for="name">Poster Phim</label>
+                            <img style="margin-bottom:10px; width: 200px; max-height: 300px;"  id="poster_img" src="" alt=""><br>
+                            <label style="text-transform: uppercase; background-color: lightseagreen" for="name">Trailer</label>                            
+                            <input style="margin-bottom:15px;" type="text" name="trailer_edit" id="trailer_edit" >
+                            <label style="text-transform: uppercase; background-color: lightslategray" for="name">Bio</label>                            
+                            <input style="margin-bottom:15px;" type="text" name="bio_edit" id="bio_edit" >
+                        </div>
+                        <div class="field">
+                                <label style="text-transform: uppercase; background-color: lawngreen" for="name">ID Phim</label>
+                                <input style="margin-bottom:15px;" readonly type="text" name="idphim_edit" id="idphim_edit">   
+
+                                <label style="text-transform: uppercase; background-color: lightcoral" for="name">Tên Phim</label>
+                                <!-- <input style="margin-bottom:15px;"  type="text" name="tenphim_edit" id="tenphim_edit"> -->
+                                <div style="margin-bottom:15px;" class="form-group">
+                                    <input id="tenphim_edit" name="tenphim_edit" type="text" placeholder="" class="form-control">
+                                    <span class="form-message"></span>
+                                </div> 
+
+                                <label style="text-transform: uppercase; background-color: lightseagreen" for="name">Poster Phim</label>                            
+                                <input style="margin-bottom:15px;" type="file" name="myImage" id="myImage" >
+            
+                                <!-- <label style="text-transform: uppercase; background-color: lightslategrey" for="name">Thời Lượng</label>
+                                <input style="margin-bottom:15px;" type="text" name="thoiluong_edit" id="thoiluong_edit">   -->
+                                   
+                                <label style="text-transform: uppercase; background-color: lightslategrey" for="name">Thời Lượng</label>
+                                <div style="margin-bottom:15px;" class="form-group">
+                                    <input id="thoiluong_edit" name="thoiluong_edit" type="text" placeholder="'Trường này phải là số nguyên '" class="form-control">
+                                    <span class="form-message"></span>
+                                </div>
+
+
+
+
+                                <label style="text-transform: uppercase; background-color: rgb(247, 247, 86)" for="name">Ngày Công Chiếu</label>
+                                <div class="row">
+                                    <!-- <div class="col-6">
+                                            <input readonly type="text" name="ngaycongchieu_edit" id="ngaycongchieu_edit">  
+
+                                    </div> -->
+
+                                    <div class="col-6 form-group">
+                                        <input readonly id="ngaycongchieu_edit" name="ngaycongchieu_edit" type="text" placeholder="" class="form-control">
+                                        <span class="form-message"></span>
+                                    </div>
+                                    <div class="col-6">
+                                            <input id="thaydoingaycongchieu" onchange="thaydoingaycongchieuPhim()" type="date" >  
+
+                                    </div>
+                                </div>
+
+                                <input hidden type="text" id="check_option" name="check_option" value="1">
+                                <button style="margin-top: 10px;" class="ui fluid blue button" type="submit">Xác Nhận</button>
+
+    
+                        </div>
+                    </div>
+                    
+                    <!-- <button class="ui fluid blue button" type="submit">Xác Nhận</button> -->
+                </form>
+            </div>
+    
+    
+           
+        </div>
+</div>
+
+
+    <div class="bg-modal2">
+            <div class="modal-content2 "> 
+                        <div class="container">
+                                <p style="text-transform: uppercase; background-color: lightgreen;">Xác Nhận Xóa Phim</p> 
+                        </div>           
+                     <form  class="ui form" method="POST" enctype="multipart/form-data"  >
+                            <div class="field">
+                                    <input hidden  type="text" name="idphim2" id="idphim2">
+                                    <input hidden  value="3" type="text" name="check_option" id="check_option">
+                                <button style="width: 100px; height: 50px; background-color: lightgreen;  border-radius: 5px; border: none;">YES</button>
+    
+        
+                            </div>
+                        </form>
+                            <div class="field">
+                                <button onclick="thoatDeletePhim()" style="width: 100px;height: 50px; background-color: lightcoral;  border-radius: 5px; border: none;">NO</button>
+    
+                                    
+        
+                            </div>
+                        
+            
+        
+            </div>
+        </div>
+
+
+
+
+<script>
+        var themphim = function(){
+                var check_tenphim_add  = document.getElementById('tenphim_add').value;
+                var check_thoiluong_add  = document.getElementById('thoiluong_add').value;
+                var check_start1_year = document.getElementById('start1_year').value;
+               
+
+                if(check_tenphim_add === ''){
+                    alert("Hãy Nhập Tên Phim Vào! Cảm Ơn");
+
+                }else if(check_thoiluong_add === ''){
+                    alert("Hãy Nhập Thời Lượng Vào! Cảm Ơn");
+
+                }else if(check_start1_year === ''){
+                    alert("Hãy Nhập Ngày Bắt Đầu  Vào! Cảm Ơn");
+
+                }
+                else
+                {
+                    document.getElementById('formaddphim').submit();
+
+                }   
+
+
+
+        };
+
+
+        var thaydoingaycongchieuPhim = function(){
+            var ngaycongchieusds = moment(document.getElementById("thaydoingaycongchieu").value).format("YYYY-MM-DD");
+            document.getElementById('ngaycongchieu_edit').value = ngaycongchieusds;
+
+        };
+
+        var thoatDeletePhim = function(){
+        document.querySelector('.bg-modal2').style.display = 'none';
+    };
+
+    function deletePhim(idphim){
+        document.querySelector('.bg-modal2').style.display = 'flex';
+        document.getElementById('idphim2').value = idphim;
+
+        $(window).scrollTop(0);
+    };
+    var getEventTime5 = function(){
+        var temp_year = moment(document.getElementById("ngaycongchieu_add").value).format("YYYY-MM-DD");
+        document.getElementById('start1_year').value = temp_year;            
+
+    };
+    document.getElementById('close1').addEventListener('click',function(){
+
+        document.querySelector('.bg-modal1').style.display = 'none';
+    });
+
+
+    document.getElementById('add').addEventListener('click',
+    function(){
+        document.querySelector('.bg-modal').style.display = 'flex';
+    });
+
+   document.getElementById('close').addEventListener('click',
+   function(){
+
+       document.querySelector('.bg-modal').style.display = 'none';
+   });
+
+   
+
+</script>
+
+
+<script>
+    
+
+
+    
+        
+        // Đối tượng `Validator`
+        function Validator(options) {
+            function getParent(element, selector) {
+                while (element.parentElement) {
+                    if (element.parentElement.matches(selector)) {
+                        return element.parentElement;
+                    }
+                    element = element.parentElement;
+                }
+            }
+        
+            var selectorRules = {};
+        
+            // Hàm thực hiện validate
+            function validate(inputElement, rule) {
+                var errorElement = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector);
+                var errorMessage;
+        
+                // Lấy ra các rules của selector
+                var rules = selectorRules[rule.selector];
+                
+                // Lặp qua từng rule & kiểm tra
+                // Nếu có lỗi thì dừng việc kiểm
+                for (var i = 0; i < rules.length; ++i) {
+                    switch (inputElement.type) {
+                        case 'radio':
+                        case 'checkbox':
+                            errorMessage = rules[i](
+                                formElement.querySelector(rule.selector + ':checked')
+                            );
+                            break;
+                        default:
+                            errorMessage = rules[i](inputElement.value);
+                    }
+                    if (errorMessage) break;
+                }
+                
+                if (errorMessage) {
+                    errorElement.innerText = errorMessage;
+                    getParent(inputElement, options.formGroupSelector).classList.add('invalid');
+                } else {
+                    errorElement.innerText = '';
+                    getParent(inputElement, options.formGroupSelector).classList.remove('invalid');
+                }
+        
+                return !errorMessage;
+            }
+        
+            // Lấy element của form cần validate
+            var formElement = document.querySelector(options.form);
+            if (formElement) {
+                // Khi submit form
+                formElement.onsubmit = function (e) {
+                    e.preventDefault();
+        
+                    var isFormValid = true;
+        
+                    // Lặp qua từng rules và validate
+                    options.rules.forEach(function (rule) {
+                        var inputElement = formElement.querySelector(rule.selector);
+                        var isValid = validate(inputElement, rule);
+                        if (!isValid) {
+                            isFormValid = false;
+                        }
+                    });
+        
+                    if (isFormValid) {
+                        // Trường hợp submit với javascript
+                        if (typeof options.onSubmit === 'function') {
+                            var enableInputs = formElement.querySelectorAll('[name]');
+                            var formValues = Array.from(enableInputs).reduce(function (values, input) {
+                                
+                                switch(input.type) {
+                                    case 'radio':
+                                        values[input.name] = formElement.querySelector('input[name="' + input.name + '"]:checked').value;
+                                        break;
+                                    case 'checkbox':
+                                        if (!input.matches(':checked')) {
+                                            values[input.name] = '';
+                                            return values;
+                                        }
+                                        if (!Array.isArray(values[input.name])) {
+                                            values[input.name] = [];
+                                        }
+                                        values[input.name].push(input.value);
+                                        break;
+                                    case 'file':
+                                        values[input.name] = input.files;
+                                        break;
+                                    default:
+                                        values[input.name] = input.value;
+                                }
+        
+                                return values;
+                            }, {});
+                            options.onSubmit(formValues);
+                        }
+                        // Trường hợp submit với hành vi mặc định
+                        else {
+                            formElement.submit();
+                        }
+                    }
+                }
+        
+                // Lặp qua mỗi rule và xử lý (lắng nghe sự kiện blur, input, ...)
+                options.rules.forEach(function (rule) {
+        
+                    // Lưu lại các rules cho mỗi input
+                    if (Array.isArray(selectorRules[rule.selector])) {
+                        selectorRules[rule.selector].push(rule.test);
+                    } else {
+                        selectorRules[rule.selector] = [rule.test];
+                    }
+        
+                    var inputElements = formElement.querySelectorAll(rule.selector);
+        
+                    Array.from(inputElements).forEach(function (inputElement) {
+                       // Xử lý trường hợp blur khỏi input
+                        inputElement.onblur = function () {
+                            validate(inputElement, rule);
+                        }
+        
+                        // Xử lý mỗi khi người dùng nhập vào input
+                        inputElement.oninput = function () {
+                            var errorElement = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector);
+                            errorElement.innerText = '';
+                            getParent(inputElement, options.formGroupSelector).classList.remove('invalid');
+                        } 
+                    });
+                });
+            }
+        
+        }
+        
+        
+        
+        // Định nghĩa rules
+        // Nguyên tắc của các rules:
+        // 1. Khi có lỗi => Trả ra message lỗi
+        // 2. Khi hợp lệ => Không trả ra cái gì cả (undefined)
+       
+        
+        Validator.isTL = function (selector, message) {
+            return {
+                selector: selector,
+                test: function (value) {
+                    var regex = /^[0-9]+$/;
+                    return regex.test(value) ? undefined :  message || 'Trường này phải là số nguyên ';
+                }
+            };
+        }
+        Validator.isRequired = function (selector, message) {
+            return {
+                selector: selector,
+                test: function (value) {
+                    return value ? undefined :  message || 'Vui lòng nhập trường này'
+                }
+            };
+        }
+        
+        
+        
+        // =================================================================
+                document.addEventListener('DOMContentLoaded', function () {
+                  // Mong muốn của chúng ta
+                  Validator({
+                    form: '#formeditphim',
+                    formGroupSelector: '.form-group',
+                    errorSelector: '.form-message',
+                    rules: [
+                        Validator.isRequired('#tenphim_edit'),
+                        Validator.isTL('#thoiluong_edit'),
+                        Validator.isRequired('#ngaycongchieu_edit')
+                      
+                      
+                    ],
+                    // onSubmit: function (data) {
+                    //   // Call API
+                    //   console.log(data);
+                    // }
+                  });
+          
+                  Validator({
+                    form: '#formaddphim',
+                    formGroupSelector: '.form-group',
+                    errorSelector: '.form-message',
+                    rules: [
+                        Validator.isRequired('#tenphim_add'),
+                      Validator.isTL('#thoiluong_add'),
+                      Validator.isRequired('#start1_year')
+                      
+                      
+                    ],
+                    // onSubmit: function (data) {
+                    //   // Call API
+                    //   console.log(data);
+                    // }
+                  });
+                  
+                });
+          
+              </script>

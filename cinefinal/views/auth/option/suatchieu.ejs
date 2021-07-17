@@ -1,0 +1,850 @@
+<section style="background-color:#000; color: #fff" class="about10 py-4">
+        
+    <div class="tab-content row my-1 mx-auto">
+            <div style=" " class="phim-info container">   
+                    <input onclick="location.href='/quanly'" readonly style="margin: auto 0;  background-color: lightseagreen; width: 130px;"  class="btn submit"  value="<=== Quản Lý"/>
+            </div> 
+        <div  id="p" class="tab-pane fade in active show col-lg-12 col-md-12 col-12 w-50 ">
+            
+            <div class="card-deck mx-auto">
+                
+                <div  class="img col-lg-3 col-md-3 col-12 w-50 pt-5 pb-5">
+                    <div style=""  class="input-group ">
+                        <div style="margin: 0;
+                        font-size: 17px;
+                        height: auto;
+                        margin: 0 auto;
+                        position: relative;
+                        text-transform: uppercase;"  class="input-group-prepend">
+                            <span style="background-color: lightgreen; border: none;  " class="input-group-text">Phim </span>
+                        
+                            <select onclick="thaydoiPhimInSC()" name="selectphim" id="selectphim">
+                                <% for(const key in foundPhim){
+                                    if(tenphim === foundPhim[key].IDphim){%>
+                                        <option selected value="<%- foundPhim[key].IDphim%>"><%- foundPhim[key].Tenphim%></option>
+                                    <%}else{%>
+                                        <option  value="<%- foundPhim[key].IDphim%>"><%- foundPhim[key].Tenphim%></option>
+                                    <%}
+                                }%>
+                            </select>    
+                        </div>
+                    </div>
+                    
+                    <% for(const key in foundPhim){%>
+                        <div style=""  id="<%- foundPhim[key].IDphim%>" class="data2 ">
+                            <img style="width: 100%;  object-fit: cover;"  class="img-fluid container" src="<%- foundPhim[key].Posterphim%>" alt="">    
+                
+                        </div>
+                    <%}%>   
+                    <div style="position: relative;  margin: 0 auto;">
+                        
+                        <form style="background-color: green; width: 50%; margin: 0 auto;"  id="formxemSC" method="POST" >
+                                                               
+                                    <input  style="width: 100%; height: 30px;" onchange="getEventTime11()"  type="date" id="start1" > 
+                           
+                            <input hidden  type="text" name="ngayxem" id="ngayxem">   
+                                                
+            
+                            <input hidden  type="text" name="tenphim" id="tenphim">  
+                            <input hidden  type="text" value="2" name="check_option" id="check_option">
+
+            
+                        </form>
+                        <div style=" width: 75%; margin: 5px auto;">
+                                <input onclick="xemsuatchieu()" readonly style=" width: 100%; background: lightgray;" class="btn submit" value="Xem Suất Chiếu"/>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+                <div  class="text col-lg-9 col-md-9 col-12 w-50 pt-5 pb-5">
+                    <div class="nav">
+                        <ul   style="margin: 0 auto; background: none; height: auto; width: 100%;">
+                            <% for(const key in foundCumRap){%>
+                                <li   style="margin: 0 5px; border: 2px solid #000; width: 100%; background-color: lightgoldenrodyellow; width: 100%; " onclick="tabs(Number( `<%-key%>`))" class="text-dark user-post ">
+                                        <%-foundCumRap[key].Tencumrap %>
+                                </li>
+                            <%}%>
+                            
+                        </ul>
+                    </div>
+                    <div class="profile-body">
+                        <% for(const key in foundCumRap){%>
+                            <div  class=" text-light profile-posts tab">
+                                <h1 id=""><%-foundCumRap[key].Tencumrap%> <span>&nbsp;~&nbsp;<span><%-tencumrap%></span></span> </h1>
+                                <div style="background-color: none;" class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    <a style=" color: #000;"  hidden class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+
+                                    <% for(const r in foundRap){
+                                        if(foundCumRap[key].IDcumrap === foundRap[r].CumRapIDcumrap){%>
+                                            <a style=" color: #000;"  class="nav-link " id="v-pills-<%-foundRap[r].IDrap%>-tab" data-toggle="pill" href="#v-pills-<%-foundRap[r].IDrap%>" role="tab" aria-controls="v-pills-<%-foundRap[r].IDrap%>" aria-selected="true"><%-foundRap[r].Tenrap%></a>
+
+                                        <%}
+                                    }%>
+                                </div>
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                        <div hidden style=" overflow-y: scroll; height: 800px; " class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                                <h1 style=" margin: 10px 0;">Rap 1</h1>
+                                                
+                                        </div>
+                                        <% for(const ra in foundRap){                                                                                        
+                                            if(foundCumRap[key].IDcumrap === foundRap[ra].CumRapIDcumrap){%>
+                                                    
+                                                <div style="overflow-y: scroll; height: 800px; " class="tab-pane fade " id="v-pills-<%-foundRap[ra].IDrap%>" role="tabpanel" aria-labelledby="v-pills-<%-foundRap[ra].IDrap%>-tab">
+                                                    <h1 style="margin: 10px 0;"><%-foundRap[ra].Tenrap%> <a onclick="themSC(`<%-foundRap[ra].IDrap%>`,`<%-foundRap[ra].Tenrap%>`, `<%-tencumrap%>`)"  style="height: 40px; height: 40px; border-radius: 4px; transition: all 0.5s ease; margin:0 10px 10px 0; line-height: 40px; text-align: center; background-color: rgba(255,255,255,0.2);"><i class="fa fa-plus"></i></a></h1>
+
+                                                    <div style="margin:auto;" class="card-deck container">                     
+                                                            <!-- <a id="add" class="btn submit" href="#" style="height: 40px; height: 40px; border-radius: 4px; transition: all 0.5s ease; margin:0 10px 10px 0; line-height: 40px; text-align: center; background-color: rgba(255,255,255,0.2);"><i class="fa fa-plus"></i></a> -->
+                                                        <% for(const sc in found_suatchieu){
+                                                            if(found_suatchieu[sc].RapIDrap === foundRap[ra].IDrap){%>
+                                                                <div class="" style="width: 200px;  margin: 10px auto;">
+                                                                        <div style="background-color: purple;" class="card-header">
+                                                                                <%-found_suatchieu[sc].GioBatDau%>
+                                                                        </div>
+                                                                        <ul class="list-group list-group-flush">
+                                                                        <li class="list-group-item text-dark"><%-found_suatchieu[sc].Phim.Tenphim%></li>
+                                                                        <li class="list-group-item text-dark">
+                                                                            <button onclick="scrollToTopSuatChieu('<%-found_suatchieu[sc].IDsuatchieu %>','<%-found_suatchieu[sc].Phim.IDphim %>','<%-found_suatchieu[sc].RapIDrap %>','<%-found_suatchieu[sc].Giave %>','<%-found_suatchieu[sc].Batdau %>','<%-found_suatchieu[sc].GioBatDau %>', '<%-found_suatchieu[sc].Ketthuc %>', '<%-found_suatchieu[sc].GioKetThuc %>')"  style="background-color: lightgreen;  border-radius: 5px; border: none;">EDIT</button>
+
+                                                                        </li>
+                                                                        <li class="list-group-item text-dark">
+                                                                            <button onclick="deleteSuatChieu('<%-found_suatchieu[sc].IDsuatchieu %>', '<%-found_suatchieu[sc].Batdau%>')"  style="background-color: lightcoral;  border-radius: 5px; border: none;">DELETE</button>
+
+                                                                        </li>
+                                                                        </ul>
+                                                                </div>
+                                                                
+                                                           <% }
+                                                        }%>
+                                                                        
+                                                                                                                                                       
+                                                    </div>
+                                                </div>
+                                                                                                                                     
+                                            <%}  
+                 
+                                        }%>
+
+
+
+                                        
+                                       
+                                    </div>
+
+                            </div>
+                            
+                        <%}%>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+</section>
+
+
+<script>
+
+    
+
+    $('.nav ul li').click(function(){
+        $(this).addClass("active").siblings().removeClass('active');
+    })
+
+    const tabBtn = document.querySelectorAll('.nav ul li');
+    const tab = document.querySelectorAll('.tab');
+    function tabs(panelIndex){
+        tab.forEach(function(node){
+            node.style.display = 'none';
+        });
+        tab[panelIndex].style.display = 'block';
+    }
+    tabs(0);
+
+  
+
+   
+    var sdsa = document.getElementById('CGV Nguyễn Du').getAttribute('data-value');
+    document.getElementById('ww').value = sdsa;
+
+
+   
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+<div class="bg-modal" >
+        <div style="background-color: lightgoldenrodyellow;" class="modal-content " >             
+            <div onclick="tatsuatchieu()" class="close">+</div>
+            <div style="overflow-y: scroll; height: 900px;" class="ui container">
+                <form id="formeditSC" class="ui form" method="POST"  >
+                    <div style="background-color: rgb(247, 247, 220);" class="card w-100" style="width: 18rem;">
+                            
+                            <div class="card-body">
+                              <h5 style="text-transform: uppercase; background-color: lawngreen" class="card-title">Chỉnh Sửa Suất Chiếu</h5>
+                       
+
+
+                                <div  class="input-group">
+                                    <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                        <span style="text-transform: uppercase; width: 160px; background-color: lightskyblue; border: none;" class="input-group-text">ID suất chiếu </span>
+                                        <input readonly type="text" name="idsuatchieu" id="idsuatchieu">
+
+                                    </div>
+                                </div>
+                                <div style="margin-top:2px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                            <span style="text-transform: uppercase; width: 160px; background-color: lightcoral; border: none;" class="input-group-text">ID phim </span>
+                                            <input readonly type="text" name="idphim" id="idphim">
+
+                                        </div>
+
+                                </div>
+                                <div style="margin-top:2px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightgray; border: none;" class="input-group-text">ID rạp </span>
+                                            <input readonly type="text" name="idrap" id="idrap">
+
+                                        </div>
+
+                                </div>
+                                <!-- <div style="margin-top:2px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightgreen; border: none;" class="input-group-text">Giá vé </span>
+                                            <input type="text" name="giave" id="giave">
+
+                                        </div>
+
+                                </div> -->
+                                <div style="margin-top:2px;" class="form-group input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightgreen; border: none;" class="input-group-text">Giá vé </span>
+                                                <input id="giave" name="giave" type="text" placeholder="" class="form-control">
+                                        </div>
+                                            <span class="form-message"></span>
+                                </div>
+                                <div style="margin-top:2px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightpink; border: none;" class="input-group-text">Ngày bắt đầu </span>
+                                            <input  type="text" name="ngaybatdau" id="ngaybatdau">
+                                            <input onchange="thaydoidate()" type="date" id="thaydoidatesc" name="thaydoidatesc">
+                                        </div>
+
+                                </div>
+                                <!-- <div style="margin-top:2px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightseagreen; border: none;" class="input-group-text">Giờ bắt đầu </span>
+                                            <input type="text" name="giobatdau" id="giobatdau">
+
+                                        </div>
+
+                                </div> -->
+                                <div style="margin-top:2px;" class="form-group input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightseagreen; border: none;" class="input-group-text">Giờ bắt đầu </span>
+                                                <input id="giobatdau" name="giobatdau" type="text" placeholder="HH:MM 24-giờ" class="form-control">
+                                        </div>
+                                            <span class="form-message"></span>
+                                </div>
+                                <div style="margin-top:2px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightsalmon; border: none;" class="input-group-text">Ngày kết thúc </span>
+                                            <input type="text" name="ngayketthuc" id="ngayketthuc">
+
+                                        </div>
+
+                                </div>
+                                <!-- <div style="margin-top:2px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightsteelblue; border: none;"class="input-group-text">Giờ kết thúc </span>
+                                            <input type="text" name="gioketthuc" id="gioketthuc">
+
+                                        </div>
+
+                                </div> -->
+                                <div style="margin-top:2px;" class="form-group input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightsteelblue; border: none;"class="input-group-text">Giờ kết thúc </span>
+                                                <input id="gioketthuc" name="gioketthuc" type="text" placeholder="HH:MM 24-giờ" class="form-control">
+                                        </div>
+                                            <span class="form-message"></span>
+                                </div>
+                                <input hidden type="text" value="0" name="check_option" id="check_option">
+
+                            </div>
+                            
+                           
+                    </div>
+                    
+                    <button class="ui fluid blue button" type="submit">Save</button>
+                </form>
+            </div>
+    
+    
+           
+        </div>
+</div> 
+<!-- THÊM SUẤT CHIẾU -->
+<div class="bg-modal1">
+        <div style="background-color: lightgoldenrodyellow; height: 500px;" class="modal-content ">             
+            <div onclick="tatsuatchieu1()" class="close">+</div>
+            <div style="overflow-y: scroll; height: 900px;" class="ui container">
+                <form id="formaddSC" class="ui form" method="POST"  >
+                    <div style="background-color: rgba(247, 247, 220, 0.151);" class="card w-100" style="width: 18rem;">                     
+                            <div class="card-body">
+                              <h5 style="text-transform: uppercase; background-color: lawngreen"  class="card-title">Thêm Suất Chiếu</h5>
+                       
+                                <div style="" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                            <span style="text-transform: uppercase; width: 160px; background-color: lightskyblue; border: none;" class="input-group-text">ID phim </span>
+                                            <input style="" readonly type="text" name="idphim1" id="idphim1">
+
+                                        </div>
+
+                                </div>
+                                <div style="margin-top:4px;" class="form-group input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightcoral; border: none;" class="input-group-text">Tên Rạp </span>
+                                                <input readonly id="tenrap1" name="tenrap1" type="text"  class="form-control">
+                                        </div>
+                                            <span class="form-message"></span>
+                                </div>
+                                <div style="margin-top:4px;" class="form-group input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightcoral; border: none;" class="input-group-text"> Rạp </span>
+                                                <input readonly id="idrap1" name="idrap1" type="text"  class="form-control">
+                                        </div>
+                                            <span class="form-message"></span>
+                                </div>
+                                <!-- <div style="margin-top:4px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;"  class="input-group-prepend">
+                                            <span style="text-transform: uppercase; width: 160px; background-color: lightcoral; border: none;" class="input-group-text"> Rạp </span>
+                                            <input readonly type="text" name="idrap1" id="idrap1">
+
+                                        </div>
+
+                                </div> -->
+                                <!-- <div style="margin-top:5px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                            <span style="text-transform: uppercase; width: 160px; background-color: lightslategray; border: none;" class="input-group-text">Giá vé </span>
+                                            <input type="text" name="giave1" id="giave1">
+
+                                        </div>
+
+                                </div> -->
+                                <div style="margin-top:4px;" class="form-group input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightslategray; border: none;" class="input-group-text">Giá vé </span>
+                                                <input id="giave1" name="giave1" type="text" placeholder="" class="form-control">
+                                        </div>
+                                            <span class="form-message"></span>
+                                </div>
+
+                                <!-- <div style="margin-top:4px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                            <span style="text-transform: uppercase; width: 160px; background-color: lightsalmon; border: none;" class="input-group-text">Ngày bắt đầu </span>
+                                            <input readonly type="text" name="ngaybatdau1" id="ngaybatdau1">
+
+                                        </div>
+
+                                </div> -->
+                                <div style="margin-top:4px;" class="form-group input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightsalmon; border: none;" class="input-group-text">Ngày bắt đầu </span>
+                                                <input readonly id="ngaybatdau1" name="ngaybatdau1" type="text" placeholder="" class="form-control">
+                                                <input onchange="thaydoidate1()" type="date" id="thaydoidatesc1" name="thaydoidatesc1">
+
+                                        </div>
+                                            <span class="form-message"></span>
+                                </div>
+
+
+
+                                <!-- <div style="margin-top:5px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                            <span style="text-transform: uppercase; width: 160px; background-color: lightgreen; border: none;" class="input-group-text">Giờ bắt đầu </span>
+                                            <input type="text" name="giobatdau1" id="giobatdau1">
+
+                                        </div>
+
+                                </div> -->
+
+                                <div style="margin-top:4px;" class="form-group input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span style="text-transform: uppercase; width: 160px; background-color: lightgreen; border: none;" class="input-group-text">Giờ bắt đầu </span>
+                                                <input id="giobatdau1" name="giobatdau1" type="text" placeholder="HH:MM 24-giờ" class="form-control">
+                                        </div>
+                                            <span class="form-message"></span>
+                                </div>
+                                <div hidden style="margin-top:4px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;"  class="input-group-prepend">
+                                            <span style="text-transform: uppercase; width: 160px; background-color: lightpink; border: none;" class="input-group-text">Ngày kết thúc </span>
+                                            <input readonly type="text" name="ngayketthuc1" id="ngayketthuc1">
+
+                                        </div>
+
+                                </div>
+                                <!-- <div style="margin-top:5px;" class="input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                            <span  style="text-transform: uppercase; width: 160px; background-color: lightseagreen; border: none;" class="input-group-text">Giờ kết thúc </span>
+                                            <input placeholder="Giờ Kết Thúc phải lớn hơn Giờ Bắt Đầu" type="text" name="gioketthuc1" id="gioketthuc1">
+
+                                        </div>
+
+                                </div> -->
+
+                                <div style="margin-top:4px;" class="form-group input-group">
+                                        <div style=" box-sizing: border-box; width: 100%;" class="input-group-prepend">
+                                                <span  style="text-transform: uppercase; width: 160px; background-color: lightseagreen; border: none;" class="input-group-text">Giờ kết thúc </span>
+                                                <input id="gioketthuc1" name="gioketthuc1" type="text" placeholder="HH:MM 24-giờ" class="form-control">
+                                        </div>
+                                        <span class="form-message"></span>
+                                </div>
+                                <input hidden readonly type="text" value="1" name="check_option" id="check_option">
+                                <!-- <input hidden  type="text" name="tencumrap1" id="tencumrap1"> 
+                        
+                                <input   type="text" name="tenrap1" id="tenrap1">                              
+                 
+                                <input    type="text" name="tenphim1" id="tenphim1">   -->
+                                <!-- <input onclick="themsuatchieeeu()" readonly style="background-color: rgb(65, 81, 228);" class="btn submit" value="Xác Nhận"/> -->
+
+                            </div>
+                            
+
+                    </div>
+                    <button class="ui fluid blue button" type="submit">Save</button>
+
+                    <!-- <button class="ui fluid blue button" type="submit">Xác Nhận</button> -->
+                </form>
+            </div>
+            
+        </div>
+</div> 
+
+
+<div class="bg-modal2">
+        <div class="modal-content2 "> 
+                    <div class="container">
+                            <p style="text-transform: uppercase; background-color: lightgreen;" >Xác nhận Xóa Suất Chiếu</p> 
+                    </div>           
+                    <form  class="ui form" method="POST"   >
+                        <div class="field">
+                            <input hidden  type="text" name="idsuatchieu2" id="idsuatchieu2">
+                            <input hidden  type="text" name="batdau2" id="batdau2">
+
+                            <input hidden  value="3" type="text" name="check_option" id="check_option">
+                            <button style="width: 100px; height: 50px; background-color: lightgreen;  border-radius: 5px; border: none;">YES</button>
+
+                        </div>
+                    </form>
+                    <div class="field">
+                        <button onclick="thoatDeleteSuatChieu()" style="width: 100px;height: 50px; background-color: lightcoral;  border-radius: 5px; border: none;">NO</button>
+                                
+                    </div>
+                    
+            
+    
+        </div>
+</div>
+
+
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+      </script>
+      <script>
+         
+      
+          $("#selectphim").on('change', function(){
+
+
+
+                  $(".data2").hide();
+                  $("#" + $(this).val()).fadeIn(700);
+              }).change();
+              $("#selectedname").on('change', function(){
+
+
+
+                  $(".data").hide();
+                  $("#" + $(this).val()).fadeIn(700);
+              }).change();
+      </script>
+      
+      <script>
+            document.getElementById('ngayxem').value = moment( new Date()).format("YYYY-MM-DD");                           
+            var getEventTime11 = function(){             
+                var ngayxem = moment(document.getElementById("start1").value).format("YYYY-MM-DD");
+                document.getElementById('ngayxem').value = ngayxem;  
+                                         
+            };
+
+            document.getElementById('tenphim').value = document.getElementsByName('selectphim')[0].value;
+            document.getElementById('idphim1').value = document.getElementById('tenphim').value;
+            var thaydoiPhimInSC = function (){
+                const temp_tenphimsdas = document.getElementsByName('selectphim')[0].value;
+                document.getElementById('tenphim').value = temp_tenphimsdas;
+                document.getElementById('idphim1').value = temp_tenphimsdas;        
+            };
+            var xemsuatchieu = function(){                    
+                document.getElementById('formxemSC').submit();                        
+            };
+      </script>
+
+      <script>
+            var thaydoidate = function(){             
+                var ngayxem11 = moment(document.getElementById("thaydoidatesc").value).format("YYYY-MM-DD");
+                document.getElementById('ngaybatdau').value = ngayxem11; 
+                document.getElementById('ngayketthuc').value = ngayxem11; 
+
+                                         
+            };
+            function scrollToTopSuatChieu(idsuatchieu, idphim, idrap, giave, ngaybatdau, giobatdau, ngayketthuc, gioketthuc) {
+                document.querySelector('.bg-modal').style.display = 'flex';
+            
+                        $(window).scrollTop(0);
+                        document.getElementById('idsuatchieu').value = idsuatchieu;
+                    document.getElementById('idphim').value = idphim;
+                    document.getElementById('idrap').value = idrap;
+                    document.getElementById('giave').value = giave;
+                    document.getElementById('ngaybatdau').value = ngaybatdau;
+                    document.getElementById('giobatdau').value = giobatdau;
+                    document.getElementById('ngayketthuc').value = ngayketthuc;
+                    document.getElementById('gioketthuc').value = gioketthuc;
+            };
+            var tatsuatchieu = function(){
+                document.querySelector('.bg-modal').style.display = 'none';    
+            };
+      </script>
+
+      <script>
+            var thoatDeleteSuatChieu = function(){
+                    document.querySelector('.bg-modal2').style.display = 'none';
+    
+            };
+    
+            function deleteSuatChieu(idsuatchieu, batdau){
+                    document.querySelector('.bg-modal2').style.display = 'flex';
+                    document.getElementById('idsuatchieu2').value = idsuatchieu;
+                    document.getElementById('batdau2').value = batdau;
+
+                    
+                    $(window).scrollTop(0);
+    
+            };
+      </script>
+
+      <script>
+          
+
+            var thaydoidate1 = function(){             
+                var ngayxem12 = moment(document.getElementById("thaydoidatesc1").value).format("YYYY-MM-DD");
+                document.getElementById('ngaybatdau1').value = ngayxem12; 
+                document.getElementById('ngayketthuc1').value = ngayxem12; 
+
+                                         
+            };
+            var themSC = function(idrap,tenrap, ngaybatdau ){
+                    document.querySelector('.bg-modal1').style.display = 'flex';
+
+                    document.getElementById('idrap1').value = idrap;
+                    document.getElementById('tenrap1').value = tenrap;
+                    document.getElementById('ngaybatdau1').value = ngaybatdau;
+                    document.getElementById('ngayketthuc1').value = ngaybatdau;
+    
+            };
+            var tatsuatchieu1 = function(){
+                document.querySelector('.bg-modal1').style.display = 'none';
+    
+             };
+            
+      </script>
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+        <script>
+    
+
+
+              
+                // Đối tượng `Validator`
+                function Validator(options) {
+                    function getParent(element, selector) {
+                        while (element.parentElement) {
+                            if (element.parentElement.matches(selector)) {
+                                return element.parentElement;
+                            }
+                            element = element.parentElement;
+                        }
+                    }
+                
+                    var selectorRules = {};
+                
+                    // Hàm thực hiện validate
+                    function validate(inputElement, rule) {
+                        var errorElement = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector);
+                        var errorMessage;
+                
+                        // Lấy ra các rules của selector
+                        var rules = selectorRules[rule.selector];
+                        
+                        // Lặp qua từng rule & kiểm tra
+                        // Nếu có lỗi thì dừng việc kiểm
+                        for (var i = 0; i < rules.length; ++i) {
+                            switch (inputElement.type) {
+                                case 'radio':
+                                case 'checkbox':
+                                    errorMessage = rules[i](
+                                        formElement.querySelector(rule.selector + ':checked')
+                                    );
+                                    break;
+                                default:
+                                    errorMessage = rules[i](inputElement.value);
+                            }
+                            if (errorMessage) break;
+                        }
+                        
+                        if (errorMessage) {
+                            errorElement.innerText = errorMessage;
+                            getParent(inputElement, options.formGroupSelector).classList.add('invalid');
+                        } else {
+                            errorElement.innerText = '';
+                            getParent(inputElement, options.formGroupSelector).classList.remove('invalid');
+                        }
+                
+                        return !errorMessage;
+                    }
+                
+                    // Lấy element của form cần validate
+                    var formElement = document.querySelector(options.form);
+                    if (formElement) {
+                        // Khi submit form
+                        formElement.onsubmit = function (e) {
+                            e.preventDefault();
+                
+                            var isFormValid = true;
+                
+                            // Lặp qua từng rules và validate
+                            options.rules.forEach(function (rule) {
+                                var inputElement = formElement.querySelector(rule.selector);
+                                var isValid = validate(inputElement, rule);
+                                if (!isValid) {
+                                    isFormValid = false;
+                                }
+                            });
+                
+                            if (isFormValid) {
+                                // Trường hợp submit với javascript
+                                if (typeof options.onSubmit === 'function') {
+                                    var enableInputs = formElement.querySelectorAll('[name]');
+                                    var formValues = Array.from(enableInputs).reduce(function (values, input) {
+                                        
+                                        switch(input.type) {
+                                            case 'radio':
+                                                values[input.name] = formElement.querySelector('input[name="' + input.name + '"]:checked').value;
+                                                break;
+                                            case 'checkbox':
+                                                if (!input.matches(':checked')) {
+                                                    values[input.name] = '';
+                                                    return values;
+                                                }
+                                                if (!Array.isArray(values[input.name])) {
+                                                    values[input.name] = [];
+                                                }
+                                                values[input.name].push(input.value);
+                                                break;
+                                            case 'file':
+                                                values[input.name] = input.files;
+                                                break;
+                                            default:
+                                                values[input.name] = input.value;
+                                        }
+                
+                                        return values;
+                                    }, {});
+                                    options.onSubmit(formValues);
+                                }
+                                // Trường hợp submit với hành vi mặc định
+                                else {
+                                    formElement.submit();
+                                }
+                            }
+                        }
+                
+                        // Lặp qua mỗi rule và xử lý (lắng nghe sự kiện blur, input, ...)
+                        options.rules.forEach(function (rule) {
+                
+                            // Lưu lại các rules cho mỗi input
+                            if (Array.isArray(selectorRules[rule.selector])) {
+                                selectorRules[rule.selector].push(rule.test);
+                            } else {
+                                selectorRules[rule.selector] = [rule.test];
+                            }
+                
+                            var inputElements = formElement.querySelectorAll(rule.selector);
+                
+                            Array.from(inputElements).forEach(function (inputElement) {
+                               // Xử lý trường hợp blur khỏi input
+                                inputElement.onblur = function () {
+                                    validate(inputElement, rule);
+                                }
+                
+                                // Xử lý mỗi khi người dùng nhập vào input
+                                inputElement.oninput = function () {
+                                    var errorElement = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector);
+                                    errorElement.innerText = '';
+                                    getParent(inputElement, options.formGroupSelector).classList.remove('invalid');
+                                } 
+                            });
+                        });
+                    }
+                
+                }
+                
+                
+                
+                // Định nghĩa rules
+                // Nguyên tắc của các rules:
+                // 1. Khi có lỗi => Trả ra message lỗi
+                // 2. Khi hợp lệ => Không trả ra cái gì cả (undefined)
+               
+                
+                Validator.isGBD = function (selector, message) {
+                    return {
+                        selector: selector,
+                        test: function (value) {
+                            var regex =/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+                            return regex.test(value) ? undefined :  message || 'HH:MM 24-giờ';
+                        }
+                    };
+                }
+                Validator.isGKT = function (selector, message) {
+                    return {
+                        selector: selector,
+                        test: function (value) {
+                            var regex =/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+                            return regex.test(value) ? undefined :  message || 'HH:MM 24-giờ';
+                        }
+                    };
+                }
+                Validator.isGT = function (selector, message) {
+                    return {
+                        selector: selector,
+                        test: function (value) {
+                            var regex = /^\d+$/;
+                            return regex.test(value) ? undefined :  message || 'Giá tiền mệnh giá VND';
+                        }
+                    };
+                }
+                Validator.isRequired = function (selector, message) {
+                    return {
+                        selector: selector,
+                        test: function (value) {
+                            return value ? undefined :  message || 'Vui lòng nhập trường này'
+                        }
+                    };
+                }
+                
+                
+                
+                // =================================================================
+                        document.addEventListener('DOMContentLoaded', function () {
+                          // Mong muốn của chúng ta
+                          Validator({
+                            form: '#formaddSC',
+                            formGroupSelector: '.form-group',
+                            errorSelector: '.form-message',
+                            rules: [
+                              Validator.isGBD('#giobatdau1'),
+                              Validator.isGBD('#gioketthuc1'),
+                              Validator.isGT('#giave1'),
+                              Validator.isRequired('#idrap1'),
+                              Validator.isRequired('#ngaybatdau1')
+                            ],
+                            // onSubmit: function (data) {
+                            //   // Call API
+                            //   console.log(data);
+                            // }
+                          });
+
+                          Validator({
+                            form: '#formeditSC',
+                            formGroupSelector: '.form-group',
+                            errorSelector: '.form-message',
+                            rules: [
+                              Validator.isGBD('#giobatdau'),
+                              Validator.isGBD('#gioketthuc'),
+                              Validator.isGT('#giave')
+                             
+                            ],
+                            // onSubmit: function (data) {
+                            //   // Call API
+                            //   console.log(data);
+                            // }
+                          });
+                  
+                  
+                          
+                        });
+                  
+                      </script>
